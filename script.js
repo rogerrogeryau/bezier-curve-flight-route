@@ -99,22 +99,24 @@ $.when(getAirports).done(function(result){
     // beize curve ---------------------------------------------------------------------------------------------
     
     
-
+    // single coordinate
     let HKG = airports.HKG;
     let TSA = airports.TSA;
     let LCY = airports.LCY;
     let BKK = airports.BKK;
+    let ITM = airports.ITM;    
     
-    
+    // form route of pair points
     let HKG_TSA = generatePathCoordinate(HKG,TSA)
     let HKG_LCY = generatePathCoordinate(HKG,LCY)
     let HKG_BKK = generatePathCoordinate(HKG,BKK)
+    let HKG_ITM = generatePathCoordinate(HKG,ITM)
     
-    // var path =  [{lat: 22.324624, lng: 114.172305}, {lat: 23.927836, lng:121.086477}]
-    // var path = resultPath
+    // shape the straight route into BeizeCurve
     let HKG_TSA_BeizeCurve = new createBeizeCurve(HKG_TSA[0],HKG_TSA[1])
     let HKG_LCY_BeizeCurve = new createBeizeCurve(HKG_LCY[0],HKG_LCY[1])
     let HKG_BKK_BeizeCurve = new createBeizeCurve(HKG_BKK[0],HKG_BKK[1])
+    let HKG_ITM_BeizeCurve = new createBeizeCurve(HKG_ITM[0],HKG_ITM[1])
     // console.log(HKG_TW.beizePath)
     // var bezierPath = getLatLngPath( path[0], path[1] );
     // console.log(bezierPath)
@@ -123,7 +125,7 @@ $.when(getAirports).done(function(result){
     
     // Create the polyline and add the symbol to it via the 'icons' property.
     // var path =  [{lat: 22.324624, lng: 114.172305}, {lat: 23.927836, lng:121.086477}]
-    var line = new google.maps.Polyline({
+    var HKG_TSA_line = new google.maps.Polyline({
       path: HKG_TSA_BeizeCurve.beizePath,
       // path: path,
       // path:bezierPath,
@@ -153,7 +155,7 @@ $.when(getAirports).done(function(result){
       map: map
     });
     
-    var line2 = new google.maps.Polyline({
+    var HKG_LCY_line = new google.maps.Polyline({
       path: HKG_LCY_BeizeCurve.beizePath,
       // path: path,
       // path:bezierPath,
@@ -184,7 +186,7 @@ $.when(getAirports).done(function(result){
     });
     
     
-    var line3 = new google.maps.Polyline({
+    var HKG_BKK_line = new google.maps.Polyline({
       path: HKG_BKK_BeizeCurve.beizePath,
       // path: path,
       // path:bezierPath,
@@ -214,11 +216,42 @@ $.when(getAirports).done(function(result){
       map: map
     });
     
+    var HKG_ITM_line = new google.maps.Polyline({
+      path: HKG_ITM_BeizeCurve.beizePath,
+      // path: path,
+      // path:bezierPath,
+      // strokeColor:'#a68974',
+      // strokeColor:'#FF4B4B',
+      // strokeColor:'#d0dbd7',
+      strokeColor:'#b9c1d1',
+      // strokeColor: '#0099FF',
+      // 	strokeColor:'#f6dda7',
+      	 //strokeColor:'#82a18f',
+      	 
+      strokeOpacity: 1,
+      // strokeOpacity:0,
+      strokeWeight: 1.5,
+      geodesic: true,
+      icons: [{
+        // icon:icons.parking.icon,
+        icon: arrowSymbol,
+        // icon:dotIcon,
+        // icon:planeIcon,
+        // icon:arrowSymbol,
+        // icon:planeSymbol,
+        // icon:PlaneIcon,
+        offset: '0%',
+        repeat: '500px'
+      }],
+      map: map
+    });
     
     // line.strokeColor = '#f6dda7'
-    animateSymbol(line);
-    animateSymbol(line2);
-    animateSymbol(line3);
+    animateSymbol(HKG_TSA_line);
+    animateSymbol(HKG_LCY_line);
+    animateSymbol(HKG_BKK_line);
+    animateSymbol(HKG_ITM_line);
+    
     // console.log(line)
     
     // generate animated repeated symbols along the bezierPath line
@@ -232,7 +265,7 @@ $.when(getAirports).done(function(result){
             // icons[0].offset = (count / 2) + '%';
             icons[0].offset = (count) + '%';
             line.set('icons', icons);
-        }, 40);
+        }, 50);
         // console.log(line)
         
     }
