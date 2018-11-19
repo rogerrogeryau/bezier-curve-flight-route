@@ -340,6 +340,12 @@ $.when(getAirports).done(function(result){
     animateSymbol(HKG_BKK_line);
     animateSymbol(HKG_ITM_line);
     
+    
+    
+    // markers pin
+    
+    
+    
     // console.log(line)
     
     // generate animated repeated symbols along the bezierPath line
