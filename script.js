@@ -7,10 +7,8 @@ $.when(getAirports).done(function(result){
   // airport's coordinate data
   let airports = result
   
-  
-  
-  // console.log(HKG_TSA)
-  
+
+  // google map initial config
   let Initialoptions ={
       center: {lat: 22.28552, lng: 114.15769},
       zoom: 8,
@@ -37,6 +35,7 @@ $.when(getAirports).done(function(result){
     // get map div element
     let MapElement = document.getElementById("map")
     
+    // create map canvas
     var map = new google.maps.Map(MapElement,Initialoptions)
     
     
@@ -139,11 +138,12 @@ $.when(getAirports).done(function(result){
       	 
       strokeOpacity: 1,
       // strokeOpacity:0,
-      strokeWeight: 1.5,
+      strokeWeight: 3.5,
       geodesic: true,
       icons: [{
         // icon:icons.parking.icon,
-        icon: arrowSymbol,
+        // icon: arrowSymbol,
+        icon:dotIcon,
         // icon:dotIcon,
         // icon:planeIcon,
         // icon:arrowSymbol,
@@ -169,18 +169,18 @@ $.when(getAirports).done(function(result){
       	 
       strokeOpacity: 1,
       // strokeOpacity:0,
-      strokeWeight: 1.5,
+      strokeWeight: 3.5,
       geodesic: true,
       icons: [{
         // icon:icons.parking.icon,
-        icon: arrowSymbol,
-        // icon:dotIcon,
+        // icon: arrowSymbol,
+        icon:dotIcon,
         // icon:planeIcon,
         // icon:arrowSymbol,
         // icon:planeSymbol,
         // icon:PlaneIcon,
         offset: '0%',
-        repeat: '500px'
+        repeat: '3000px'
       }],
       map: map
     });
@@ -200,12 +200,12 @@ $.when(getAirports).done(function(result){
       	 
       strokeOpacity: 1,
       // strokeOpacity:0,
-      strokeWeight: 1.5,
+      strokeWeight: 3.5,
       geodesic: true,
       icons: [{
         // icon:icons.parking.icon,
-        icon: arrowSymbol,
-        // icon:dotIcon,
+        // icon: arrowSymbol,
+        icon:dotIcon,
         // icon:planeIcon,
         // icon:arrowSymbol,
         // icon:planeSymbol,
@@ -230,12 +230,12 @@ $.when(getAirports).done(function(result){
       	 
       strokeOpacity: 1,
       // strokeOpacity:0,
-      strokeWeight: 1.5,
+      strokeWeight: 3.5,
       geodesic: true,
       icons: [{
         // icon:icons.parking.icon,
-        icon: arrowSymbol,
-        // icon:dotIcon,
+        // icon: arrowSymbol,
+        icon:dotIcon,
         // icon:planeIcon,
         // icon:arrowSymbol,
         // icon:planeSymbol,
@@ -245,6 +245,94 @@ $.when(getAirports).done(function(result){
       }],
       map: map
     });
+    
+    
+    
+    google.maps.event.addListener(HKG_TSA_line, 'mouseover', function(event) {
+    //   new google.maps.Marker({map:map,position:event.latLng});
+    //   path.push(event.latLng);
+    //   myLine.setPath(path);
+        console.log(HKG_TSA_line)
+        
+        HKG_TSA_line.strokeWeight = 5.5
+        HKG_TSA_line.strokeColor = '#37393e'
+        // console.log(event)
+    });
+    google.maps.event.addListener(HKG_TSA_line, 'mouseout', function(event) {
+    //   new google.maps.Marker({map:map,position:event.latLng});
+    //   path.push(event.latLng);
+    //   myLine.setPath(path);
+        console.log(HKG_TSA_line)
+        
+        HKG_TSA_line.strokeWeight = 3.5
+        HKG_TSA_line.strokeColor = '#b9c1d1'
+        // console.log(event)
+    });
+    
+    google.maps.event.addListener(HKG_LCY_line, 'mouseover', function(event) {
+    //   new google.maps.Marker({map:map,position:event.latLng});
+    //   path.push(event.latLng);
+    //   myLine.setPath(path);
+        console.log(HKG_LCY_line)
+        
+        HKG_LCY_line.strokeWeight = 5.5
+        HKG_LCY_line.strokeColor = '#37393e'
+        
+        // console.log(event)
+    });
+    google.maps.event.addListener(HKG_LCY_line, 'mouseout', function(event) {
+    //   new google.maps.Marker({map:map,position:event.latLng});
+    //   path.push(event.latLng);
+    //   myLine.setPath(path);
+        console.log(HKG_LCY_line)
+        
+        HKG_LCY_line.strokeWeight = 3.5
+        HKG_LCY_line.strokeColor = '#b9c1d1'
+        // console.log(event)
+    });
+    
+    google.maps.event.addListener(HKG_BKK_line, 'mouseover', function(event) {
+    //   new google.maps.Marker({map:map,position:event.latLng});
+    //   path.push(event.latLng);
+    //   myLine.setPath(path);
+        console.log(HKG_BKK_line)
+        
+        HKG_BKK_line.strokeWeight = 5.5
+        HKG_BKK_line.strokeColor = '#37393e'
+        // console.log(event)
+    });
+    google.maps.event.addListener(HKG_BKK_line, 'mouseout', function(event) {
+    //   new google.maps.Marker({map:map,position:event.latLng});
+    //   path.push(event.latLng);
+    //   myLine.setPath(path);
+        console.log(HKG_BKK_line)
+        
+        HKG_BKK_line.strokeWeight = 3.5
+        HKG_BKK_line.strokeColor = '#b9c1d1'
+        // console.log(event)
+    });
+    
+    google.maps.event.addListener(HKG_ITM_line, 'mouseover', function(event) {
+    //   new google.maps.Marker({map:map,position:event.latLng});
+    //   path.push(event.latLng);
+    //   myLine.setPath(path);
+        console.log(HKG_ITM_line)
+        
+        HKG_ITM_line.strokeWeight = 5.5
+        HKG_ITM_line.strokeColor = '#37393e'
+        // console.log(event)
+    });
+    google.maps.event.addListener(HKG_ITM_line, 'mouseout', function(event) {
+    //   new google.maps.Marker({map:map,position:event.latLng});
+    //   path.push(event.latLng);
+    //   myLine.setPath(path);
+        console.log(HKG_ITM_line)
+        
+        HKG_ITM_line.strokeWeight = 3.5
+        HKG_ITM_line.strokeColor = '#b9c1d1'
+        // console.log(event)
+    });
+    
     
     // line.strokeColor = '#f6dda7'
     animateSymbol(HKG_TSA_line);
@@ -259,13 +347,13 @@ $.when(getAirports).done(function(result){
         var count = 0;
         window.setInterval(function() {
             // count = (count + 1) % 200;
-            count = ++count % 80;
+            count = ++count % 800000;
         
             var icons = line.get('icons');
             // icons[0].offset = (count / 2) + '%';
             icons[0].offset = (count) + '%';
             line.set('icons', icons);
-        }, 50);
+        }, 40);
         // console.log(line)
         
     }
