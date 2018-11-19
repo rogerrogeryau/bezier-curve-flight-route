@@ -116,6 +116,10 @@ $.when(getAirports).done(function(result){
     let HKG_LCY_BeizeCurve = new createBeizeCurve(HKG_LCY[0],HKG_LCY[1])
     let HKG_BKK_BeizeCurve = new createBeizeCurve(HKG_BKK[0],HKG_BKK[1])
     let HKG_ITM_BeizeCurve = new createBeizeCurve(HKG_ITM[0],HKG_ITM[1])
+    
+    console.log('midpoint :' + HKG_TSA_BeizeCurve.midpoint)
+    
+    
     // console.log(HKG_TW.beizePath)
     // var bezierPath = getLatLngPath( path[0], path[1] );
     // console.log(bezierPath)
@@ -154,6 +158,9 @@ $.when(getAirports).done(function(result){
       }],
       map: map
     });
+    
+    
+    console.log(HKG_TSA_line)
     
     var HKG_LCY_line = new google.maps.Polyline({
       path: HKG_LCY_BeizeCurve.beizePath,
