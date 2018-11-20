@@ -2,7 +2,7 @@ function createBeizeCurve(from, to){
     this.from =from;
     this.to = to;
     this.beizePath = getLatLngPath(from, to)
-
+    this.midpoint = getBezierHandles(from,to).midpoint
     
     function getLatLngPath( p0, p1 )
         {
@@ -50,7 +50,7 @@ function createBeizeCurve(from, to){
             return {
                 a: { lat: q1.lat + ( -dLng * curvature ), lng: q1.lng + ( dLat * curvature ) },
                 b: { lat: q3.lat + ( -dLng * curvature ), lng: q3.lng + ( dLat * curvature ) },
-                // midpoint: {q2}
+                midpoint: q2
             };
         }
         else
@@ -58,7 +58,7 @@ function createBeizeCurve(from, to){
             return {
                 a: { lat: q1.lat - ( -dLng * curvature ), lng: q1.lng + ( dLat * curvature ) },
                 b: { lat: q3.lat - ( -dLng * curvature ), lng: q3.lng + ( dLat * curvature ) },
-                // midpoint: {q2}
+                midpoint: q2
             };
         }
     }

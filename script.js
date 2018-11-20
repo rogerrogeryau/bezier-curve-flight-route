@@ -102,11 +102,13 @@ $.when(getAirports,airline_routes).done(function(result, result2){
     
     // drawBeizeCurves = [];
     // mouseOverEventDictionary = {}
+    
     // loop through all airline routes
     for (let route in airlineRoutes) {
       // console.log(airlineRoutes[route])
       for (let i = 0; i < airlineRoutes[route].length; i++) {
 
+      
         let pointFrom = airlineRoutes[route][i]['from']
         let pointTo = airlineRoutes[route][i]['to']
         
@@ -119,6 +121,9 @@ $.when(getAirports,airline_routes).done(function(result, result2){
         // create BeizeCurve for that path
         let targetBeizeCurve = new createBeizeCurve(targetPath[0],targetPath[1])
         
+        
+        // midpoint
+        console.log(targetBeizeCurve.midpoint)
 
         // -------------------DRAW BeizeCurve PATH ON GOOGLE MAP-----------------------
         
@@ -157,7 +162,7 @@ $.when(getAirports,airline_routes).done(function(result, result2){
         // -------------------DRAW PATH ON GOOGLE MAP-----------------------
       
   
-        // -------------------APPLY FUNCTION FOR THE LINE----------------------------------
+        // -------------------APPLY FUNCTIONS & EVENT LISTENER FOR THE LINE----------------------------------
         
      
         // animation applied on symbol along the curve
@@ -192,7 +197,7 @@ $.when(getAirports,airline_routes).done(function(result, result2){
         
         
         
-        // -------------------APPLY FUNCTION FOR THE LINE----------------------------------
+        // -------------------APPLY FUNCTIONS & EVENT LISTENER FOR THE LINE----------------------------------
   
       
   
@@ -200,12 +205,15 @@ $.when(getAirports,airline_routes).done(function(result, result2){
     }
     
     
+    // InfoWindow -----------------------------------------------------------------------------------------------
     
     
-    // console.log(drawBeizeCurves)
+    
+    // InfoWindow -----------------------------------------------------------------------------------------------
     
     
-
+    
+    
     
     
     
@@ -362,7 +370,7 @@ $.when(getAirports,airline_routes).done(function(result, result2){
         //   new google.maps.Marker({map:map,position:event.latLng});
         //   path.push(event.latLng);
         //   myLine.setPath(path);
-        console.log(line)
+        // console.log(line)
         
         line.strokeWeight = 2.5
         line.strokeColor = '#b9c1d1'
