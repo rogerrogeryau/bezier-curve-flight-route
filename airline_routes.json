@@ -8,5 +8,16 @@
     {"from":"HKG", "to":"HND"},
     {"from":"HKG", "to":"ITM"},
     {"from":"HKG", "to":"LCY"}
+  ],
+  "CI":[
+    {"from":"HKG", "to":"TSA"},
+    {"from":"HKG", "to":"KHH"},
+    {"from":"HKG", "to":"BKK"},
+    {"from":"HKG", "to":"YVR"},
+    {"from":"HKG", "to":"TNN"},
+    {"from":"HKG", "to":"HND"},
+    {"from":"HKG", "to":"CGK"},
+    {"from":"HKG", "to":"LAX"},
+    {"from":"HKG", "to":"SIN"}
   ]
 }
