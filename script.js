@@ -10,8 +10,9 @@ $.when(getAirports).done(function(result){
 
   // google map initial config
   let Initialoptions ={
-      center: {lat: 22.28552, lng: 114.15769},
-      zoom: 8,
+      // center: {lat: 22.28552, lng: 114.15769},
+      center:{lat:22.3089008331,lng:113.915000916},
+      zoom: 5,
       disableDefaultUI: true,
       scrollwheel:true,
       draggable:true,

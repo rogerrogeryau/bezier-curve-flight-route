@@ -11,6 +11,18 @@ html, body {
     padding: 0;
 }
 
+section{
+    height: 80%;
+    margin: 0;
+    padding: 30px;
+}
+
+#map_wrapper{
+    height: 100%;
+    margin: 0;
+    padding: 0px;
+}
+
 
 /*.bubble {*/
 /*    background:#232e40;*/
