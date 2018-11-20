@@ -1,0 +1,12 @@
+{
+  "CX":[
+    {"from":"HKG", "to":"TSA"},
+    {"from":"HKG", "to":"BKK"},
+    {"from":"HKG", "to":"SIN"},
+    {"from":"HKG", "to":"ICN"},
+    {"from":"HKG", "to":"KHH"},
+    {"from":"HKG", "to":"HND"},
+    {"from":"HKG", "to":"ITM"},
+    {"from":"HKG", "to":"LCY"}
+  ]
+}
