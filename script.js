@@ -348,7 +348,7 @@ $.when(getAirports,airline_routes).done(function(result, result2){
       //   myLine.setPath(path);
           // console.log(drawBeizeCurves[airlineRoutes[route][i]])
         
-          line.strokeWeight = 2.5
+          line.strokeWeight = 4.5
           line.strokeColor = '#37393e'
           // console.log(event)
       });
@@ -364,7 +364,7 @@ $.when(getAirports,airline_routes).done(function(result, result2){
         //   myLine.setPath(path);
         console.log(line)
         
-        line.strokeWeight = 4.5
+        line.strokeWeight = 2.5
         line.strokeColor = '#b9c1d1'
         // console.log(event)
       });
