@@ -17,9 +17,10 @@ $.when(getAirports,airline_routes).done(function(result, result2){
   //   // console.log("hi")
   // }
   
-  airlineRoutes['CX'].forEach(route => {
-    console.log(route)
-  })
+  // dictionary storing the coordinate of all airports shown all the map, in dictionary format
+  let singlePointCoordinateDictionary = [];
+  
+
   
   // console.log(airlineRoutes)
 
@@ -112,28 +113,153 @@ $.when(getAirports,airline_routes).done(function(result, result2){
     
     
     
+    // drawBeizeCurves = [];
+    // mouseOverEventDictionary = {}
+    // loop through all airline routes
+    for (let route in airlineRoutes) {
+      // console.log(airlineRoutes[route])
+      for (let i = 0; i < airlineRoutes[route].length; i++) {
+        // console.log(airlineRoutes[route][i])
+        // for (let point in airlineRoutes[route][i]){
+        //   let targetAirport = airlineRoutes[route][i][point];
+        //   // generatePathCoordinate()
+          
+        //   // console.log(airports[targetAirport])
+          
+        //   // console.log(airlineRoutes[route][i][point])
+        //   // singlePointCoordinateDictionary.push(airports.airlineRoutes[route][i][point])
+        // }
+        
+        // console.log(airlineRoutes[route][i]['from'])
+        // console.log(airlineRoutes[route][i]['to'])
+        
+        let pointFrom = airlineRoutes[route][i]['from']
+        let pointTo = airlineRoutes[route][i]['to']
+        
+        let targetPath = generatePathCoordinate(
+          airports[pointFrom], 
+          airports[pointTo]
+        )
+        
+        // console.log(targetPath)
+        
+        // create BeizeCurve for that path
+        let targetBeizeCurve = new createBeizeCurve(targetPath[0],targetPath[1])
+        
+        
+        // -------------------DRAW PATH ON GOOGLE MAP-----------------------
+        
+        var drawBeizeCurves;
+        drawBeizeCurves = new google.maps.Polyline({
+          path: targetBeizeCurve.beizePath,
+          // path: path,
+          // path:bezierPath,
+          // strokeColor:'#a68974',
+          // strokeColor:'#FF4B4B',
+          // strokeColor:'#d0dbd7',
+          strokeColor:'#b9c1d1',
+          // strokeColor: '#0099FF',
+          // 	strokeColor:'#f6dda7',
+          //strokeColor:'#82a18f',
+          
+          strokeOpacity: 1,
+          // strokeOpacity:0,
+          strokeWeight: 3.5,
+          geodesic: true,
+          icons: [{
+            // icon:icons.parking.icon,
+            // icon: arrowSymbol,
+            icon:dotIcon,
+            // icon:dotIcon,
+            // icon:planeIcon,
+            // icon:arrowSymbol,
+            // icon:planeSymbol,
+            // icon:PlaneIcon,
+            offset: '0%',
+            repeat: '800px'
+          }],
+          map: map
+        });
+        
+        // -------------------DRAW PATH ON GOOGLE MAP-----------------------
+      
+  
+        // -------------------ADD EVENT LISTENER FOR THE LINE----------------------------------
+        
+        // console.log(drawBeizeCurves[airlineRoutes[route][i]])
+        
+        
+        animateSymbol(drawBeizeCurves);
+        mouseOverEventBeizeCurves(drawBeizeCurves);
+        mouseOutEventBeizeCurves(drawBeizeCurves);
+        
+        // // make the line bold when mouseover
+        // google.maps.event.addListener(drawBeizeCurves[airlineRoutes[route][i]], 'click', function() {
+        // //   new google.maps.Marker({map:map,position:event.latLng});
+        // //   path.push(event.latLng);
+        // //   myLine.setPath(path);
+        //     // console.log(drawBeizeCurves[airlineRoutes[route][i]])
+            
+        //     drawBeizeCurves[airlineRoutes[route][i]].strokeWeight = 5.5
+        //     drawBeizeCurves[airlineRoutes[route][i]].strokeColor = '#37393e'
+        //     // console.log(event)
+        // });
+        // google.maps.event.addListener(drawBeizeCurves[airlineRoutes[route][i]], 'mouseout', function(event) {
+        // //   new google.maps.Marker({map:map,position:event.latLng});
+        // //   path.push(event.latLng);
+        // //   myLine.setPath(path);
+        //     console.log(drawBeizeCurves[airlineRoutes[route][i]])
+            
+        //     drawBeizeCurves[airlineRoutes[route][i]].strokeWeight = 3.5
+        //     drawBeizeCurves[airlineRoutes[route][i]].strokeColor = '#b9c1d1'
+        //     // console.log(event)
+        // });
+        
+        
+        
+        // -------------------ADD EVENT LISTENER FOR THE LINE----------------------------------
+  
+      
+  
+      }
+    }
+    
+    
+    
+    
+    // console.log(drawBeizeCurves)
+    
+    
+
+    
+    
+    
+    
+    
+    
     
     // beize curve ---------------------------------------------------------------------------------------------
     
     
-    // single coordinate
-    let HKG = airports.HKG;
-    let TSA = airports.TSA;
-    let LCY = airports.LCY;
-    let BKK = airports.BKK;
-    let ITM = airports.ITM;    
+    // // single coordinate
+    // let HKG = airports.HKG;
+    // let TSA = airports.TSA;
+    // let LCY = airports.LCY;
+    // let BKK = airports.BKK;
+    // let ITM = airports.ITM;    
     
-    // form route of pair points
-    let HKG_TSA = generatePathCoordinate(HKG,TSA)
-    let HKG_LCY = generatePathCoordinate(HKG,LCY)
-    let HKG_BKK = generatePathCoordinate(HKG,BKK)
-    let HKG_ITM = generatePathCoordinate(HKG,ITM)
+    // // form route of pair points
+    // let HKG_TSA = generatePathCoordinate(HKG,TSA)
+    // let HKG_LCY = generatePathCoordinate(HKG,LCY)
+    // let HKG_BKK = generatePathCoordinate(HKG,BKK)
+    // let HKG_ITM = generatePathCoordinate(HKG,ITM)
+     
     
-    // shape the straight route into BeizeCurve
-    let HKG_TSA_BeizeCurve = new createBeizeCurve(HKG_TSA[0],HKG_TSA[1])
-    let HKG_LCY_BeizeCurve = new createBeizeCurve(HKG_LCY[0],HKG_LCY[1])
-    let HKG_BKK_BeizeCurve = new createBeizeCurve(HKG_BKK[0],HKG_BKK[1])
-    let HKG_ITM_BeizeCurve = new createBeizeCurve(HKG_ITM[0],HKG_ITM[1])
+    // // shape the straight route into BeizeCurve
+    // let HKG_TSA_BeizeCurve = new createBeizeCurve(HKG_TSA[0],HKG_TSA[1])
+    // let HKG_LCY_BeizeCurve = new createBeizeCurve(HKG_LCY[0],HKG_LCY[1])
+    // let HKG_BKK_BeizeCurve = new createBeizeCurve(HKG_BKK[0],HKG_BKK[1])
+    // let HKG_ITM_BeizeCurve = new createBeizeCurve(HKG_ITM[0],HKG_ITM[1])
     
     // console.log('midpoint :' + HKG_TSA_BeizeCurve.midpoint)
     
@@ -146,224 +272,224 @@ $.when(getAirports,airline_routes).done(function(result, result2){
     
     // Create the polyline and add the symbol to it via the 'icons' property.
     // var path =  [{lat: 22.324624, lng: 114.172305}, {lat: 23.927836, lng:121.086477}]
-    var HKG_TSA_line = new google.maps.Polyline({
-      path: HKG_TSA_BeizeCurve.beizePath,
-      // path: path,
-      // path:bezierPath,
-      // strokeColor:'#a68974',
-      // strokeColor:'#FF4B4B',
-      // strokeColor:'#d0dbd7',
-      strokeColor:'#b9c1d1',
-      // strokeColor: '#0099FF',
-      // 	strokeColor:'#f6dda7',
-      	 //strokeColor:'#82a18f',
+    // var HKG_TSA_line = new google.maps.Polyline({
+    //   path: HKG_TSA_BeizeCurve.beizePath,
+    //   // path: path,
+    //   // path:bezierPath,
+    //   // strokeColor:'#a68974',
+    //   // strokeColor:'#FF4B4B',
+    //   // strokeColor:'#d0dbd7',
+    //   strokeColor:'#b9c1d1',
+    //   // strokeColor: '#0099FF',
+    //   // 	strokeColor:'#f6dda7',
+    //   	 //strokeColor:'#82a18f',
       	 
-      strokeOpacity: 1,
-      // strokeOpacity:0,
-      strokeWeight: 3.5,
-      geodesic: true,
-      icons: [{
-        // icon:icons.parking.icon,
-        // icon: arrowSymbol,
-        icon:dotIcon,
-        // icon:dotIcon,
-        // icon:planeIcon,
-        // icon:arrowSymbol,
-        // icon:planeSymbol,
-        // icon:PlaneIcon,
-        offset: '0%',
-        repeat: '150px'
-      }],
-      map: map
-    });
+    //   strokeOpacity: 1,
+    //   // strokeOpacity:0,
+    //   strokeWeight: 3.5,
+    //   geodesic: true,
+    //   icons: [{
+    //     // icon:icons.parking.icon,
+    //     // icon: arrowSymbol,
+    //     icon:dotIcon,
+    //     // icon:dotIcon,
+    //     // icon:planeIcon,
+    //     // icon:arrowSymbol,
+    //     // icon:planeSymbol,
+    //     // icon:PlaneIcon,
+    //     offset: '0%',
+    //     repeat: '150px'
+    //   }],
+    //   map: map
+    // });
     
     
-    // console.log(HKG_TSA_line)
+    // // console.log(HKG_TSA_line)
     
-    var HKG_LCY_line = new google.maps.Polyline({
-      path: HKG_LCY_BeizeCurve.beizePath,
-      // path: path,
-      // path:bezierPath,
-      // strokeColor:'#a68974',
-      // strokeColor:'#FF4B4B',
-      // strokeColor:'#d0dbd7',
-      strokeColor:'#b9c1d1',
-      // strokeColor: '#0099FF',
-      // 	strokeColor:'#f6dda7',
-      	 //strokeColor:'#82a18f',
+    // var HKG_LCY_line = new google.maps.Polyline({
+    //   path: HKG_LCY_BeizeCurve.beizePath,
+    //   // path: path,
+    //   // path:bezierPath,
+    //   // strokeColor:'#a68974',
+    //   // strokeColor:'#FF4B4B',
+    //   // strokeColor:'#d0dbd7',
+    //   strokeColor:'#b9c1d1',
+    //   // strokeColor: '#0099FF',
+    //   // 	strokeColor:'#f6dda7',
+    //   	 //strokeColor:'#82a18f',
       	 
-      strokeOpacity: 1,
-      // strokeOpacity:0,
-      strokeWeight: 3.5,
-      geodesic: true,
-      icons: [{
-        // icon:icons.parking.icon,
-        // icon: arrowSymbol,
-        icon:dotIcon,
-        // icon:planeIcon,
-        // icon:arrowSymbol,
-        // icon:planeSymbol,
-        // icon:PlaneIcon,
-        offset: '0%',
-        repeat: '3000px'
-      }],
-      map: map
-    });
+    //   strokeOpacity: 1,
+    //   // strokeOpacity:0,
+    //   strokeWeight: 3.5,
+    //   geodesic: true,
+    //   icons: [{
+    //     // icon:icons.parking.icon,
+    //     // icon: arrowSymbol,
+    //     icon:dotIcon,
+    //     // icon:planeIcon,
+    //     // icon:arrowSymbol,
+    //     // icon:planeSymbol,
+    //     // icon:PlaneIcon,
+    //     offset: '0%',
+    //     repeat: '3000px'
+    //   }],
+    //   map: map
+    // });
     
     
-    var HKG_BKK_line = new google.maps.Polyline({
-      path: HKG_BKK_BeizeCurve.beizePath,
-      // path: path,
-      // path:bezierPath,
-      // strokeColor:'#a68974',
-      // strokeColor:'#FF4B4B',
-      // strokeColor:'#d0dbd7',
-      strokeColor:'#b9c1d1',
-      // strokeColor: '#0099FF',
-      // 	strokeColor:'#f6dda7',
-      	 //strokeColor:'#82a18f',
+    // var HKG_BKK_line = new google.maps.Polyline({
+    //   path: HKG_BKK_BeizeCurve.beizePath,
+    //   // path: path,
+    //   // path:bezierPath,
+    //   // strokeColor:'#a68974',
+    //   // strokeColor:'#FF4B4B',
+    //   // strokeColor:'#d0dbd7',
+    //   strokeColor:'#b9c1d1',
+    //   // strokeColor: '#0099FF',
+    //   // 	strokeColor:'#f6dda7',
+    //   	 //strokeColor:'#82a18f',
       	 
-      strokeOpacity: 1,
-      // strokeOpacity:0,
-      strokeWeight: 3.5,
-      geodesic: true,
-      icons: [{
-        // icon:icons.parking.icon,
-        // icon: arrowSymbol,
-        icon:dotIcon,
-        // icon:planeIcon,
-        // icon:arrowSymbol,
-        // icon:planeSymbol,
-        // icon:PlaneIcon,
-        offset: '0%',
-        repeat: '500px'
-      }],
-      map: map
-    });
+    //   strokeOpacity: 1,
+    //   // strokeOpacity:0,
+    //   strokeWeight: 3.5,
+    //   geodesic: true,
+    //   icons: [{
+    //     // icon:icons.parking.icon,
+    //     // icon: arrowSymbol,
+    //     icon:dotIcon,
+    //     // icon:planeIcon,
+    //     // icon:arrowSymbol,
+    //     // icon:planeSymbol,
+    //     // icon:PlaneIcon,
+    //     offset: '0%',
+    //     repeat: '500px'
+    //   }],
+    //   map: map
+    // });
     
-    var HKG_ITM_line = new google.maps.Polyline({
-      path: HKG_ITM_BeizeCurve.beizePath,
-      // path: path,
-      // path:bezierPath,
-      // strokeColor:'#a68974',
-      // strokeColor:'#FF4B4B',
-      // strokeColor:'#d0dbd7',
-      strokeColor:'#b9c1d1',
-      // strokeColor: '#0099FF',
-      // 	strokeColor:'#f6dda7',
-      	 //strokeColor:'#82a18f',
+    // var HKG_ITM_line = new google.maps.Polyline({
+    //   path: HKG_ITM_BeizeCurve.beizePath,
+    //   // path: path,
+    //   // path:bezierPath,
+    //   // strokeColor:'#a68974',
+    //   // strokeColor:'#FF4B4B',
+    //   // strokeColor:'#d0dbd7',
+    //   strokeColor:'#b9c1d1',
+    //   // strokeColor: '#0099FF',
+    //   // 	strokeColor:'#f6dda7',
+    //   	 //strokeColor:'#82a18f',
       	 
-      strokeOpacity: 1,
-      // strokeOpacity:0,
-      strokeWeight: 3.5,
-      geodesic: true,
-      icons: [{
-        // icon:icons.parking.icon,
-        // icon: arrowSymbol,
-        icon:dotIcon,
-        // icon:planeIcon,
-        // icon:arrowSymbol,
-        // icon:planeSymbol,
-        // icon:PlaneIcon,
-        offset: '0%',
-        repeat: '500px'
-      }],
-      map: map
-    });
+    //   strokeOpacity: 1,
+    //   // strokeOpacity:0,
+    //   strokeWeight: 3.5,
+    //   geodesic: true,
+    //   icons: [{
+    //     // icon:icons.parking.icon,
+    //     // icon: arrowSymbol,
+    //     icon:dotIcon,
+    //     // icon:planeIcon,
+    //     // icon:arrowSymbol,
+    //     // icon:planeSymbol,
+    //     // icon:PlaneIcon,
+    //     offset: '0%',
+    //     repeat: '500px'
+    //   }],
+    //   map: map
+    // });
     
     
     
-    google.maps.event.addListener(HKG_TSA_line, 'mouseover', function(event) {
-    //   new google.maps.Marker({map:map,position:event.latLng});
-    //   path.push(event.latLng);
-    //   myLine.setPath(path);
-        console.log(HKG_TSA_line)
+    // google.maps.event.addListener(HKG_TSA_line, 'mouseover', function(event) {
+    // //   new google.maps.Marker({map:map,position:event.latLng});
+    // //   path.push(event.latLng);
+    // //   myLine.setPath(path);
+    //     console.log(HKG_TSA_line)
         
-        HKG_TSA_line.strokeWeight = 5.5
-        HKG_TSA_line.strokeColor = '#37393e'
-        // console.log(event)
-    });
-    google.maps.event.addListener(HKG_TSA_line, 'mouseout', function(event) {
-    //   new google.maps.Marker({map:map,position:event.latLng});
-    //   path.push(event.latLng);
-    //   myLine.setPath(path);
-        console.log(HKG_TSA_line)
+    //     HKG_TSA_line.strokeWeight = 5.5
+    //     HKG_TSA_line.strokeColor = '#37393e'
+    //     // console.log(event)
+    // });
+    // google.maps.event.addListener(HKG_TSA_line, 'mouseout', function(event) {
+    // //   new google.maps.Marker({map:map,position:event.latLng});
+    // //   path.push(event.latLng);
+    // //   myLine.setPath(path);
+    //     console.log(HKG_TSA_line)
         
-        HKG_TSA_line.strokeWeight = 3.5
-        HKG_TSA_line.strokeColor = '#b9c1d1'
-        // console.log(event)
-    });
+    //     HKG_TSA_line.strokeWeight = 3.5
+    //     HKG_TSA_line.strokeColor = '#b9c1d1'
+    //     // console.log(event)
+    // });
     
-    google.maps.event.addListener(HKG_LCY_line, 'mouseover', function(event) {
-    //   new google.maps.Marker({map:map,position:event.latLng});
-    //   path.push(event.latLng);
-    //   myLine.setPath(path);
-        console.log(HKG_LCY_line)
+    // google.maps.event.addListener(HKG_LCY_line, 'mouseover', function(event) {
+    // //   new google.maps.Marker({map:map,position:event.latLng});
+    // //   path.push(event.latLng);
+    // //   myLine.setPath(path);
+    //     console.log(HKG_LCY_line)
         
-        HKG_LCY_line.strokeWeight = 5.5
-        HKG_LCY_line.strokeColor = '#37393e'
+    //     HKG_LCY_line.strokeWeight = 5.5
+    //     HKG_LCY_line.strokeColor = '#37393e'
         
-        // console.log(event)
-    });
-    google.maps.event.addListener(HKG_LCY_line, 'mouseout', function(event) {
-    //   new google.maps.Marker({map:map,position:event.latLng});
-    //   path.push(event.latLng);
-    //   myLine.setPath(path);
-        console.log(HKG_LCY_line)
+    //     // console.log(event)
+    // });
+    // google.maps.event.addListener(HKG_LCY_line, 'mouseout', function(event) {
+    // //   new google.maps.Marker({map:map,position:event.latLng});
+    // //   path.push(event.latLng);
+    // //   myLine.setPath(path);
+    //     console.log(HKG_LCY_line)
         
-        HKG_LCY_line.strokeWeight = 3.5
-        HKG_LCY_line.strokeColor = '#b9c1d1'
-        // console.log(event)
-    });
+    //     HKG_LCY_line.strokeWeight = 3.5
+    //     HKG_LCY_line.strokeColor = '#b9c1d1'
+    //     // console.log(event)
+    // });
     
-    google.maps.event.addListener(HKG_BKK_line, 'mouseover', function(event) {
-    //   new google.maps.Marker({map:map,position:event.latLng});
-    //   path.push(event.latLng);
-    //   myLine.setPath(path);
-        console.log(HKG_BKK_line)
+    // google.maps.event.addListener(HKG_BKK_line, 'mouseover', function(event) {
+    // //   new google.maps.Marker({map:map,position:event.latLng});
+    // //   path.push(event.latLng);
+    // //   myLine.setPath(path);
+    //     console.log(HKG_BKK_line)
         
-        HKG_BKK_line.strokeWeight = 5.5
-        HKG_BKK_line.strokeColor = '#37393e'
-        // console.log(event)
-    });
-    google.maps.event.addListener(HKG_BKK_line, 'mouseout', function(event) {
-    //   new google.maps.Marker({map:map,position:event.latLng});
-    //   path.push(event.latLng);
-    //   myLine.setPath(path);
-        console.log(HKG_BKK_line)
+    //     HKG_BKK_line.strokeWeight = 5.5
+    //     HKG_BKK_line.strokeColor = '#37393e'
+    //     // console.log(event)
+    // });
+    // google.maps.event.addListener(HKG_BKK_line, 'mouseout', function(event) {
+    // //   new google.maps.Marker({map:map,position:event.latLng});
+    // //   path.push(event.latLng);
+    // //   myLine.setPath(path);
+    //     console.log(HKG_BKK_line)
         
-        HKG_BKK_line.strokeWeight = 3.5
-        HKG_BKK_line.strokeColor = '#b9c1d1'
-        // console.log(event)
-    });
+    //     HKG_BKK_line.strokeWeight = 3.5
+    //     HKG_BKK_line.strokeColor = '#b9c1d1'
+    //     // console.log(event)
+    // });
     
-    google.maps.event.addListener(HKG_ITM_line, 'mouseover', function(event) {
-    //   new google.maps.Marker({map:map,position:event.latLng});
-    //   path.push(event.latLng);
-    //   myLine.setPath(path);
-        console.log(HKG_ITM_line)
+    // google.maps.event.addListener(HKG_ITM_line, 'mouseover', function(event) {
+    // //   new google.maps.Marker({map:map,position:event.latLng});
+    // //   path.push(event.latLng);
+    // //   myLine.setPath(path);
+    //     console.log(HKG_ITM_line)
         
-        HKG_ITM_line.strokeWeight = 5.5
-        HKG_ITM_line.strokeColor = '#37393e'
-        // console.log(event)
-    });
-    google.maps.event.addListener(HKG_ITM_line, 'mouseout', function(event) {
-    //   new google.maps.Marker({map:map,position:event.latLng});
-    //   path.push(event.latLng);
-    //   myLine.setPath(path);
-        console.log(HKG_ITM_line)
+    //     HKG_ITM_line.strokeWeight = 5.5
+    //     HKG_ITM_line.strokeColor = '#37393e'
+    //     // console.log(event)
+    // });
+    // google.maps.event.addListener(HKG_ITM_line, 'mouseout', function(event) {
+    // //   new google.maps.Marker({map:map,position:event.latLng});
+    // //   path.push(event.latLng);
+    // //   myLine.setPath(path);
+    //     console.log(HKG_ITM_line)
         
-        HKG_ITM_line.strokeWeight = 3.5
-        HKG_ITM_line.strokeColor = '#b9c1d1'
-        // console.log(event)
-    });
+    //     HKG_ITM_line.strokeWeight = 3.5
+    //     HKG_ITM_line.strokeColor = '#b9c1d1'
+    //     // console.log(event)
+    // });
     
     
-    // line.strokeColor = '#f6dda7'
-    animateSymbol(HKG_TSA_line);
-    animateSymbol(HKG_LCY_line);
-    animateSymbol(HKG_BKK_line);
-    animateSymbol(HKG_ITM_line);
+    // // line.strokeColor = '#f6dda7'
+    // animateSymbol(HKG_TSA_line);
+    // animateSymbol(HKG_LCY_line);
+    // animateSymbol(HKG_BKK_line);
+    // animateSymbol(HKG_ITM_line);
     
     
     
@@ -373,21 +499,6 @@ $.when(getAirports,airline_routes).done(function(result, result2){
     
     // console.log(line)
     
-    // generate animated repeated symbols along the bezierPath line
-    function animateSymbol(line) {
-        var count = 0;
-        window.setInterval(function() {
-            // count = (count + 1) % 200;
-            count = ++count % 800000;
-        
-            var icons = line.get('icons');
-            // icons[0].offset = (count / 2) + '%';
-            icons[0].offset = (count) + '%';
-            line.set('icons', icons);
-        }, 40);
-        // console.log(line)
-        
-    }
     
     
     // function used to link up two places -- simply a line
@@ -402,6 +513,61 @@ $.when(getAirports,airline_routes).done(function(result, result2){
       path.push(point1,point2)
       return path
     }
+    
+    
+    
+    
+    // generate animated repeated symbols along the bezierPath line
+    function animateSymbol(line) {
+        var count = 0;
+        window.setInterval(function() {
+            count = (count + 0.25) % 20000;
+            // count = ++count % 800000;
+        
+            var icons = line.get('icons');
+            // icons[0].offset = (count / 2) + '%';
+            icons[0].offset = (count) + '%';
+            line.set('icons', icons);
+        }, 40);
+        // console.log(line)
+        
+    }
+    
+    
+    
+    // BeizeCurves mouseover event
+    function mouseOverEventBeizeCurves(line){
+    
+      // make the line bold when mouseover
+      google.maps.event.addListener(line, 'mouseover', function() {
+      //   new google.maps.Marker({map:map,position:event.latLng});
+      //   path.push(event.latLng);
+      //   myLine.setPath(path);
+          // console.log(drawBeizeCurves[airlineRoutes[route][i]])
+        
+          line.strokeWeight = 5.5
+          line.strokeColor = '#37393e'
+          // console.log(event)
+      });
+      return;
+    
+    }
+    
+    
+    function mouseOutEventBeizeCurves(line){
+      google.maps.event.addListener(line, 'mouseout', function(event) {
+        //   new google.maps.Marker({map:map,position:event.latLng});
+        //   path.push(event.latLng);
+        //   myLine.setPath(path);
+        console.log(line)
+        
+        line.strokeWeight = 3.5
+        line.strokeColor = '#b9c1d1'
+        // console.log(event)
+      });
+    }
+    
+    
     
     
     
