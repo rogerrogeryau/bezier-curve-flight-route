@@ -12,19 +12,6 @@ $.when(getAirports,airline_routes).done(function(result, result2){
   let airlineRoutes = result2[0]
   
   
-  // for(var i = 0; i < airlineRoutes.length; i++) {
-  //   console.log(airlineRoutes[i])
-  //   // console.log("hi")
-  // }
-  
-  // dictionary storing the coordinate of all airports shown all the map, in dictionary format
-  let singlePointCoordinateDictionary = [];
-  
-
-  
-  // console.log(airlineRoutes)
-
-
   // google map initial config
   let Initialoptions ={
       // center: {lat: 22.28552, lng: 114.15769},
@@ -119,20 +106,7 @@ $.when(getAirports,airline_routes).done(function(result, result2){
     for (let route in airlineRoutes) {
       // console.log(airlineRoutes[route])
       for (let i = 0; i < airlineRoutes[route].length; i++) {
-        // console.log(airlineRoutes[route][i])
-        // for (let point in airlineRoutes[route][i]){
-        //   let targetAirport = airlineRoutes[route][i][point];
-        //   // generatePathCoordinate()
-          
-        //   // console.log(airports[targetAirport])
-          
-        //   // console.log(airlineRoutes[route][i][point])
-        //   // singlePointCoordinateDictionary.push(airports.airlineRoutes[route][i][point])
-        // }
-        
-        // console.log(airlineRoutes[route][i]['from'])
-        // console.log(airlineRoutes[route][i]['to'])
-        
+
         let pointFrom = airlineRoutes[route][i]['from']
         let pointTo = airlineRoutes[route][i]['to']
         
@@ -141,13 +115,12 @@ $.when(getAirports,airline_routes).done(function(result, result2){
           airports[pointTo]
         )
         
-        // console.log(targetPath)
         
         // create BeizeCurve for that path
         let targetBeizeCurve = new createBeizeCurve(targetPath[0],targetPath[1])
         
-        
-        // -------------------DRAW PATH ON GOOGLE MAP-----------------------
+
+        // -------------------DRAW BeizeCurve PATH ON GOOGLE MAP-----------------------
         
         var drawBeizeCurves;
         drawBeizeCurves = new google.maps.Polyline({
@@ -164,7 +137,7 @@ $.when(getAirports,airline_routes).done(function(result, result2){
           
           strokeOpacity: 1,
           // strokeOpacity:0,
-          strokeWeight: 3.5,
+          strokeWeight: 2.5,
           geodesic: true,
           icons: [{
             // icon:icons.parking.icon,
@@ -184,14 +157,16 @@ $.when(getAirports,airline_routes).done(function(result, result2){
         // -------------------DRAW PATH ON GOOGLE MAP-----------------------
       
   
-        // -------------------ADD EVENT LISTENER FOR THE LINE----------------------------------
+        // -------------------APPLY FUNCTION FOR THE LINE----------------------------------
         
-        // console.log(drawBeizeCurves[airlineRoutes[route][i]])
-        
-        
+     
+        // animation applied on symbol along the curve
         animateSymbol(drawBeizeCurves);
+        
+        // endow the curve with event trigger
         mouseOverEventBeizeCurves(drawBeizeCurves);
         mouseOutEventBeizeCurves(drawBeizeCurves);
+        
         
         // // make the line bold when mouseover
         // google.maps.event.addListener(drawBeizeCurves[airlineRoutes[route][i]], 'click', function() {
@@ -217,7 +192,7 @@ $.when(getAirports,airline_routes).done(function(result, result2){
         
         
         
-        // -------------------ADD EVENT LISTENER FOR THE LINE----------------------------------
+        // -------------------APPLY FUNCTION FOR THE LINE----------------------------------
   
       
   
@@ -304,98 +279,7 @@ $.when(getAirports,airline_routes).done(function(result, result2){
     // });
     
     
-    // // console.log(HKG_TSA_line)
-    
-    // var HKG_LCY_line = new google.maps.Polyline({
-    //   path: HKG_LCY_BeizeCurve.beizePath,
-    //   // path: path,
-    //   // path:bezierPath,
-    //   // strokeColor:'#a68974',
-    //   // strokeColor:'#FF4B4B',
-    //   // strokeColor:'#d0dbd7',
-    //   strokeColor:'#b9c1d1',
-    //   // strokeColor: '#0099FF',
-    //   // 	strokeColor:'#f6dda7',
-    //   	 //strokeColor:'#82a18f',
-      	 
-    //   strokeOpacity: 1,
-    //   // strokeOpacity:0,
-    //   strokeWeight: 3.5,
-    //   geodesic: true,
-    //   icons: [{
-    //     // icon:icons.parking.icon,
-    //     // icon: arrowSymbol,
-    //     icon:dotIcon,
-    //     // icon:planeIcon,
-    //     // icon:arrowSymbol,
-    //     // icon:planeSymbol,
-    //     // icon:PlaneIcon,
-    //     offset: '0%',
-    //     repeat: '3000px'
-    //   }],
-    //   map: map
-    // });
-    
-    
-    // var HKG_BKK_line = new google.maps.Polyline({
-    //   path: HKG_BKK_BeizeCurve.beizePath,
-    //   // path: path,
-    //   // path:bezierPath,
-    //   // strokeColor:'#a68974',
-    //   // strokeColor:'#FF4B4B',
-    //   // strokeColor:'#d0dbd7',
-    //   strokeColor:'#b9c1d1',
-    //   // strokeColor: '#0099FF',
-    //   // 	strokeColor:'#f6dda7',
-    //   	 //strokeColor:'#82a18f',
-      	 
-    //   strokeOpacity: 1,
-    //   // strokeOpacity:0,
-    //   strokeWeight: 3.5,
-    //   geodesic: true,
-    //   icons: [{
-    //     // icon:icons.parking.icon,
-    //     // icon: arrowSymbol,
-    //     icon:dotIcon,
-    //     // icon:planeIcon,
-    //     // icon:arrowSymbol,
-    //     // icon:planeSymbol,
-    //     // icon:PlaneIcon,
-    //     offset: '0%',
-    //     repeat: '500px'
-    //   }],
-    //   map: map
-    // });
-    
-    // var HKG_ITM_line = new google.maps.Polyline({
-    //   path: HKG_ITM_BeizeCurve.beizePath,
-    //   // path: path,
-    //   // path:bezierPath,
-    //   // strokeColor:'#a68974',
-    //   // strokeColor:'#FF4B4B',
-    //   // strokeColor:'#d0dbd7',
-    //   strokeColor:'#b9c1d1',
-    //   // strokeColor: '#0099FF',
-    //   // 	strokeColor:'#f6dda7',
-    //   	 //strokeColor:'#82a18f',
-      	 
-    //   strokeOpacity: 1,
-    //   // strokeOpacity:0,
-    //   strokeWeight: 3.5,
-    //   geodesic: true,
-    //   icons: [{
-    //     // icon:icons.parking.icon,
-    //     // icon: arrowSymbol,
-    //     icon:dotIcon,
-    //     // icon:planeIcon,
-    //     // icon:arrowSymbol,
-    //     // icon:planeSymbol,
-    //     // icon:PlaneIcon,
-    //     offset: '0%',
-    //     repeat: '500px'
-    //   }],
-    //   map: map
-    // });
+ 
     
     
     
@@ -419,87 +303,11 @@ $.when(getAirports,airline_routes).done(function(result, result2){
     //     HKG_TSA_line.strokeColor = '#b9c1d1'
     //     // console.log(event)
     // });
+
     
-    // google.maps.event.addListener(HKG_LCY_line, 'mouseover', function(event) {
-    // //   new google.maps.Marker({map:map,position:event.latLng});
-    // //   path.push(event.latLng);
-    // //   myLine.setPath(path);
-    //     console.log(HKG_LCY_line)
-        
-    //     HKG_LCY_line.strokeWeight = 5.5
-    //     HKG_LCY_line.strokeColor = '#37393e'
-        
-    //     // console.log(event)
-    // });
-    // google.maps.event.addListener(HKG_LCY_line, 'mouseout', function(event) {
-    // //   new google.maps.Marker({map:map,position:event.latLng});
-    // //   path.push(event.latLng);
-    // //   myLine.setPath(path);
-    //     console.log(HKG_LCY_line)
-        
-    //     HKG_LCY_line.strokeWeight = 3.5
-    //     HKG_LCY_line.strokeColor = '#b9c1d1'
-    //     // console.log(event)
-    // });
+
     
-    // google.maps.event.addListener(HKG_BKK_line, 'mouseover', function(event) {
-    // //   new google.maps.Marker({map:map,position:event.latLng});
-    // //   path.push(event.latLng);
-    // //   myLine.setPath(path);
-    //     console.log(HKG_BKK_line)
-        
-    //     HKG_BKK_line.strokeWeight = 5.5
-    //     HKG_BKK_line.strokeColor = '#37393e'
-    //     // console.log(event)
-    // });
-    // google.maps.event.addListener(HKG_BKK_line, 'mouseout', function(event) {
-    // //   new google.maps.Marker({map:map,position:event.latLng});
-    // //   path.push(event.latLng);
-    // //   myLine.setPath(path);
-    //     console.log(HKG_BKK_line)
-        
-    //     HKG_BKK_line.strokeWeight = 3.5
-    //     HKG_BKK_line.strokeColor = '#b9c1d1'
-    //     // console.log(event)
-    // });
-    
-    // google.maps.event.addListener(HKG_ITM_line, 'mouseover', function(event) {
-    // //   new google.maps.Marker({map:map,position:event.latLng});
-    // //   path.push(event.latLng);
-    // //   myLine.setPath(path);
-    //     console.log(HKG_ITM_line)
-        
-    //     HKG_ITM_line.strokeWeight = 5.5
-    //     HKG_ITM_line.strokeColor = '#37393e'
-    //     // console.log(event)
-    // });
-    // google.maps.event.addListener(HKG_ITM_line, 'mouseout', function(event) {
-    // //   new google.maps.Marker({map:map,position:event.latLng});
-    // //   path.push(event.latLng);
-    // //   myLine.setPath(path);
-    //     console.log(HKG_ITM_line)
-        
-    //     HKG_ITM_line.strokeWeight = 3.5
-    //     HKG_ITM_line.strokeColor = '#b9c1d1'
-    //     // console.log(event)
-    // });
-    
-    
-    // // line.strokeColor = '#f6dda7'
-    // animateSymbol(HKG_TSA_line);
-    // animateSymbol(HKG_LCY_line);
-    // animateSymbol(HKG_BKK_line);
-    // animateSymbol(HKG_ITM_line);
-    
-    
-    
-    // markers pin
-    
-    
-    
-    // console.log(line)
-    
-    
+    // function codeblock --------------------------------------------------------------------------
     
     // function used to link up two places -- simply a line
     function generatePathCoordinate(fromPlace, toPlace){
@@ -513,9 +321,6 @@ $.when(getAirports,airline_routes).done(function(result, result2){
       path.push(point1,point2)
       return path
     }
-    
-    
-    
     
     // generate animated repeated symbols along the bezierPath line
     function animateSymbol(line) {
@@ -533,8 +338,6 @@ $.when(getAirports,airline_routes).done(function(result, result2){
         
     }
     
-    
-    
     // BeizeCurves mouseover event
     function mouseOverEventBeizeCurves(line){
     
@@ -545,7 +348,7 @@ $.when(getAirports,airline_routes).done(function(result, result2){
       //   myLine.setPath(path);
           // console.log(drawBeizeCurves[airlineRoutes[route][i]])
         
-          line.strokeWeight = 5.5
+          line.strokeWeight = 2.5
           line.strokeColor = '#37393e'
           // console.log(event)
       });
@@ -553,7 +356,7 @@ $.when(getAirports,airline_routes).done(function(result, result2){
     
     }
     
-    
+    // BeizeCurves mouseout event
     function mouseOutEventBeizeCurves(line){
       google.maps.event.addListener(line, 'mouseout', function(event) {
         //   new google.maps.Marker({map:map,position:event.latLng});
@@ -561,16 +364,19 @@ $.when(getAirports,airline_routes).done(function(result, result2){
         //   myLine.setPath(path);
         console.log(line)
         
-        line.strokeWeight = 3.5
+        line.strokeWeight = 4.5
         line.strokeColor = '#b9c1d1'
         // console.log(event)
       });
     }
     
+    // function codeblock --------------------------------------------------------------------------
     
     
     
     
+    
+    // Markers ------------------------------------------------------------------------
     
     
     // var from_point = new google.maps.Marker({
@@ -604,7 +410,7 @@ $.when(getAirports,airline_routes).done(function(result, result2){
     // });
   
   
-  
+  // Markers ------------------------------------------------------------------------
   
   
   

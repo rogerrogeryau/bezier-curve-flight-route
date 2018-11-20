@@ -2,7 +2,7 @@ function createBeizeCurve(from, to){
     this.from =from;
     this.to = to;
     this.beizePath = getLatLngPath(from, to)
-    // this.midPoint = getBezierHandles(from,to).midpoint
+
     
     function getLatLngPath( p0, p1 )
         {
