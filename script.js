@@ -12,7 +12,7 @@ $.when(getAirports,airline_routes).done(function(result, result2){
   let airlineRoutes = result2[0]
   
   
-  definePopupClass();
+  
   
   // google map initial config
   let Initialoptions ={
@@ -41,14 +41,11 @@ $.when(getAirports,airline_routes).done(function(result, result2){
       
     // get map div element
     let MapElement = document.getElementById("map")
-    
+ 
     // create map canvas
     var map = new google.maps.Map(MapElement,Initialoptions)
     
-    // popup = new Popup(
-    //     new google.maps.LatLng(-33.866, 151.196),
-    //     document.getElementById('content'));
-    // popup.setMap(map);
+
     
     // Define the symbol, using one of the predefined paths ('CIRCLE')
     // supplied by the Google Maps JavaScript API.
@@ -148,7 +145,7 @@ $.when(getAirports,airline_routes).done(function(result, result2){
           
           strokeOpacity: 1,
           // strokeOpacity:0,
-          strokeWeight: 2.5,
+          strokeWeight: 1.5,
           geodesic: true,
           icons: [{
             // icon:icons.parking.icon,
@@ -377,7 +374,7 @@ $.when(getAirports,airline_routes).done(function(result, result2){
         //   myLine.setPath(path);
         // console.log(line)
         
-        line.strokeWeight = 2.5
+        line.strokeWeight = 1.5
         line.strokeColor = '#b9c1d1'
         // console.log(event)
       });
@@ -388,7 +385,8 @@ $.when(getAirports,airline_routes).done(function(result, result2){
     
     
     // --------------------------- infoWindow -------------------------------------------------
-    
+   
+
     
     // --------------------------- infoWindow -------------------------------------------------
     

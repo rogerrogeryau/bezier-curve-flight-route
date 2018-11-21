@@ -7,7 +7,8 @@ function definePopupClass() {
    * @constructor
    * @extends {google.maps.OverlayView}
    */
-  let Popup = function(position, content) {
+  let Popup;
+  Popup = function(position, content) {
     this.position = position;
 
     content.classList.add('popup-bubble-content');
