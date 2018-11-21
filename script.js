@@ -47,6 +47,11 @@ $.when(getAirports,airline_routes).done(function(result, result2){
     
 
     
+    // let popup = new Popup(
+    //     new google.maps.LatLng(-33.866, 151.196),
+    //     document.getElementById('content'));
+    // popup.setMap(map);
+    
     // Define the symbol, using one of the predefined paths ('CIRCLE')
     // supplied by the Google Maps JavaScript API.
     // var arrowSymbol = {

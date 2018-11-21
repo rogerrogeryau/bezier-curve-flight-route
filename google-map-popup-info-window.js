@@ -1,5 +1,5 @@
 /** Defines the Popup class. */
-function definePopupClass() {
+function definePopupClass(position, content) {
   /**
    * A customized popup on the map.
    * @param {!google.maps.LatLng} position
@@ -7,8 +7,8 @@ function definePopupClass() {
    * @constructor
    * @extends {google.maps.OverlayView}
    */
-  let Popup;
-  Popup = function(position, content) {
+  
+  let Popup = function(position, content) {
     this.position = position;
 
     content.classList.add('popup-bubble-content');
@@ -71,4 +71,8 @@ function definePopupClass() {
           });
         });
   };
+  
+  
+  
+  return Popup
 }
