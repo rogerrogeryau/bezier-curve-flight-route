@@ -47,10 +47,13 @@ $.when(getAirports,airline_routes).done(function(result, result2){
     
 
     
+    // fail to incorporate Popup object [edited on 23-11-2018]
     // let popup = new Popup(
     //     new google.maps.LatLng(-33.866, 151.196),
     //     document.getElementById('content'));
     // popup.setMap(map);
+    
+    
     
     // Define the symbol, using one of the predefined paths ('CIRCLE')
     // supplied by the Google Maps JavaScript API.
@@ -93,9 +96,10 @@ $.when(getAirports,airline_routes).done(function(result, result2){
 
       path: 'M362.985,430.724l-10.248,51.234l62.332,57.969l-3.293,26.145 l-71.345-23.599l-2.001,13.069l-2.057-13.529l-71.278,22.928l-5.762-23.984l64.097-59.271l-8.913-51.359l0.858-114.43 l-21.945-11.338l-189.358,88.76l-1.18-32.262l213.344-180.08l0.875-107.436l7.973-32.005l7.642-12.054l7.377-3.958l9.238,3.65 l6.367,14.925l7.369,30.363v106.375l211.592,182.082l-1.496,32.247l-188.479-90.61l-21.616,10.087l-0.094,115.684',
       scale: 0.0333,
-      strokeOpacity: 0.7,
+      strokeOpacity: 0.6,
       // color: '#ff6969',
       strokeColor:'#ff6969',
+      // strokeColor: '#ff2222',
       strokeWeight: 3,
       anchor: new google.maps.Point(300, 300)
     };
@@ -130,7 +134,7 @@ $.when(getAirports,airline_routes).done(function(result, result2){
         let targetBeizeCurve = new createBeizeCurve(targetPath[0],targetPath[1])
         
         
-        // midpoint
+        // midpoint - a point at which infoWindow lies
         console.log(targetBeizeCurve.midpoint)
 
         // -------------------DRAW BeizeCurve PATH ON GOOGLE MAP-----------------------
@@ -170,7 +174,7 @@ $.when(getAirports,airline_routes).done(function(result, result2){
         // -------------------DRAW PATH ON GOOGLE MAP-----------------------
       
   
-        // -------------------APPLY FUNCTIONS & EVENT LISTENER FOR THE LINE----------------------------------
+        // -------------------APPLY FUNCTIONS & EVENT LISTENER FOR THE Beize LINE----------------------------------
         
      
         // animation applied on symbol along the curve
