@@ -223,6 +223,7 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
         // var drawBeizeCurves;
         // drawBeizeCurves.setMap(null)
         let drawBeizeCurves = new google.maps.Polyline({
+          leasePrice:airlineRoutes[carrier][i]['leasePrice'],
           carrier:carrier,
           path: targetBeizeCurve.beizePath,
           infoWindowPoint:targetBeizeCurve.infoWindowPoint,
