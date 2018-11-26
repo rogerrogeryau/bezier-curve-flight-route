@@ -2,7 +2,7 @@ let getAirports = $.get("./hutcho_airport_v2.json");
 let airline_routes = $.get("./airline_routes.json");
 
 
-$.when(getAirports,airline_routes, defaultSelectedCarrierDisplay()).done(function(result, result2){
+$.when(getAirports,airline_routes,).done(function(result, result2){
   // console.log(result[0])
   // console.log(result2[0])
   
