@@ -19,5 +19,10 @@
     {"from":"HKG", "to":"CGK"},
     {"from":"HKG", "to":"LAX"},
     {"from":"HKG", "to":"SIN"}
+  ],
+  "HX":[
+    {"from":"KHH", "to":"TSA"}
+
+
   ]
 }

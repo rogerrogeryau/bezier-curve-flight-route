@@ -1,9 +1,14 @@
 let getAirports = $.get("./hutcho_airport_v2.json");
 let airline_routes = $.get("./airline_routes.json");
-
+// window.addEventListener("load", function(event) {
+//   console.log("All resources finished loading!");
+// });
 $.when(getAirports,airline_routes).done(function(result, result2){
   // console.log(result[0])
   // console.log(result2[0])
+  
+  
+  
   
   // get airport's coordinate data
   let airports = result[0]
@@ -45,6 +50,38 @@ $.when(getAirports,airline_routes).done(function(result, result2){
     // create map canvas
     var map = new google.maps.Map(MapElement,Initialoptions)
     
+
+
+    
+    // map control panel ----------------------------------------------------
+      
+      
+      // attach event listener to carrier selector
+      let carrierSelector = document.getElementById('carrier_selector')
+
+      
+      // airline route displayed when another carrier selected
+      carrierSelector.addEventListener("change", function() {
+          // clear previously displayed route
+          deleteBeizeCurves()
+          
+          // get the selected carrier option tag element
+          let chosenCarrier = carrierSelector.options[carrierSelector.selectedIndex].value;
+          // alert(chosenCarrier)
+          
+          // display selected routes on the map
+          showRoutesOfSelectedCarrier(chosenCarrier)
+          
+          
+      });
+    
+    
+      
+      
+      
+    // map control panel ----------------------------------------------------
+
+
 
     
     // fail to incorporate Popup object [edited on 23-11-2018]
@@ -91,6 +128,7 @@ $.when(getAirports,airline_routes).done(function(result, result2){
     // };
     
     
+    
     // plane symbal
     var planeSymbol = {
 
@@ -115,14 +153,25 @@ $.when(getAirports,airline_routes).done(function(result, result2){
     // drawBeizeCurves = [];
     // mouseOverEventDictionary = {}
     
-    // loop through all airline routes
-    for (let route in airlineRoutes) {
+    
+    // function to show airline routes
+    
+    
+    
+    // loop through all airline routes 
+    
+    
+    // for (let route in airlineRoutes) {
       // console.log(airlineRoutes[route])
-      for (let i = 0; i < airlineRoutes[route].length; i++) {
+    
+    let airlineRoutesArray = [];
+    
+    function showRoutesOfSelectedCarrier(carrier){
+      // loop through all routes of the selected airline
+      for (let i = 0; i < airlineRoutes[carrier].length; i++) {
 
-      
-        let pointFrom = airlineRoutes[route][i]['from']
-        let pointTo = airlineRoutes[route][i]['to']
+        let pointFrom = airlineRoutes[carrier][i]['from']
+        let pointTo = airlineRoutes[carrier][i]['to']
         
         let targetPath = generatePathCoordinate(
           airports[pointFrom], 
@@ -139,8 +188,9 @@ $.when(getAirports,airline_routes).done(function(result, result2){
 
         // -------------------DRAW BeizeCurve PATH ON GOOGLE MAP-----------------------
         
-        var drawBeizeCurves;
-        drawBeizeCurves = new google.maps.Polyline({
+        // var drawBeizeCurves;
+        // drawBeizeCurves.setMap(null)
+        let drawBeizeCurves = new google.maps.Polyline({
           path: targetBeizeCurve.beizePath,
           // path: path,
           // path:bezierPath,
@@ -211,10 +261,13 @@ $.when(getAirports,airline_routes).done(function(result, result2){
         
         // -------------------APPLY FUNCTIONS & EVENT LISTENER FOR THE LINE----------------------------------
   
-      
-  
+        airlineRoutesArray.push(drawBeizeCurves)
       }
+ 
+      
     }
+
+    // }
     
     
     // InfoWindow -----------------------------------------------------------------------------------------------
@@ -388,6 +441,15 @@ $.when(getAirports,airline_routes).done(function(result, result2){
         // console.log(event)
       });
     }
+    
+    
+    function deleteBeizeCurves() {
+        //Loop through all the markers and remove
+        for (var i = 0; i < airlineRoutesArray.length; i++) {
+            airlineRoutesArray[i].setMap(null);
+        }
+        // airlineRoutesArray = [];
+    };
     
     // function codeblock --------------------------------------------------------------------------
     

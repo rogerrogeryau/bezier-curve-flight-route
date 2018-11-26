@@ -42,6 +42,10 @@ section{
     height:100%;
 }
 
+#map-control-panel-card:hover {
+  box-shadow: 0 0 30px rgba(33,33,33,.2); 
+}
+
 
 /*.bubble {*/
 /*    background:#232e40;*/
