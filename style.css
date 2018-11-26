@@ -9,6 +9,8 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    font-family: 'Noto Sans TC', sans-serif;
+    /*font-size: 48px;*/
 }
 
 section{
@@ -21,6 +23,23 @@ section{
     height: 100%;
     margin: 0;
     padding: 0px;
+    position:relative;
+}
+
+#over_map { 
+    position: absolute; 
+    top: 5%; 
+    left: -3%; 
+    z-index: 99; 
+    /*position:absolute*/
+    display:block
+    
+}
+
+#map-control-panel{
+    /*position: absolute; */
+    /*display:block*/
+    height:100%;
 }
 
 
