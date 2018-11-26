@@ -1,9 +1,19 @@
 let getAirports = $.get("./hutcho_airport_v2.json");
 let airline_routes = $.get("./airline_routes.json");
-// window.addEventListener("load", function(event) {
-//   console.log("All resources finished loading!");
-// });
-$.when(getAirports,airline_routes).done(function(result, result2){
+
+
+function defaultSelectedCarrierDisplay(){
+  window.addEventListener("load", function(event) {
+    // console.log("All resources finished loading!");
+    
+    
+    
+  });
+}
+
+
+
+$.when(getAirports,airline_routes, defaultSelectedCarrierDisplay()).done(function(result, result2){
   // console.log(result[0])
   // console.log(result2[0])
   
@@ -50,6 +60,37 @@ $.when(getAirports,airline_routes).done(function(result, result2){
     // create map canvas
     var map = new google.maps.Map(MapElement,Initialoptions)
     
+        
+    // infoWindow------------------------------------------------------------
+    // var contentString = '<div id="content">'+
+    //       '<div id="siteNotice">'+
+    //       '</div>'+
+    //       '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
+    //       '<div id="bodyContent">'+
+    //       '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
+    //       'sandstone rock formation in the southern part of the '+
+    //       'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
+    //       'south west of the nearest large town, Alice Springs; 450&#160;km '+
+    //       '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
+    //       'features of the Uluru - Kata Tjuta National Park. Uluru is '+
+    //       'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
+    //       'Aboriginal people of the area. It has many springs, waterholes, '+
+    //       'rock caves and ancient paintings. Uluru is listed as a World '+
+    //       'Heritage Site.</p>'+
+    //       '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
+    //       'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
+    //       '(last visited June 22, 2009).</p>'+
+    //       '</div>'+
+    //       '</div>';
+    var contentString = '至抵機票價格: $ 1000 ';
+    
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString,
+      // position:Initialoptions.center
+    });
+    
+    // infoWindow------------------------------------------------------------
+
 
 
     
@@ -72,13 +113,12 @@ $.when(getAirports,airline_routes).done(function(result, result2){
           // display selected routes on the map
           showRoutesOfSelectedCarrier(chosenCarrier)
           
+          // clear shown infoWindow
+          infowindow.close()
           
       });
     
     
-      
-      
-      
     // map control panel ----------------------------------------------------
 
 
@@ -164,6 +204,8 @@ $.when(getAirports,airline_routes).done(function(result, result2){
     // for (let route in airlineRoutes) {
       // console.log(airlineRoutes[route])
     
+    
+    // an array storing all created airline route
     let airlineRoutesArray = [];
     
     function showRoutesOfSelectedCarrier(carrier){
@@ -192,6 +234,7 @@ $.when(getAirports,airline_routes).done(function(result, result2){
         // drawBeizeCurves.setMap(null)
         let drawBeizeCurves = new google.maps.Polyline({
           path: targetBeizeCurve.beizePath,
+          midpoint:targetBeizeCurve.midpoint,
           // path: path,
           // path:bezierPath,
           // strokeColor:'#a68974',
@@ -261,6 +304,7 @@ $.when(getAirports,airline_routes).done(function(result, result2){
         
         // -------------------APPLY FUNCTIONS & EVENT LISTENER FOR THE LINE----------------------------------
   
+        // push created airline route curve to the corresponding array
         airlineRoutesArray.push(drawBeizeCurves)
       }
  
@@ -422,7 +466,11 @@ $.when(getAirports,airline_routes).done(function(result, result2){
         
           line.strokeWeight = 4.5
           line.strokeColor = '#37393e'
-          // console.log(event)
+          // console.log(infowindow)
+          // infowindow.setPosition(Initialoptions.center)
+          infowindow.setPosition(line.midpoint)
+          infowindow.open(map)
+          
       });
       return;
     
