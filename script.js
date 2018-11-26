@@ -38,13 +38,22 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
         // styles:[{"featureType": "landscape", "elementType": "all", "stylers": [{"hue": "#FFA800"}, {"gamma": 1 } ] }, {"featureType": "landscape", "elementType": "geometry.fill", "stylers": [{"color": "#f8fae9"} ] }, {"featureType": "poi", "elementType": "all", "stylers": [{"hue": "#679714"}, {"saturation": 33.4 }, {"lightness": -25.4 }, {"gamma": 1 } ] }, {"featureType": "road.highway", "elementType": "all", "stylers": [{"hue": "#53FF00"}, {"saturation": -73 }, {"lightness": 40 }, {"gamma": 1 } ] }, {"featureType": "road.arterial", "elementType": "all", "stylers": [{"hue": "#FBFF00"}, {"gamma": 1 } ] }, {"featureType": "road.local", "elementType": "all", "stylers": [{"hue": "#00FFFD"}, {"lightness": 30 }, {"gamma": 1 } ] }, {"featureType": "water", "elementType": "all", "stylers": [{"hue": "#00BFFF"}, {"saturation": 6 }, {"lightness": 8 }, {"gamma": 1 } ] } ]
         // styles: [{"featureType": "administrative", "elementType": "labels.text.fill", "stylers": [{"color": "#444444"} ] }, {"featureType": "landscape", "elementType": "all", "stylers": [{"color": "#f2f2f2"} ] }, {"featureType": "poi", "elementType": "all", "stylers": [{"visibility": "off"} ] }, {"featureType": "road", "elementType": "all", "stylers": [{"saturation": -100 }, {"lightness": 45 } ] }, {"featureType": "road.highway", "elementType": "all", "stylers": [{"visibility": "simplified"} ] }, {"featureType": "road.arterial", "elementType": "labels.icon", "stylers": [{"visibility": "off"} ] }, {"featureType": "transit", "elementType": "all", "stylers": [{"visibility": "off"} ] }, {"featureType": "water", "elementType": "all", "stylers": [{"color": "#003b5d"}, {"visibility": "on"} ] } ]    
         
-    }
+  }
       
     // get map div element
     let MapElement = document.getElementById("map")
  
     // create map canvas
     var map = new google.maps.Map(MapElement,Initialoptions)
+    
+  
+    
+    
+    
+
+    
+    
+    
     
         
     // infoWindow------------------------------------------------------------
@@ -84,26 +93,26 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
     // map control panel ----------------------------------------------------
       
       
-      // attach event listener to carrier selector
-      let carrierSelector = document.getElementById('carrier_selector')
+    // attach event listener to carrier selector
+    let carrierSelector = document.getElementById('carrier_selector')
 
-      
-      // airline route displayed when another carrier selected
-      carrierSelector.addEventListener("change", function() {
-          // clear previously displayed route
-          deleteBeizeCurves()
-          
-          // get the selected carrier option tag element
-          let chosenCarrier = carrierSelector.options[carrierSelector.selectedIndex].value;
-          // alert(chosenCarrier)
-          
-          // display selected routes on the map
-          showRoutesOfSelectedCarrier(chosenCarrier)
-          
-          // clear shown infoWindow when another carrier is clicked
-          infowindow.close()
-          
-      });
+    
+    // airline route displayed when another carrier selected
+    carrierSelector.addEventListener("change", function() {
+        // clear previously displayed route
+        deleteBeizeCurves()
+        
+        // get the selected carrier option tag element
+        let chosenCarrier = carrierSelector.options[carrierSelector.selectedIndex].value;
+        // alert(chosenCarrier)
+        
+        // display selected routes on the map
+        showRoutesOfSelectedCarrier(chosenCarrier)
+        
+        // clear shown infoWindow when another carrier is clicked
+        infowindow.close()
+        
+    });
     
     
     // map control panel ----------------------------------------------------
@@ -315,6 +324,12 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
     // beize curve ---------------------------------------------------------------------------------------------
     
     
+    
+    
+    
+    
+    
+    
     // // single coordinate
     // let HKG = airports.HKG;
     // let TSA = airports.TSA;
@@ -403,8 +418,21 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
     //     // console.log(event)
     // });
 
-    
 
+    // customised markers----------------------------------------------------
+    // var CustomMarker1 = new CustomMarker(
+    // 	{lat:22.3089008331,lng:113.915000916},
+    // 	map,
+    // 	{
+    // 		// marker_id: '123',
+    // 		// colour: 'Red'
+    // 	}
+    // );  
+    
+    
+    
+    // customised markers----------------------------------------------------
+    
     
     // function codeblock --------------------------------------------------------------------------
     
