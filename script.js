@@ -15,9 +15,6 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
   // get airline routes
   let airlineRoutes = result2[0]
   
-  
-  
-  
   // google map initial config
   let Initialoptions ={
       // center: {lat: 22.28552, lng: 114.15769},
@@ -27,8 +24,8 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
       scrollwheel:true,
       draggable:true,
       mapTypeId: 'roadmap',
-      // maxZoom:14,
-    //   minZoom:5,
+      maxZoom:7,
+      minZoom:3,
       zoomControl:true,
       mapTypeControl:false,
       scaleControl:true,
@@ -73,7 +70,7 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
     //       '</div>';
     
     // initialize the infoWindow object
-    var contentString = '至抵機票價格: $ 1000 ';
+    var contentString = '';
     var infowindow = new google.maps.InfoWindow({
       content: contentString,
       // position:Initialoptions.center
@@ -241,7 +238,7 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
           
           strokeOpacity: 1,
           // strokeOpacity:0,
-          strokeWeight: 1.5,
+          strokeWeight: 3,
           geodesic: true,
           icons: [{
             // icon:icons.parking.icon,
@@ -449,8 +446,8 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
       //   path.push(event.latLng);
       //   myLine.setPath(path);
           // console.log(drawBeizeCurves[airlineRoutes[route][i]])
-        
-          line.strokeWeight = 4.5
+
+          line.strokeWeight = 5.5
           line.strokeColor = '#37393e'
           // a point where the infoWindow lies
           infowindow.setPosition(line.infoWindowPoint)
@@ -474,9 +471,12 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
         //   myLine.setPath(path);
         // console.log(line)
         
-        line.strokeWeight = 1.5
+        line.strokeWeight = 3
         line.strokeColor = '#b9c1d1'
         // console.log(event)
+        
+        // close infoWindow
+        infowindow.close()
       });
     }
     
