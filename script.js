@@ -2,17 +2,6 @@ let getAirports = $.get("./hutcho_airport_v2.json");
 let airline_routes = $.get("./airline_routes.json");
 
 
-function defaultSelectedCarrierDisplay(){
-  window.addEventListener("load", function(event) {
-    // console.log("All resources finished loading!");
-    
-    
-    
-  });
-}
-
-
-
 $.when(getAirports,airline_routes, defaultSelectedCarrierDisplay()).done(function(result, result2){
   // console.log(result[0])
   // console.log(result2[0])
@@ -82,8 +71,9 @@ $.when(getAirports,airline_routes, defaultSelectedCarrierDisplay()).done(functio
     //       '(last visited June 22, 2009).</p>'+
     //       '</div>'+
     //       '</div>';
-    var contentString = '至抵機票價格: $ 1000 ';
     
+    // initialize the infoWindow object
+    var contentString = '至抵機票價格: $ 1000 ';
     var infowindow = new google.maps.InfoWindow({
       content: contentString,
       // position:Initialoptions.center
@@ -113,7 +103,7 @@ $.when(getAirports,airline_routes, defaultSelectedCarrierDisplay()).done(functio
           // display selected routes on the map
           showRoutesOfSelectedCarrier(chosenCarrier)
           
-          // clear shown infoWindow
+          // clear shown infoWindow when another carrier is clicked
           infowindow.close()
           
       });
@@ -226,15 +216,18 @@ $.when(getAirports,airline_routes, defaultSelectedCarrierDisplay()).done(functio
         
         
         // midpoint - a point at which infoWindow lies
-        console.log(targetBeizeCurve.midpoint)
+        // console.log(targetBeizeCurve.infoWindowPoint)
 
         // -------------------DRAW BeizeCurve PATH ON GOOGLE MAP-----------------------
         
         // var drawBeizeCurves;
         // drawBeizeCurves.setMap(null)
         let drawBeizeCurves = new google.maps.Polyline({
+          carrier:carrier,
           path: targetBeizeCurve.beizePath,
-          midpoint:targetBeizeCurve.midpoint,
+          infoWindowPoint:targetBeizeCurve.infoWindowPoint,
+          pointFrom:pointFrom,
+          pointTo:pointTo,
           // path: path,
           // path:bezierPath,
           // strokeColor:'#a68974',
@@ -314,15 +307,7 @@ $.when(getAirports,airline_routes, defaultSelectedCarrierDisplay()).done(functio
     // }
     
     
-    // InfoWindow -----------------------------------------------------------------------------------------------
-    
 
-    // InfoWindow -----------------------------------------------------------------------------------------------
-    
-    
-    
-    
-    
     
     
     
@@ -466,9 +451,13 @@ $.when(getAirports,airline_routes, defaultSelectedCarrierDisplay()).done(functio
         
           line.strokeWeight = 4.5
           line.strokeColor = '#37393e'
-          // console.log(infowindow)
-          // infowindow.setPosition(Initialoptions.center)
-          infowindow.setPosition(line.midpoint)
+          // a point where the infoWindow lies
+          infowindow.setPosition(line.infoWindowPoint)
+          // contetn inside the infoWindow
+          infowindow.setContent(
+            `由 ${line.pointFrom} 飛至 ${line.pointTo} 的 ${line.carrier} 最抵機票價格: ${line.leasePrice} `
+          )
+          // open the window
           infowindow.open(map)
           
       });

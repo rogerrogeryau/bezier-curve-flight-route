@@ -1,27 +1,27 @@
 {
   "CX":[
-    {"from":"HKG", "to":"TSA"},
-    {"from":"HKG", "to":"BKK"},
-    {"from":"HKG", "to":"SIN"},
-    {"from":"HKG", "to":"ICN"},
-    {"from":"HKG", "to":"KHH"},
-    {"from":"HKG", "to":"HND"},
-    {"from":"HKG", "to":"ITM"},
-    {"from":"HKG", "to":"LCY"}
+    {"from":"HKG", "to":"TSA", "leasePrice":"HKD $1,036"},
+    {"from":"HKG", "to":"BKK", "leasePrice":"HKD $1,495"},
+    {"from":"HKG", "to":"SIN", "leasePrice":"HKD $2,111"},
+    {"from":"HKG", "to":"ICN", "leasePrice":"HKD $1,784"},
+    {"from":"HKG", "to":"KHH", "leasePrice":"HKD $1,054"},
+    {"from":"HKG", "to":"HND", "leasePrice":"HKD $2,782"},
+    {"from":"HKG", "to":"ITM", "leasePrice":"HKD $2,470"},
+    {"from":"HKG", "to":"LCY", "leasePrice":"HKD $4,266"}
   ],
   "CI":[
-    {"from":"HKG", "to":"TSA"},
-    {"from":"HKG", "to":"KHH"},
-    {"from":"HKG", "to":"BKK"},
-    {"from":"HKG", "to":"YVR"},
-    {"from":"HKG", "to":"TNN"},
-    {"from":"HKG", "to":"HND"},
-    {"from":"HKG", "to":"CGK"},
-    {"from":"HKG", "to":"LAX"},
-    {"from":"HKG", "to":"SIN"}
+    {"from":"HKG", "to":"TSA", "leasePrice":"HKD $993"},
+    {"from":"HKG", "to":"KHH", "leasePrice":"HKD $1,133"},
+    {"from":"HKG", "to":"BKK", "leasePrice":"HKD $2,135"},
+    {"from":"HKG", "to":"YVR", "leasePrice":"HKD $16,776"},
+    {"from":"HKG", "to":"TNN", "leasePrice":"HKD $989"},
+    {"from":"HKG", "to":"HND", "leasePrice":"HKD $2,145"},
+    {"from":"HKG", "to":"CGK", "leasePrice":"HKD $2,386"},
+    {"from":"HKG", "to":"LAX", "leasePrice":"HKD $3,059"},
+    {"from":"HKG", "to":"SIN", "leasePrice":"HKD $3,049"}
   ],
   "HX":[
-    {"from":"KHH", "to":"TSA"}
+    {"from":"KHH", "to":"TSA", "leasePrice":"HKD $1,036"}
 
 
   ]

@@ -28,8 +28,10 @@ section{
 
 #over_map { 
     position: absolute; 
-    top: 5%; 
-    left: 1%; 
+    /*top: 5%; */
+    bottom:2.9%;
+    left: 0.5%; 
+    /*right:1%;*/
     z-index: 99; 
     /*position:absolute*/
     display:block

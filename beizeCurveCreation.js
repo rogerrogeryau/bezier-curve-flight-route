@@ -2,7 +2,7 @@ function createBeizeCurve(from, to){
     this.from =from;
     this.to = to;
     this.beizePath = getLatLngPath(from, to)
-    this.midpoint = getLatLngPath(from,to)[5]   //the 6th coordinate point along the curve as the midpoint at which infoWindow lies
+    this.infoWindowPoint = getLatLngPath(from,to)[5]   //the 6th coordinate point along the curve as the point at which infoWindow lies
     
     function getLatLngPath( p0, p1 )
         {
