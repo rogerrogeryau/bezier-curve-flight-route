@@ -486,16 +486,21 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
             `
               <div class="infoContent" style="text-align: center;">
                 <h5>
-                  由 <b>${line.fromPlace}</b> 飛至 <b>${line.toPlace}</b> 的 ${line.carrier} 最抵機票價格:
+                  由 <b>${line.fromPlace}</b> 飛至 <b>${line.toPlace}</b> 的 ${line.carrier} 最抵機票價格
                 </h5>
-                <h6 class="leastPrice" style="color:red; text-align: center;">
+                <h4 class="leastPrice" style="color:red; text-align: center;">
                   <b>${line.leasePrice}</b>
-                </h6>
+                  <button type="button" class="btn btn-danger">馬上購票</button>
+                </h4>
               </div>
             `
           )
           // open the window
           infowindow.open(map)
+          // // close window after 3s
+          // setTimeout(() => {
+          //   infowindow.close()
+          // },6500)
           
       });
       return;
@@ -515,7 +520,7 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
         // console.log(event)
         
         // close infoWindow
-        infowindow.close()
+        // infowindow.close()
       });
     }
     
