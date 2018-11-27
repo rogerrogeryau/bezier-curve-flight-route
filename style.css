@@ -30,8 +30,8 @@ section{
     position: absolute; 
     top: 5%; 
     /*bottom:2.9%;*/
-    left: 0.5%; 
-    /*right:1%;*/
+    /*left: 0%; */
+    right:1%;
     z-index: 99; 
     position:absolute
     /*display:block*/
@@ -41,8 +41,8 @@ section{
 #map-control-panel{
     /*position: absolute; */
     /*display:block*/
-    height:100%;
-    width:103%;
+    height:50%;
+    width:100%;
 }
 
 #map-control-panel-card:hover {

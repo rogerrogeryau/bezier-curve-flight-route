@@ -26,12 +26,12 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
       mapTypeId: 'roadmap',
       maxZoom:7,
       minZoom:3,
-      zoomControl:true,
+      zoomControl:false,
       mapTypeControl:false,
       scaleControl:true,
-      streetViewControl:true,
+      streetViewControl:false,
       rotateControl:true,
-      fullscreenControl:true,
+      fullscreenControl:false,
       styles:[{"featureType": "administrative", "elementType": "labels.text.fill", "stylers": [{"color": "#444444"} ] }, {"featureType": "landscape", "elementType": "all", "stylers": [{"color": "#f2f2f2"} ] }, {"featureType": "poi", "elementType": "all", "stylers": [{"visibility": "off"} ] }, {"featureType": "road", "elementType": "all", "stylers": [{"saturation": -100 }, {"lightness": 45 } ] }, {"featureType": "road.highway", "elementType": "all", "stylers": [{"visibility": "simplified"} ] }, {"featureType": "road.arterial", "elementType": "labels.icon", "stylers": [{"visibility": "off"} ] }, {"featureType": "transit", "elementType": "all", "stylers": [{"visibility": "off"} ] }, {"featureType": "water", "elementType": "all", "stylers": [{"color": "#46bcec"}, {"visibility": "on"} ] } ]
       // styles:[{"featureType": "administrative", "stylers": [{"visibility": "on"} ] }, {"featureType": "poi", "stylers": [{"visibility": "simplified"} ] }, {"featureType": "road", "elementType": "labels", "stylers": [{"visibility": "simplified"} ] }, {"featureType": "water", "stylers": [{"visibility": "simplified"} ] }, {"featureType": "transit", "stylers": [{"visibility": "simplified"} ] }, {"featureType": "landscape", "stylers": [{"visibility": "simplified"} ] }, {"featureType": "road.highway", "stylers": [{"visibility": "off"} ] }, {"featureType": "road.local", "stylers": [{"visibility": "on"} ] }, {"featureType": "road.highway", "elementType": "geometry", "stylers": [{"visibility": "on"} ] }, {"featureType": "water", "stylers": [{"color": "#84afa3"}, {"lightness": 52 } ] }, {"stylers": [{"saturation": -17 }, {"gamma": 0.36 } ] }, {"featureType": "transit.line", "elementType": "geometry", "stylers": [{"color": "#3f518c"} ] } ]
         // styles:[{"featureType": "landscape", "elementType": "all", "stylers": [{"hue": "#FFA800"}, {"gamma": 1 } ] }, {"featureType": "landscape", "elementType": "geometry.fill", "stylers": [{"color": "#f8fae9"} ] }, {"featureType": "poi", "elementType": "all", "stylers": [{"hue": "#679714"}, {"saturation": 33.4 }, {"lightness": -25.4 }, {"gamma": 1 } ] }, {"featureType": "road.highway", "elementType": "all", "stylers": [{"hue": "#53FF00"}, {"saturation": -73 }, {"lightness": 40 }, {"gamma": 1 } ] }, {"featureType": "road.arterial", "elementType": "all", "stylers": [{"hue": "#FBFF00"}, {"gamma": 1 } ] }, {"featureType": "road.local", "elementType": "all", "stylers": [{"hue": "#00FFFD"}, {"lightness": 30 }, {"gamma": 1 } ] }, {"featureType": "water", "elementType": "all", "stylers": [{"hue": "#00BFFF"}, {"saturation": 6 }, {"lightness": 8 }, {"gamma": 1 } ] } ]
@@ -158,6 +158,16 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
     // };
     
     
+    // marker icon
+    // var markerIcon = {
+    //     url: 'http://image.flaticon.com/icons/svg/252/252025.svg',
+    //     scaledSize: new google.maps.Size(30, 30),
+    //     origin: new google.maps.Point(0, 0),
+    //     anchor: new google.maps.Point(5,30),
+    //     labelOrigin:  new google.maps.Point(0,0),
+    // };
+    
+    
     
     // plane symbal
     var planeSymbol = {
@@ -166,7 +176,9 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
       scale: 0.0333,
       strokeOpacity: 0.6,
       // color: '#ff6969',
-      strokeColor:'#ff6969',
+      // strokeColor:'#ff6969',
+      // strokeColor:'#2daaff',
+      strokeColor:'	#56514d',
       // strokeColor: '#ff2222',
       strokeWeight: 3,
       anchor: new google.maps.Point(300, 300)
@@ -209,16 +221,6 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
         let pointTo = airlineRoutes[carrier][i]['to']
         
         
-        // create markers
-        // let airportMarker = new google.maps.Marker({
-        //   map:map,
-        //   position:airports[pointTo],
-        //   id:pointTo
-        // });
-        // airlineAirportMarkers.push(airportMarker)
-        
-        
-        
         // a pair of coordinates of a route
         let targetPath = generatePathCoordinate(
           airports[pointFrom], 
@@ -230,21 +232,33 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
         let airportMarker = new google.maps.Marker({
           map:map,
           position:targetPath[1],
-          id:pointTo
+          id:pointTo,
+          animation: google.maps.Animation.DROP,
+          // icon: markerIcon,
+          icon: 'http://www.google.com/intl/en_us/mapfiles/ms/micons/' + 'red' + '-dot.png',
+          // label: {
+          // text: "GO!"
+          //   color: "#eb3a44",
+          //   fontSize: "16px",
+          //   fontWeight: "bold"
+          // }
         });
+        
+        // push current marker to array
         airlineAirportMarkers.push(airportMarker)
         
         
         
-        // create BeizeCurve for that path
-        let targetBeizeCurve = new createBeizeCurve(targetPath[0],targetPath[1])
         
+
         
         // midpoint - a point at which infoWindow lies
         // console.log(targetBeizeCurve.infoWindowPoint)
 
         // -------------------DRAW BeizeCurve PATH ON GOOGLE MAP-----------------------
         
+        // create BeizeCurve for that path
+        let targetBeizeCurve = new createBeizeCurve(targetPath[0],targetPath[1])
         // var drawBeizeCurves;
         // drawBeizeCurves.setMap(null)
         let drawBeizeCurves = new google.maps.Polyline({
@@ -285,6 +299,9 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
           map: map
         });
         
+        // push created airline route curve to the corresponding array
+        airlineRoutesArray.push(drawBeizeCurves)
+        
         // -------------------DRAW PATH ON GOOGLE MAP-----------------------
       
   
@@ -321,12 +338,12 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
         //     // console.log(event)
         // });
         
-        
-        
+      
         // -------------------APPLY FUNCTIONS & EVENT LISTENER FOR THE LINE----------------------------------
   
-        // push created airline route curve to the corresponding array
-        airlineRoutesArray.push(drawBeizeCurves)
+  
+  
+        
       }
  
       
@@ -524,7 +541,7 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
           )
           // open the window
           infowindow.open(map)
-          // // close window after 3s
+          // close window after 6.5s
           // setTimeout(() => {
           //   infowindow.close()
           // },6500)
