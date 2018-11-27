@@ -33,22 +33,48 @@ section{
     /*left: 0%; */
     right:1%;
     z-index: 99; 
-    position:absolute
+    position:absolute;
     /*display:block*/
+    width:25%;
+    height: 80%;
     
 }
 
 #map-control-panel{
     /*position: absolute; */
     /*display:block*/
-    height:50%;
+    height:100%;
     width:100%;
+    position: absolute;
+    left: 0%;
+    top: 0%;
+    /*right:30%;*/
+    /*top: 5%; */
+    /*overflow:scroll;*/
+}
+
+
+#map-control-panel-card:{
+  /*box-shadow: 0 0 40px rgba(33,33,33,.2); */
+  height:50%;
+  /*width: 100%;*/
+  width:100%;
+  
+  
 }
 
 #map-control-panel-card:hover {
-  box-shadow: 0 0 40px rgba(33,33,33,.2); 
+  /*box-shadow: 0 0 40px rgba(33,33,33,.2); */
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  /*height:100%;*/
 }
 
+
+
+#flight-ticket-list-group{
+    padding: 10px;
+    /*box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);*/
+}
 
 .bubble {
     background:#232e40;

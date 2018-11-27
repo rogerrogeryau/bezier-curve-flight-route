@@ -530,7 +530,7 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
             `
               <div class="infoContent" style="text-align: center;">
                 <h5>
-                  由 <b>${line.fromPlace}</b> 飛至 <b>${line.toPlace}</b> 的 ${line.carrier} 最抵機票價格
+                  由 <b>${line.fromPlace}</b> 飛至 <b>${line.toPlace}</b> <font size="1" style="color:blue;">(不連稅)</font> 的 ${line.carrier} 最抵機票價格
                 </h5>
                 <h4 class="leastPrice" style="color:red; text-align: center;">
                   <b>${line.leasePrice}</b>
