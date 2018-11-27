@@ -1,24 +1,24 @@
 {
   "CX":[
-    {"from":"HKG", "to":"TSA", "leasePrice":"HKD $1,036"},
-    {"from":"HKG", "to":"BKK", "leasePrice":"HKD $1,495"},
-    {"from":"HKG", "to":"SIN", "leasePrice":"HKD $2,111"},
-    {"from":"HKG", "to":"ICN", "leasePrice":"HKD $1,784"},
-    {"from":"HKG", "to":"KHH", "leasePrice":"HKD $1,054"},
-    {"from":"HKG", "to":"HND", "leasePrice":"HKD $2,782"},
-    {"from":"HKG", "to":"ITM", "leasePrice":"HKD $2,470"},
-    {"from":"HKG", "to":"LCY", "leasePrice":"HKD $4,266"}
+    {"from":"HKG", "to":"TSA", "leasePrice":"HKD $1,036", "fromPlace":"香港", "toPlace":"台北"},
+    {"from":"HKG", "to":"BKK", "leasePrice":"HKD $1,495", "fromPlace":"香港", "toPlace":"曼谷"},
+    {"from":"HKG", "to":"SIN", "leasePrice":"HKD $2,111", "fromPlace":"香港", "toPlace":"新加坡"},
+    {"from":"HKG", "to":"ICN", "leasePrice":"HKD $1,784", "fromPlace":"香港", "toPlace":"首爾"},
+    {"from":"HKG", "to":"KHH", "leasePrice":"HKD $1,054", "fromPlace":"香港", "toPlace":"高雄"},
+    {"from":"HKG", "to":"HND", "leasePrice":"HKD $2,782", "fromPlace":"香港", "toPlace":"東京"},
+    {"from":"HKG", "to":"ITM", "leasePrice":"HKD $2,470", "fromPlace":"香港", "toPlace":"大阪"},
+    {"from":"HKG", "to":"LCY", "leasePrice":"HKD $4,266", "fromPlace":"香港", "toPlace":"倫敦"}
   ],
   "CI":[
-    {"from":"HKG", "to":"TSA", "leasePrice":"HKD $993"},
-    {"from":"HKG", "to":"KHH", "leasePrice":"HKD $1,133"},
-    {"from":"HKG", "to":"BKK", "leasePrice":"HKD $2,135"},
-    {"from":"HKG", "to":"YVR", "leasePrice":"HKD $16,776"},
-    {"from":"HKG", "to":"TNN", "leasePrice":"HKD $989"},
-    {"from":"HKG", "to":"HND", "leasePrice":"HKD $2,145"},
-    {"from":"HKG", "to":"CGK", "leasePrice":"HKD $2,386"},
-    {"from":"HKG", "to":"LAX", "leasePrice":"HKD $3,059"},
-    {"from":"HKG", "to":"SIN", "leasePrice":"HKD $3,049"}
+    {"from":"HKG", "to":"TSA", "leasePrice":"HKD $993", "fromPlace":"香港", "toPlace":"台北"},
+    {"from":"HKG", "to":"KHH", "leasePrice":"HKD $1,133", "fromPlace":"香港", "toPlace":"高雄"},
+    {"from":"HKG", "to":"BKK", "leasePrice":"HKD $2,135", "fromPlace":"香港", "toPlace":"曼谷"},
+    {"from":"HKG", "to":"YVR", "leasePrice":"HKD $16,776", "fromPlace":"香港", "toPlace":"温哥華"},
+    {"from":"HKG", "to":"TNN", "leasePrice":"HKD $989", "fromPlace":"香港", "toPlace":"台南"},
+    {"from":"HKG", "to":"HND", "leasePrice":"HKD $2,145", "fromPlace":"香港", "toPlace":"東京"},
+    {"from":"HKG", "to":"CGK", "leasePrice":"HKD $2,386", "fromPlace":"香港", "toPlace":"雅加逹"},
+    {"from":"HKG", "to":"LAX", "leasePrice":"HKD $3,059", "fromPlace":"香港", "toPlace":"洛杉磯"},
+    {"from":"HKG", "to":"SIN", "leasePrice":"HKD $3,049", "fromPlace":"香港", "toPlace":"新加坡"}
   ],
   "HX":[
     {"from":"KHH", "to":"TSA", "leasePrice":"HKD $1,036"}
@@ -26,3 +26,4 @@
 
   ]
 }
+
