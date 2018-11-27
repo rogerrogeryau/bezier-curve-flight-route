@@ -46,16 +46,7 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
     // create map canvas
     var map = new google.maps.Map(MapElement,Initialoptions)
     
-  
-    
-    
-    
 
-    
-    
-    
-    
-        
     // infoWindow------------------------------------------------------------
     // var contentString = '<div id="content">'+
     //       '<div id="siteNotice">'+
@@ -102,6 +93,9 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
         // clear previously displayed route
         deleteBeizeCurves()
         
+        // clear previously displayed markers
+        deleteAirportMarkers()
+        
         // get the selected carrier option tag element
         let chosenCarrier = carrierSelector.options[carrierSelector.selectedIndex].value;
         // alert(chosenCarrier)
@@ -116,7 +110,7 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
     
     
     // map control panel ----------------------------------------------------
-
+    
 
 
     
@@ -204,6 +198,9 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
     // an array storing all created airline route
     let airlineRoutesArray = [];
     
+    // array storing all markers
+    let airlineAirportMarkers = []
+    
     function showRoutesOfSelectedCarrier(carrier){
       // loop through all routes of the selected airline
       for (let i = 0; i < airlineRoutes[carrier].length; i++) {
@@ -211,10 +208,32 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
         let pointFrom = airlineRoutes[carrier][i]['from']
         let pointTo = airlineRoutes[carrier][i]['to']
         
+        
+        // create markers
+        // let airportMarker = new google.maps.Marker({
+        //   map:map,
+        //   position:airports[pointTo],
+        //   id:pointTo
+        // });
+        // airlineAirportMarkers.push(airportMarker)
+        
+        
+        
+        // a pair of coordinates of a route
         let targetPath = generatePathCoordinate(
           airports[pointFrom], 
           airports[pointTo]
         )
+        // console.log(targetPath[1])
+        
+        // markers
+        let airportMarker = new google.maps.Marker({
+          map:map,
+          position:targetPath[1],
+          id:pointTo
+        });
+        airlineAirportMarkers.push(airportMarker)
+        
         
         
         // create BeizeCurve for that path
@@ -436,6 +455,14 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
     // customised markers----------------------------------------------------
     
     
+    // $( "#carrier_selector option:nth-child(2)").click()
+    // $( "#carrier_selector" ).change(function() {
+    //     // $("#CI").click();
+        
+    // });
+    // console.log($( "#carrier_selector" ).find("option:").index())
+    
+    
     // function codeblock --------------------------------------------------------------------------
     
     // function used to link up two places -- simply a line
@@ -525,12 +552,22 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
     }
     
     
+    // clear BeizeCurves array
     function deleteBeizeCurves() {
         //Loop through all the markers and remove
         for (var i = 0; i < airlineRoutesArray.length; i++) {
             airlineRoutesArray[i].setMap(null);
         }
         // airlineRoutesArray = [];
+    };
+    
+    // clear airportMarker array
+    function deleteAirportMarkers() {
+        //Loop through all the markers and remove
+        for (var i = 0; i < airlineAirportMarkers.length; i++) {
+            airlineAirportMarkers[i].setMap(null);
+        }
+        // airlineAirportMarkers = [];
     };
     
     // function codeblock --------------------------------------------------------------------------
@@ -594,6 +631,12 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
   
   
 })
+// .then(function(){
+//   // console.log($( "select" ))
+//   // console.log($( "select[id=carrier_selector]" ))
+//   // $( "select[id=carrier_selector]" ).val("CI").change()
+  
+// })
 
 
 
