@@ -19,11 +19,6 @@
     {"from":"HKG", "to":"CGK", "leasePrice":"HKD $2,386", "fromPlace":"香港", "toPlace":"雅加逹"},
     {"from":"HKG", "to":"LAX", "leasePrice":"HKD $3,059", "fromPlace":"香港", "toPlace":"洛杉磯"},
     {"from":"HKG", "to":"SIN", "leasePrice":"HKD $3,049", "fromPlace":"香港", "toPlace":"新加坡"}
-  ],
-  "HX":[
-    {"from":"KHH", "to":"TSA", "leasePrice":"HKD $1,036"}
-
-
   ]
 }
 

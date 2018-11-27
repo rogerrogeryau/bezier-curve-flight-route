@@ -235,6 +235,8 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
           infoWindowPoint:targetBeizeCurve.infoWindowPoint,
           pointFrom:pointFrom,
           pointTo:pointTo,
+          fromPlace:airlineRoutes[carrier][i]['fromPlace'],
+          toPlace:airlineRoutes[carrier][i]['toPlace'],
           // path: path,
           // path:bezierPath,
           // strokeColor:'#a68974',
@@ -481,7 +483,16 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
           infowindow.setPosition(line.infoWindowPoint)
           // contetn inside the infoWindow
           infowindow.setContent(
-            `由 ${line.pointFrom} 飛至 ${line.pointTo} 的 ${line.carrier} 最抵機票價格: ${line.leasePrice} `
+            `
+              <div class="infoContent" style="text-align: center;">
+                <h5>
+                  由 <b>${line.fromPlace}</b> 飛至 <b>${line.toPlace}</b> 的 ${line.carrier} 最抵機票價格:
+                </h5>
+                <h6 class="leastPrice" style="color:red; text-align: center;">
+                  <b>${line.leasePrice}</b>
+                </h6>
+              </div>
+            `
           )
           // open the window
           infowindow.open(map)
