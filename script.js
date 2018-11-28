@@ -608,13 +608,33 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
     
     // function used to create Flight list item in the home tab of nav bar
     function createFightTicketListItemInTheNavBarHomeTab(route, airlineName){
-      console.log(route)
+      // console.log(route)
       let fromPlace = route.fromPlace;
       let toPlace = route.toPlace;
       // console.log(airlineName)
       let listGroup = $(".flight-ticket-list-group")
       let flightTicketListItem = $('<li>', {'class': 'list-group-item flight-ticket-list-item', 'id':'flightTicketListItem_' + airlineName + '_' + fromPlace + '_' + toPlace,'text': airlineName + '_' + fromPlace + '_' + toPlace });
+      
+      // flightTicketListItem.on('click', function () {
+      //     // console.log(airports[airport].name);
+      //     // map.setCenter(new google.maps.LatLng(airports[airport].lat, airports[airport].lon));
+      //     // map.setZoom(9);
+      //     console.log("hi")
+      // })
+      // append the created list item to the group list element
       listGroup.append(flightTicketListItem)
+      
+      // retrieve the newly created list item [DOM]
+      let thisFlightTicketListItem = $('#flightTicketListItem_' + airlineName + '_' + fromPlace + '_' + toPlace)
+      thisFlightTicketListItem.on('click', function () {
+        // console.log(airlineRoutesArray[0])
+        // airlineRoutesArray[0].mouseover()
+        google.maps.event.trigger(airlineRoutesArray[0], 'mouseover');
+      })
+      
+      // console.log(thisFlightTicketListItem)
+      
+      
     }
       
     // functions codeblock -------------------------------------------------------------------------------------------------------------------------------------------------------------------
