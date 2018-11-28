@@ -57,6 +57,7 @@ section{
     position: absolute;
     left: 0%;
     top: 0%;
+        /*flex-shrink:3;*/
     /*right:30%;*/
     /*top: 5%; */
      

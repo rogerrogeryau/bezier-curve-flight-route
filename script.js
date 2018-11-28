@@ -6,8 +6,9 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
   // console.log(result[0])
   // console.log(result2[0])
   
-  
-  
+  // activate navigation bar
+  var sidebar = $('#sidebar').sidebar();
+    
   
   // get airport's coordinate data
   let airports = result[0]
