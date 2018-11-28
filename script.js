@@ -359,7 +359,7 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
        
       // create flight ticket items in the list group in home tab of nav bar---------------------------------
        
-       createFightTicketListItemInTheNavBarHomeTab(airlineRoutes[carrier][i], carrier)
+      createFightTicketListItemInTheNavBarHomeTab(airlineRoutes[carrier][i], carrier, i)
       // create flight ticket items in the list group in home tab of nav bar---------------------------------
       
       }
@@ -406,13 +406,13 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
     // let HKG_BKK_BeizeCurve = new createBeizeCurve(HKG_BKK[0],HKG_BKK[1])
     // let HKG_ITM_BeizeCurve = new createBeizeCurve(HKG_ITM[0],HKG_ITM[1])
     
-    // console.log('midpoint :' + HKG_TSA_BeizeCurve.midpoint)
+    // console.log('midpoint :' + HKG_TSA_BeizeC  urve.midpoint)
     
     
     // console.log(HKG_TW.beizePath)
     // var bezierPath = getLatLngPath( path[0], path[1] );
     // console.log(bezierPath)
-    // beize curve ----------------------------------------------------------------------------------------------
+    // beize curve ---------------------------- ------------------------------------------------------------------
     
     
     // Create the polyline and add the symbol to it via the 'icons' property.
@@ -552,7 +552,7 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
                 </h5>
                 <h4 class="leastPrice" style="color:red; text-align: center;">
                   <b>${line.leasePrice}</b>
-                  <button type="button" class="btn btn-danger">馬上購票</button>
+                  <button type="button" class="btn btn-success">馬上購票</button>
                 </h4>
               </div>
             `
@@ -587,27 +587,27 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
     }
     
     
-    // clear BeizeCurves array
+    // clear BeizeCurves array and BeizeCurves on the map
     function deleteBeizeCurves() {
         //Loop through all the markers and remove
         for (var i = 0; i < airlineRoutesArray.length; i++) {
             airlineRoutesArray[i].setMap(null);
         }
-        // airlineRoutesArray = [];
+        airlineRoutesArray = [];
     };
     
-    // clear airportMarker array
+    // clear airportMarker array and airlin eAirport Markers on the map
     function deleteAirportMarkers() {
         //Loop through all the markers and remove
         for (var i = 0; i < airlineAirportMarkers.length; i++) {
             airlineAirportMarkers[i].setMap(null);
         }
-        // airlineAirportMarkers = [];
+        airlineAirportMarkers = [];
     };
     
     
     // function used to create Flight list item in the home tab of nav bar
-    function createFightTicketListItemInTheNavBarHomeTab(route, airlineName){
+    function createFightTicketListItemInTheNavBarHomeTab(route, airlineName, googlePolylineIndex){
       // console.log(route)
       let fromPlace = route.fromPlace;
       let toPlace = route.toPlace;
@@ -626,10 +626,16 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
       
       // retrieve the newly created list item [DOM]
       let thisFlightTicketListItem = $('#flightTicketListItem_' + airlineName + '_' + fromPlace + '_' + toPlace)
-      thisFlightTicketListItem.on('click', function () {
+      thisFlightTicketListItem.on('mouseover', function () {
         // console.log(airlineRoutesArray[0])
         // airlineRoutesArray[0].mouseover()
-        google.maps.event.trigger(airlineRoutesArray[0], 'mouseover');
+        google.maps.event.trigger(airlineRoutesArray[googlePolylineIndex], 'mouseover');
+      })
+      
+      thisFlightTicketListItem.on('mouseout', function () {
+        // console.log(airlineRoutesArray[0])
+        // airlineRoutesArray[0].mouseover()
+        google.maps.event.trigger(airlineRoutesArray[googlePolylineIndex], 'mouseout');
       })
       
       // console.log(thisFlightTicketListItem)
