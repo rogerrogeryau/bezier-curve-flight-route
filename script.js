@@ -2,12 +2,18 @@ let getAirports = $.get("./hutcho_airport_v2.json");
 let airline_routes = $.get("./airline_routes.json");
 
 
-$.when(getAirports,airline_routes,).done(function(result, result2){
+// function activateNavBar(){
+//   
+//   var sidebar = $('#sidebar').sidebar();
+// }
+
+
+
+$.when(getAirports,airline_routes).done(function(result, result2){
   // console.log(result[0])
   // console.log(result2[0])
   
-  // activate navigation bar
-  var sidebar = $('#sidebar').sidebar();
+  
     
   
   // get airport's coordinate data
@@ -45,8 +51,10 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
     let MapElement = document.getElementById("map")
  
     // create map canvas
-    var map = new google.maps.Map(MapElement,Initialoptions)
+    let map = new google.maps.Map(MapElement,Initialoptions)
     
+    // activate navigation bar
+    let sidebar = $('#sidebar').sidebar();
 
     // infoWindow------------------------------------------------------------
     // var contentString = '<div id="content">'+
@@ -629,13 +637,19 @@ $.when(getAirports,airline_routes,).done(function(result, result2){
       thisFlightTicketListItem.on('mouseover', function () {
         // console.log(airlineRoutesArray[0])
         // airlineRoutesArray[0].mouseover()
-        google.maps.event.trigger(airlineRoutesArray[googlePolylineIndex], 'mouseover');
+        
+        // google.maps.event.trigger(polygon, "click", {});
+        // console.log("mouseover: " + airlineName + '_' + fromPlace + '_' + toPlace)
+        // google.maps.event.addDomListener(window, 'load', initMap)
+        
+        google.maps.event.trigger(airlineRoutesArray[googlePolylineIndex], 'mouseover', {});
       })
       
       thisFlightTicketListItem.on('mouseout', function () {
+        // console.log("mouseout: " + airlineName + '_' + fromPlace + '_' + toPlace)
         // console.log(airlineRoutesArray[0])
         // airlineRoutesArray[0].mouseover()
-        google.maps.event.trigger(airlineRoutesArray[googlePolylineIndex], 'mouseout');
+        google.maps.event.trigger(airlineRoutesArray[googlePolylineIndex], 'mouseout', {});
       })
       
       // console.log(thisFlightTicketListItem)
