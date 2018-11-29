@@ -1,12 +1,15 @@
+
+
 .sidebar {
   position: absolute;
   /*overflow-y: hidden;*/
   /*position: relative;*/
+  /*height: auto;*/
   display: inline-block;
   top: 0;
   bottom: 0;
   width: 100%;
-  height: 90%;
+  height: 100%;
   max-height: 100%;
   overflow: hidden;
   z-index: 2000; }
@@ -21,7 +24,7 @@
   @media (min-width: 768px) and (max-width: 991px) {
     .sidebar {
       top: 5%;
-      width: 380px; } }
+      width: 390px; } }
   @media (min-width: 992px) and (max-width: 1199px) {
     .sidebar {
       top: 5%;
@@ -101,7 +104,7 @@
     bottom: 0; }
 
 .sidebar-content {
-  
+  height: 100%;
   position: absolute;
   /*opacity: 10%;*/
   top: 0;
@@ -129,6 +132,7 @@
 
 
 .sidebar-pane {
+  /*height: 0%;*/
   display: none;
   left: 0;
   right: 0;
@@ -184,6 +188,7 @@
 .sidebar {
     border-right: 0;
     box-shadow: rgba(0, 0, 0, 0.298039) 0 1px 4px -1px; 
+    height: auto;
     
   }
   @media (min-width: 768px) {
@@ -192,7 +197,7 @@
       border-radius: 2px; 
       opacity: 100%;
       border-radius: 20px;
-      /*height: 100%;*/
+      height: 90%;
     } 
     
   }
@@ -280,15 +285,31 @@
 
 .sidebar-home-tab-content{
   /*overflow:scroll;*/
-  /*height:10%;*/
-  height: 50vh;
+  /*height:20rem;*/
+  /*top:%;*/
+  overflow: auto;
+  height: 45vh;
+  /*height: 50vh;*/
   
   /*width:100%;*/
   overflow-x: hidden;
   /*display: block;*/
-  /*position: relative;*/
+  position: relative;
   /*position: absolute;*/
   /*max-height:100%;*/
+  
+}
+
+@media (max-height: 675px) {
+  .sidebar-home-tab-content{
+    height: 35vh;
+  }
+  
+}
+@media (max-height: 493px) {
+  .sidebar-home-tab-content{
+    height: 25vh;
+  }
   
 }
 
@@ -297,3 +318,9 @@
   box-shadow: 0 0 30px rgba(33,33,33,.2);
   cursor: pointer;
 }
+
+
+/*.sidebar-home-tab-content{*/
+/*  height:100%;*/
+/*}*/
+
