@@ -542,30 +542,152 @@ $.when(getAirports,airline_routes, hotels).done(function(result, result2, result
           deleteAirportMarkers()
           infowindow.close()
           
-          for (let hotel in hotels) {
-            // console.log(hotel)
+          // for (let hotel in hotels) {
+          //   // console.log(hotel)
+            
+          //   let latlonObj = {lat: hotels[hotel].HT_LATITUDE, lng: hotels[hotel].HT_LONGITUDE}
+            
+          //   let hotelMarker = new google.maps.Marker({
+          //     map:map,
+          //     position: latlonObj,
+          //     id:hotel,
+          //     animation: google.maps.Animation.DROP,
+          //     // icon: markerIcon,
+          //     icon: 'http://www.google.com/intl/en_us/mapfiles/ms/micons/' + 'red' + '-dot.png',
+          //     // label: {
+          //     // text: "GO!"
+          //     //   color: "#eb3a44",
+          //     //   fontSize: "16px",
+          //     //   fontWeight: "bold"
+          //     // }
+          //     title:hotels[hotel].HOTEL_NAME
+          //   });
+            
+          //   // push current marker to array
+          //   hotelsMarkersArray.push(hotelMarker)
+            
+          //   hotelMarkersMouseOver(hotelMarker)
+          //   // hotelMarkersMouseOver()
+            
+          //   // var infowindow = new google.maps.InfoWindow({
+          //   //   content: `${hotel.HOTEL_NAME}`
+          //   // });
+            
+          //   // hotelMarker.addEventListener('click',function(){
+              
+          //   // })
+            
+          //   // infowindow.setContent(
+          //   //   `
+          //   //     ${hotels[hotel].HOTEL_NAME}
+          //   //   `
+          //   // )
+            
+          //   // infowindow.setPosition(latlonObj)
+            
+          //   // hotelMarkersMouseOver(hotelMarker)
+            
+            
+            
+            
+          //   // infowindow.content=hotels[hotel].HOTEL_NAME
+          //   // hotelMarker.addListener('mouseover', function() {
+          //   //   infowindow.open(map, hotelMarker);
+          //   // });
+          
+          console.log(hotels[1024305])
+          
+          
+          for(let hotel in hotels){
+          
+            let latlonObj = {lat: hotels[hotel].HT_LATITUDE, lng: hotels[hotel].HT_LONGITUDE}
             
             let hotelMarker = new google.maps.Marker({
-            map:map,
-            position:{lat: hotels[hotel].HT_LATITUDE, lng: hotels[hotel].HT_LONGITUDE},
-            id:hotel,
-            animation: google.maps.Animation.DROP,
-            // icon: markerIcon,
-            icon: 'http://www.google.com/intl/en_us/mapfiles/ms/micons/' + 'red' + '-dot.png',
-            // label: {
-            // text: "GO!"
-            //   color: "#eb3a44",
-            //   fontSize: "16px",
-            //   fontWeight: "bold"
-            // }
-            });
-          
-            // push current marker to array
-            hotelsMarkersArray.push(hotelMarker)
-          
+                map:map,
+                position: latlonObj,
+                id:hotel,
+                animation: google.maps.Animation.DROP,
+                // icon: markerIcon,
+                icon: 'http://www.google.com/intl/en_us/mapfiles/ms/micons/' + 'red' + '-dot.png',
+                // label: {
+                // text: "GO!"
+                //   color: "#eb3a44",
+                //   fontSize: "16px",
+                //   fontWeight: "bold"
+                // }
+                title:hotels[hotel].HOTEL_NAME
+              });
+            
+            // infowindow.setContent(`${hotels[hotel].HOTEL_NAME}`)
+            
+            // hotelMarker.addListener('mouseover', function() {
+            //   infowindow.open(map, hotelMarker);
+            // });
+            
+            
+            
+            
+            
+            google.maps.event.addListener(hotelMarker, 'mouseover', (function(pin) {
+              return function() {
+                  // infowindow.setContent(airports[airport].name);
+                  
+                  // var contentString = '<div id="content" class="card">'+
+                  //                     '<div id="siteNotice">'+
+                  //                     '</div>'+
+                  //                     '<h3 id="firstHeading" class="firstHeading">'+airports[airport].name+'</h3>'+
+                  //                     '<div id="bodyContent">'+
+                  //                     '<h4>'+airports[airport].state+'</h4>'+
+                  //                     '<h5>'+airports[airport].lat+', '+airports[airport].lon+'</h5>'+
+                  //                     '(last visited June 22, 2009).</p>'+
+                  //                     '</div>'+
+                  //                     '</div>';
+                  
+                  contentString = `${hotelMarker.title}`
+                  
+                  
+                  infowindow.setContent(contentString);
+                  
+  
+                  // var infowindow = new google.maps.InfoWindow({
+                  //   // content: contentString
+                  //   content:airports[airport].name
+                  // });
+                  
+                  infowindow.open(map, hotelMarker);
+                  
+                  // // mouseover event to trigger scrolling effect in the post container on the right-hand side
+                  // $("#" + airports[airport].iata)[0].scrollIntoView({
+                  //     behavior: "auto", // or "auto" or "instant"
+                  //     block: "start" // or "end"
+                  // });
+              
+                  //append css shadow effect to the chosen content post
+                  // $("#" + airports[airport].iata).css('box-shadow', '0 0 80px rgba(33,33,33,.2)');
+              };
+            })(hotelMarker));            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
           
           
           }
+          
+          
+          
+            
+          
+          
+          
+          // }
           // console.log(hotels)
           
           
@@ -617,6 +739,10 @@ $.when(getAirports,airline_routes, hotels).done(function(result, result2, result
         // console.log(line)
         
     }
+    
+    
+    
+    
     
     // BeizeCurves mouseover event
     function mouseOverEventBeizeCurves(line){
@@ -704,7 +830,17 @@ $.when(getAirports,airline_routes, hotels).done(function(result, result2, result
         hotelsMarkersArray = [];
     };
     
-    
+    function hotelMarkersMouseOver(hotelMarker){
+      google.maps.event.addListener(hotelMarker, 'mouseover', function(event) {
+        // infowindow.setContent(
+        //   `
+        //     ${hotelMarker.title}
+        //   `
+        // )
+      })
+      // open the window
+      infowindow.open(map)
+    };
     
     
     
