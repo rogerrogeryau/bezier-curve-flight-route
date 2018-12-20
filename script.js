@@ -23,7 +23,8 @@ $.when(getAirports,airline_routes, hotels).done(function(result, result2, result
   let airlineRoutes = result2[0]
   
   // get hotels
-  console.log(result3[0])
+  let hotels = result3[0]
+  // console.log(result3[0])
   
   // google map initial config
   let Initialoptions ={
