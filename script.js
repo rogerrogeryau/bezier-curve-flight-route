@@ -1,6 +1,6 @@
 let getAirports = $.get("./hutcho_airport_v2.json");
 let airline_routes = $.get("./airline_routes.json");
-
+let hotels = $.get('./1000_hotel_JSON.json');
 
 // function activateNavBar(){
 //   
@@ -9,18 +9,21 @@ let airline_routes = $.get("./airline_routes.json");
 
 
 
-$.when(getAirports,airline_routes).done(function(result, result2){
+$.when(getAirports,airline_routes, hotels).done(function(result, result2, result3){
   // console.log(result[0])
   // console.log(result2[0])
   
   
-    
+  
   
   // get airport's coordinate data
   let airports = result[0]
   
   // get airline routes
   let airlineRoutes = result2[0]
+  
+  // get hotels
+  console.log(result3[0])
   
   // google map initial config
   let Initialoptions ={
