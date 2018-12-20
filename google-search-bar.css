@@ -1,6 +1,6 @@
 .google-searchBox{
     overflow:auto;
-    left:35%;
+    left:33.33%;
     bottom:0%;
     right:113px;
     top: 30%;
@@ -24,7 +24,69 @@
     outline: none;
     padding: 0 11px 0 13px;
     text-overflow: ellipsis;
-    width: 50%;
+    width: 40%;
     z-index: 10;
-    max-width: 30%!important;
+    /*max-width: 30%!important;*/
 }
+
+
+@media (max-width: 768px) {
+    .google-searchBox{
+      width: 70%;
+      left:17%;
+      transition: width 500ms;
+    } 
+}
+
+
+ /*@media (min-width: 768px) {*/
+ /*   #pac-input{*/
+ /*     width: 40%;*/
+      /*transition: width 500ms; */
+        
+ /*   } */
+     
+ /*}*/
+  /*@media (min-width: 768px) and (max-width: 991px) {*/
+  /*  .google-searchBox.form-control {*/
+  /*    top: 5%;*/
+  /*    width: 390px; } }*/
+  /*@media (min-width: 992px) and (max-width: 1199px) {*/
+  /*  .google-searchBox.form-control {*/
+  /*    top: 5%;*/
+  /*    width: 390px; } }*/
+  /*@media (min-width: 1200px) {*/
+  /*  .google-searchBox.form-control {*/
+  /*    width: 460px; */
+  /*    top:5%;*/
+      /*left:5%;*/
+  /*  } }*/
+
+
+/*@media (max-width: 768px) and (max-width: 991px) {*/
+/*    .google-searchBox.form-control{*/
+/*      width: 40%;*/
+/*      left:33.33%;*/
+/*    } */
+/*}*/
+/*@media (min-width: 768px) and (max-width: 991px) {*/
+/*    .google-searchBox.form-control{*/
+/*      width: 60%;*/
+/*      left:25%;*/
+/*    } */
+/*}*/
+/*@media (min-width: 768px) and (max-width: 991px) {*/
+/*    .google-searchBox {*/
+/*      width: 30%;*/
+/*    } */
+/*}*/
+/*@media (min-width: 992px) and (max-width: 1199px) {*/
+/*    .google-searchBox {*/
+/*      width: 50%;*/
+/*    } */
+/*}*/
+/*@media (min-width: 1200px) {*/
+/*    .google-searchBox {*/
+/*      width: 50%;*/
+/*    } */
+/*}*/
