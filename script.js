@@ -72,6 +72,87 @@ $.when(getAirports,airline_routes, hotels).done(function(result, result2, result
     // infoWindow------------------------------------------------------------
 
 
+
+
+    // search box--------------------------------------------------------------
+    
+    
+    // Create the search box and link it to the UI element.
+    var input = document.getElementById('pac-input');
+    var searchBox = new google.maps.places.SearchBox(input);
+    // map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+    
+    // Bias the SearchBox results towards current map's viewport.
+    map.addListener('bounds_changed', function() {
+      searchBox.setBounds(map.getBounds());
+    });
+    
+    
+    // var Searchmarkers = [];
+    
+    // Listen for the event fired when the user selects a prediction and retrieve
+    // more details for that place.
+    searchBox.addListener('places_changed', function() {
+    var places = searchBox.getPlaces();
+    
+    if (places.length == 0) {
+      return;
+    }
+    
+    // Clear out the old markers.
+    // Searchmarkers.forEach(function(Searchmarker) {
+    //   Searchmarker.setMap(null);
+    // });
+    // Searchmarkers = [];
+    
+    // For each place, get the icon, name and location.
+    var bounds = new google.maps.LatLngBounds();
+      places.forEach(function(place) {
+      if (!place.geometry) {
+        console.log("Returned place contains no geometry");
+        return;
+      }
+      // var icon = {
+      //   // url: place.icon,
+      //   size: new google.maps.Size(71, 71),
+      //   origin: new google.maps.Point(0, 0),
+      //   anchor: new google.maps.Point(17, 34),
+      //   scaledSize: new google.maps.Size(25, 25)
+      // };
+      
+      // // Create a marker for each place.
+      // Searchmarkers.push(new google.maps.Marker({
+      //   map: map,
+      //   icon: icon,
+      //   title: place.name,
+      //   position: place.geometry.location
+      // }));
+    
+      if (place.geometry.viewport) {
+        // Only geocodes have viewport.
+        bounds.union(place.geometry.viewport);
+      } else {
+        bounds.extend(place.geometry.location);
+      }
+    });
+      map.fitBounds(bounds);
+      map.setZoom(13);
+    });
+    
+    
+    // search box--------------------------------------------------------------
+    
+    
+
+
+
+
+
+
+
+
+
+
     // an array storing all created airline route
     let airlineRoutesArray = [];
     
@@ -92,287 +173,287 @@ $.when(getAirports,airline_routes, hotels).done(function(result, result2, result
       // map control panel ----------------------------------------------------
         
         
-      // attach event listener to carrier selector
-      let carrierSelector = document.getElementById('carrier_selector')
-  
-      
-      // airline route displayed when another carrier selected
-      carrierSelector.addEventListener("change", function() {
-          // clear previously displayed route
-          deleteBeizeCurves()
-          
-          // clear previously displayed markers
-          deleteAirportMarkers()
-          
-          // get the selected carrier option tag element
-          let chosenCarrier = carrierSelector.options[carrierSelector.selectedIndex].value;
-          // alert(chosenCarrier)
-          
-          // display selected routes on the map
-          showRoutesOfSelectedCarrier(chosenCarrier)
-          
-          // clear shown infoWindow when another carrier is clicked
-          infowindow.close()
-          
-      });
-      
-      
-      // map control panel ----------------------------------------------------
-      
-  
-  
-      
-      // fail to incorporate Popup object [edited on 23-11-2018]
-      // let popup = new Popup(
-      //     new google.maps.LatLng(-33.866, 151.196),
-      //     document.getElementById('content'));
-      // popup.setMap(map);
-      
-      
-      
-      // Define the symbol, using one of the predefined paths ('CIRCLE')
-      // supplied by the Google Maps JavaScript API.
-      // var arrowSymbol = {
-      //   // path: google.maps.SymbolPath.CIRCLE,
-      //   // path : google.maps.SymbolPath.FORWARD_OPEN_ARROW,
-      //   path : google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
-      //   // path: icons.parking.icon,
-      //   scale: 3,
-      //   // strokeColor: '#fbbc05',
-      //   // strokeColor: '#0099FF',
-      //   // strokeColor:'#192A3D',
-      //   strokeColor:'#f1a130',
-      //   // strokeColor:'#ff6969'
-      //   // strokeColor:'#a68974'
-  
-      //   strokeOpacity: 1,
-      //   strokeWeight: 3,
-      //   // anchor: new google.maps.Point(300, 300)
-      // };
-      
-      // var lineSymbol2 = {
-      //   path: google.maps.SymbolPath.CIRCLE,
-      //   scale: 8,
-      //   strokeColor: '#00ac45'
-      // };
-      
-      
-      // var dotIcon = {
-      //     path: 'M -1,1 0,0 1,1',
-      //     // path:'http://material.io/tools/icons/?icon=local_airport&style=outline',
-      //     scale: 10,
-      //     strokeWeight: 2,
-      //     strokeColor: '#232e40'
-      // };
-      
-      
-      // marker icon
-      // var markerIcon = {
-      //     url: 'http://image.flaticon.com/icons/svg/252/252025.svg',
-      //     scaledSize: new google.maps.Size(30, 30),
-      //     origin: new google.maps.Point(0, 0),
-      //     anchor: new google.maps.Point(5,30),
-      //     labelOrigin:  new google.maps.Point(0,0),
-      // };
-      
-      
-      
-      // plane symbal
-      var planeSymbol = {
-  
-        path: 'M362.985,430.724l-10.248,51.234l62.332,57.969l-3.293,26.145 l-71.345-23.599l-2.001,13.069l-2.057-13.529l-71.278,22.928l-5.762-23.984l64.097-59.271l-8.913-51.359l0.858-114.43 l-21.945-11.338l-189.358,88.76l-1.18-32.262l213.344-180.08l0.875-107.436l7.973-32.005l7.642-12.054l7.377-3.958l9.238,3.65 l6.367,14.925l7.369,30.363v106.375l211.592,182.082l-1.496,32.247l-188.479-90.61l-21.616,10.087l-0.094,115.684',
-        scale: 0.0333,
-        strokeOpacity: 0.6,
-        // color: '#ff6969',
-        // strokeColor:'#ff6969',
-        // strokeColor:'#2daaff',
-        strokeColor:'	#56514d',
-        // strokeColor: '#ff2222',
-        strokeWeight: 3,
-        anchor: new google.maps.Point(300, 300)
-      };
-      
-      // var PlaneIcon = new google.maps.MarkerImage(
-      //   "http://www.charterjetscompany.com/planeicon.png",
-      // );
-      
-      // var planeIcon = 'https://material.io/tools/icons/?icon=local_airport&style=outline';
-      
-      
-      
-      // drawBeizeCurves = [];
-      // mouseOverEventDictionary = {}
-      
-      
-      // function to show airline routes
-      
-      
-      
-      // loop through all airline routes 
-      
-      
-      // for (let route in airlineRoutes) {
-        // console.log(airlineRoutes[route])
-      
-      
-      // // an array storing all created airline route
-      // let airlineRoutesArray = [];
-      
-      // // array storing all markers
-      // let airlineAirportMarkers = []
-      
-      
-      function showRoutesOfSelectedCarrier(carrier){
+    // attach event listener to carrier selector
+    let carrierSelector = document.getElementById('carrier_selector')
+
+    
+    // airline route displayed when another carrier selected
+    carrierSelector.addEventListener("change", function() {
+        // clear previously displayed route
+        deleteBeizeCurves()
         
-        // get the flight ticket list group in the nav bar [home tab]
-        let listGroup = $(".flight-ticket-list-group")
-        // clear all children list item beforehand
-        listGroup.children().remove()
+        // clear previously displayed markers
+        deleteAirportMarkers()
         
-        // loop through all routes of the selected airline
-        for (let i = 0; i < airlineRoutes[carrier].length; i++) {
+        // get the selected carrier option tag element
+        let chosenCarrier = carrierSelector.options[carrierSelector.selectedIndex].value;
+        // alert(chosenCarrier)
+        
+        // display selected routes on the map
+        showRoutesOfSelectedCarrier(chosenCarrier)
+        
+        // clear shown infoWindow when another carrier is clicked
+        infowindow.close()
+        
+    });
+    
+    
+    // map control panel ----------------------------------------------------
+    
+
+
+    
+    // fail to incorporate Popup object [edited on 23-11-2018]
+    // let popup = new Popup(
+    //     new google.maps.LatLng(-33.866, 151.196),
+    //     document.getElementById('content'));
+    // popup.setMap(map);
+    
+    
+    
+    // Define the symbol, using one of the predefined paths ('CIRCLE')
+    // supplied by the Google Maps JavaScript API.
+    // var arrowSymbol = {
+    //   // path: google.maps.SymbolPath.CIRCLE,
+    //   // path : google.maps.SymbolPath.FORWARD_OPEN_ARROW,
+    //   path : google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+    //   // path: icons.parking.icon,
+    //   scale: 3,
+    //   // strokeColor: '#fbbc05',
+    //   // strokeColor: '#0099FF',
+    //   // strokeColor:'#192A3D',
+    //   strokeColor:'#f1a130',
+    //   // strokeColor:'#ff6969'
+    //   // strokeColor:'#a68974'
+
+    //   strokeOpacity: 1,
+    //   strokeWeight: 3,
+    //   // anchor: new google.maps.Point(300, 300)
+    // };
+    
+    // var lineSymbol2 = {
+    //   path: google.maps.SymbolPath.CIRCLE,
+    //   scale: 8,
+    //   strokeColor: '#00ac45'
+    // };
+    
+    
+    // var dotIcon = {
+    //     path: 'M -1,1 0,0 1,1',
+    //     // path:'http://material.io/tools/icons/?icon=local_airport&style=outline',
+    //     scale: 10,
+    //     strokeWeight: 2,
+    //     strokeColor: '#232e40'
+    // };
+    
+    
+    // marker icon
+    // var markerIcon = {
+    //     url: 'http://image.flaticon.com/icons/svg/252/252025.svg',
+    //     scaledSize: new google.maps.Size(30, 30),
+    //     origin: new google.maps.Point(0, 0),
+    //     anchor: new google.maps.Point(5,30),
+    //     labelOrigin:  new google.maps.Point(0,0),
+    // };
+    
+    
+    
+    // plane symbal
+    var planeSymbol = {
+
+      path: 'M362.985,430.724l-10.248,51.234l62.332,57.969l-3.293,26.145 l-71.345-23.599l-2.001,13.069l-2.057-13.529l-71.278,22.928l-5.762-23.984l64.097-59.271l-8.913-51.359l0.858-114.43 l-21.945-11.338l-189.358,88.76l-1.18-32.262l213.344-180.08l0.875-107.436l7.973-32.005l7.642-12.054l7.377-3.958l9.238,3.65 l6.367,14.925l7.369,30.363v106.375l211.592,182.082l-1.496,32.247l-188.479-90.61l-21.616,10.087l-0.094,115.684',
+      scale: 0.0333,
+      strokeOpacity: 0.6,
+      // color: '#ff6969',
+      // strokeColor:'#ff6969',
+      // strokeColor:'#2daaff',
+      strokeColor:'	#56514d',
+      // strokeColor: '#ff2222',
+      strokeWeight: 3,
+      anchor: new google.maps.Point(300, 300)
+    };
+    
+    // var PlaneIcon = new google.maps.MarkerImage(
+    //   "http://www.charterjetscompany.com/planeicon.png",
+    // );
+    
+    // var planeIcon = 'https://material.io/tools/icons/?icon=local_airport&style=outline';
+    
+    
+    
+    // drawBeizeCurves = [];
+    // mouseOverEventDictionary = {}
+    
+    
+    // function to show airline routes
+    
+    
+    
+    // loop through all airline routes 
+    
+    
+    // for (let route in airlineRoutes) {
+      // console.log(airlineRoutes[route])
+    
+    
+    // // an array storing all created airline route
+    // let airlineRoutesArray = [];
+    
+    // // array storing all markers
+    // let airlineAirportMarkers = []
+    
+    
+    function showRoutesOfSelectedCarrier(carrier){
+      
+      // get the flight ticket list group in the nav bar [home tab]
+      let listGroup = $(".flight-ticket-list-group")
+      // clear all children list item beforehand
+      listGroup.children().remove()
+      
+      // loop through all routes of the selected airline
+      for (let i = 0; i < airlineRoutes[carrier].length; i++) {
+
+        let pointFrom = airlineRoutes[carrier][i]['from']
+        let pointTo = airlineRoutes[carrier][i]['to']
+        
+        
+        // a pair of coordinates of a route
+        let targetPath = generatePathCoordinate(
+          airports[pointFrom], 
+          airports[pointTo]
+        )
+        // console.log(targetPath[1])
+        
+        // markers
+        let airportMarker = new google.maps.Marker({
+          map:map,
+          position:targetPath[1],
+          id:pointTo,
+          animation: google.maps.Animation.DROP,
+          // icon: markerIcon,
+          icon: 'http://www.google.com/intl/en_us/mapfiles/ms/micons/' + 'red' + '-dot.png',
+          // label: {
+          // text: "GO!"
+          //   color: "#eb3a44",
+          //   fontSize: "16px",
+          //   fontWeight: "bold"
+          // }
+        });
+        
+        // push current marker to array
+        airlineAirportMarkers.push(airportMarker)
+        
+        
+        
+        
+
+        
+        // midpoint - a point at which infoWindow lies
+        // console.log(targetBeizeCurve.infoWindowPoint)
+
+        // -------------------DRAW BeizeCurve PATH ON GOOGLE MAP-----------------------
+        
+        // create BeizeCurve for that path
+        let targetBeizeCurve = new createBeizeCurve(targetPath[0],targetPath[1])
+        // var drawBeizeCurves;
+        // drawBeizeCurves.setMap(null)
+        let drawBeizeCurves = new google.maps.Polyline({
+          leasePrice:airlineRoutes[carrier][i]['leasePrice'],
+          carrier:carrier,
+          path: targetBeizeCurve.beizePath,
+          infoWindowPoint:targetBeizeCurve.infoWindowPoint,
+          pointFrom:pointFrom,
+          pointTo:pointTo,
+          fromPlace:airlineRoutes[carrier][i]['fromPlace'],
+          toPlace:airlineRoutes[carrier][i]['toPlace'],
+          // path: path,
+          // path:bezierPath,
+          // strokeColor:'#a68974',
+          // strokeColor:'#FF4B4B',
+          // strokeColor:'#d0dbd7',
+          strokeColor:'#b9c1d1',
+          // strokeColor: '#0099FF',
+          // 	strokeColor:'#f6dda7',
+          //strokeColor:'#82a18f',
+          
+          strokeOpacity: 1,
+          // strokeOpacity:0,
+          strokeWeight: 3,
+          geodesic: true,
+          icons: [{
+            // icon:icons.parking.icon,
+            // icon: arrowSymbol,
+            // icon:dotIcon,
+            // icon:dotIcon,
+            icon:planeSymbol,
+            // icon:arrowSymbol,
+            // icon:planeSymbol,
+            // icon:PlaneIcon,
+            offset: '0%',
+            repeat: '800px'
+          }],
+          map: map
+        });
+        
+        // push created airline route curve to the corresponding array
+        airlineRoutesArray.push(drawBeizeCurves)
+        
+        // -------------------DRAW PATH ON GOOGLE MAP-----------------------
+      
   
-          let pointFrom = airlineRoutes[carrier][i]['from']
-          let pointTo = airlineRoutes[carrier][i]['to']
-          
-          
-          // a pair of coordinates of a route
-          let targetPath = generatePathCoordinate(
-            airports[pointFrom], 
-            airports[pointTo]
-          )
-          // console.log(targetPath[1])
-          
-          // markers
-          let airportMarker = new google.maps.Marker({
-            map:map,
-            position:targetPath[1],
-            id:pointTo,
-            animation: google.maps.Animation.DROP,
-            // icon: markerIcon,
-            icon: 'http://www.google.com/intl/en_us/mapfiles/ms/micons/' + 'red' + '-dot.png',
-            // label: {
-            // text: "GO!"
-            //   color: "#eb3a44",
-            //   fontSize: "16px",
-            //   fontWeight: "bold"
-            // }
-          });
-          
-          // push current marker to array
-          airlineAirportMarkers.push(airportMarker)
-          
-          
-          
-          
-  
-          
-          // midpoint - a point at which infoWindow lies
-          // console.log(targetBeizeCurve.infoWindowPoint)
-  
-          // -------------------DRAW BeizeCurve PATH ON GOOGLE MAP-----------------------
-          
-          // create BeizeCurve for that path
-          let targetBeizeCurve = new createBeizeCurve(targetPath[0],targetPath[1])
-          // var drawBeizeCurves;
-          // drawBeizeCurves.setMap(null)
-          let drawBeizeCurves = new google.maps.Polyline({
-            leasePrice:airlineRoutes[carrier][i]['leasePrice'],
-            carrier:carrier,
-            path: targetBeizeCurve.beizePath,
-            infoWindowPoint:targetBeizeCurve.infoWindowPoint,
-            pointFrom:pointFrom,
-            pointTo:pointTo,
-            fromPlace:airlineRoutes[carrier][i]['fromPlace'],
-            toPlace:airlineRoutes[carrier][i]['toPlace'],
-            // path: path,
-            // path:bezierPath,
-            // strokeColor:'#a68974',
-            // strokeColor:'#FF4B4B',
-            // strokeColor:'#d0dbd7',
-            strokeColor:'#b9c1d1',
-            // strokeColor: '#0099FF',
-            // 	strokeColor:'#f6dda7',
-            //strokeColor:'#82a18f',
+        // -------------------APPLY FUNCTIONS & EVENT LISTENER FOR THE Beize LINE----------------------------------
+        
+     
+        // animation applied on symbol along the curve
+        animateSymbol(drawBeizeCurves);
+        
+        // endow the curve with event trigger
+        mouseOverEventBeizeCurves(drawBeizeCurves);
+        mouseOutEventBeizeCurves(drawBeizeCurves);
+        
+        
+        
+        
+        // // make the line bold when mouseover
+        // google.maps.event.addListener(drawBeizeCurves[airlineRoutes[route][i]], 'click', function() {
+        // //   new google.maps.Marker({map:map,position:event.latLng});
+        // //   path.push(event.latLng);
+        // //   myLine.setPath(path);
+        //     // console.log(drawBeizeCurves[airlineRoutes[route][i]])
             
-            strokeOpacity: 1,
-            // strokeOpacity:0,
-            strokeWeight: 3,
-            geodesic: true,
-            icons: [{
-              // icon:icons.parking.icon,
-              // icon: arrowSymbol,
-              // icon:dotIcon,
-              // icon:dotIcon,
-              icon:planeSymbol,
-              // icon:arrowSymbol,
-              // icon:planeSymbol,
-              // icon:PlaneIcon,
-              offset: '0%',
-              repeat: '800px'
-            }],
-            map: map
-          });
-          
-          // push created airline route curve to the corresponding array
-          airlineRoutesArray.push(drawBeizeCurves)
-          
-          // -------------------DRAW PATH ON GOOGLE MAP-----------------------
+        //     drawBeizeCurves[airlineRoutes[route][i]].strokeWeight = 5.5
+        //     drawBeizeCurves[airlineRoutes[route][i]].strokeColor = '#37393e'
+        //     // console.log(event)
+        // });
+        // google.maps.event.addListener(drawBeizeCurves[airlineRoutes[route][i]], 'mouseout', function(event) {
+        // //   new google.maps.Marker({map:map,position:event.latLng});
+        // //   path.push(event.latLng);
+        // //   myLine.setPath(path);
+        //     console.log(drawBeizeCurves[airlineRoutes[route][i]])
+            
+        //     drawBeizeCurves[airlineRoutes[route][i]].strokeWeight = 3.5
+        //     drawBeizeCurves[airlineRoutes[route][i]].strokeColor = '#b9c1d1'
+        //     // console.log(event)
+        // });
         
-    
-          // -------------------APPLY FUNCTIONS & EVENT LISTENER FOR THE Beize LINE----------------------------------
-          
+      
+        // -------------------APPLY FUNCTIONS & EVENT LISTENER FOR THE LINE----------------------------------
+  
+        // create clickable list items of flight ticket in the home page of nav bar
+        
+        // console.log(listGroup.children().empty())
        
-          // animation applied on symbol along the curve
-          animateSymbol(drawBeizeCurves);
-          
-          // endow the curve with event trigger
-          mouseOverEventBeizeCurves(drawBeizeCurves);
-          mouseOutEventBeizeCurves(drawBeizeCurves);
-          
-          
-          
-          
-          // // make the line bold when mouseover
-          // google.maps.event.addListener(drawBeizeCurves[airlineRoutes[route][i]], 'click', function() {
-          // //   new google.maps.Marker({map:map,position:event.latLng});
-          // //   path.push(event.latLng);
-          // //   myLine.setPath(path);
-          //     // console.log(drawBeizeCurves[airlineRoutes[route][i]])
-              
-          //     drawBeizeCurves[airlineRoutes[route][i]].strokeWeight = 5.5
-          //     drawBeizeCurves[airlineRoutes[route][i]].strokeColor = '#37393e'
-          //     // console.log(event)
-          // });
-          // google.maps.event.addListener(drawBeizeCurves[airlineRoutes[route][i]], 'mouseout', function(event) {
-          // //   new google.maps.Marker({map:map,position:event.latLng});
-          // //   path.push(event.latLng);
-          // //   myLine.setPath(path);
-          //     console.log(drawBeizeCurves[airlineRoutes[route][i]])
-              
-          //     drawBeizeCurves[airlineRoutes[route][i]].strokeWeight = 3.5
-          //     drawBeizeCurves[airlineRoutes[route][i]].strokeColor = '#b9c1d1'
-          //     // console.log(event)
-          // });
-          
-        
-          // -------------------APPLY FUNCTIONS & EVENT LISTENER FOR THE LINE----------------------------------
-    
-          // create clickable list items of flight ticket in the home page of nav bar
-          
-          // console.log(listGroup.children().empty())
-         
-         
-         
-        // create flight ticket items in the list group in home tab of nav bar---------------------------------
-         
-        createFightTicketListItemInTheNavBarHomeTab(airlineRoutes[carrier][i], carrier, i)
-        // create flight ticket items in the list group in home tab of nav bar---------------------------------
-        
-        }
-   
-        
+       
+       
+      // create flight ticket items in the list group in home tab of nav bar---------------------------------
+       
+      createFightTicketListItemInTheNavBarHomeTab(airlineRoutes[carrier][i], carrier, i)
+      // create flight ticket items in the list group in home tab of nav bar---------------------------------
+      
       }
+ 
+      
+    }
 
       
       
@@ -538,6 +619,9 @@ $.when(getAirports,airline_routes, hotels).done(function(result, result2, result
           //     // alert('hotel tab to be turned on')
           // }
           
+          
+          console.log(map)
+          
           deleteBeizeCurves()
           deleteAirportMarkers()
           infowindow.close()
@@ -595,7 +679,7 @@ $.when(getAirports,airline_routes, hotels).done(function(result, result2, result
           //   //   infowindow.open(map, hotelMarker);
           //   // });
           
-          console.log(hotels[1024305])
+          // console.log(hotels[1024305])
           
           
           for(let hotel in hotels){
@@ -626,7 +710,7 @@ $.when(getAirports,airline_routes, hotels).done(function(result, result2, result
             
             
             
-            
+            hotelsMarkersArray.push(hotelMarker)
             
             google.maps.event.addListener(hotelMarker, 'mouseover', (function(pin) {
               return function() {
@@ -647,7 +731,7 @@ $.when(getAirports,airline_routes, hotels).done(function(result, result2, result
                   
                   
                   infowindow.setContent(contentString);
-                  
+                  infowindow.setPosition(latlonObj)
   
                   // var infowindow = new google.maps.InfoWindow({
                   //   // content: contentString
