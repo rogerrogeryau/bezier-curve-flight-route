@@ -279,13 +279,13 @@
     margin-right: 60px !important; } }
 
 
-.sidebar-home-tab-airline-selector{
+.sidebar-tab-airline-selector{
   padding: 5px;
   padding-top: 20px;
   height: 100%;
 }
 
-.sidebar-home-tab-content{
+.sidebar-tab-content{
   /*overflow:scroll;*/
   /*height:20rem;*/
   /*top:%;*/
@@ -304,19 +304,25 @@
 }
 
 @media (max-height: 675px) {
-  .sidebar-home-tab-content{
+  .sidebar-tab-content{
     height: 35vh;
   }
   
 }
 @media (max-height: 493px) {
-  .sidebar-home-tab-content{
+  .sidebar-tab-content{
     height: 25vh;
   }
   
 }
 
 .flight-ticket-list-item:hover{
+  /*box-shadow: rgba(0, 0, 0, 0.298039) 0 1px 4px -1px;*/
+  box-shadow: 0 0 30px rgba(33,33,33,.2);
+  cursor: pointer;
+}
+
+.itin_list_items:hover{
   /*box-shadow: rgba(0, 0, 0, 0.298039) 0 1px 4px -1px;*/
   box-shadow: 0 0 30px rgba(33,33,33,.2);
   cursor: pointer;
