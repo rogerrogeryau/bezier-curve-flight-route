@@ -35,7 +35,7 @@ $.when(getAirports,airline_routes, hotels).done(function(result, result2, result
       scrollwheel:true,
       draggable:true,
       mapTypeId: 'roadmap',
-      maxZoom:7,
+      // maxZoom:7,
       minZoom:3,
       zoomControl:false,
       mapTypeControl:false,
@@ -158,6 +158,8 @@ $.when(getAirports,airline_routes, hotels).done(function(result, result2, result
     
     // array storing all markers
     let airlineAirportMarkers = []
+    
+    
     
     
     // tab - air
@@ -786,25 +788,17 @@ $.when(getAirports,airline_routes, hotels).done(function(result, result2, result
     
     // itinerary tab-------------------------------------
     $( "li>a[href='#itinerary']" ).click(function() {
-      $( function() {
-        $( "#accordion" ).accordion({
-          collapsible: true,
-          // heightStyle: "content"
-        });
-      } );
-          
+      // tab - itinerary
+        
+        deleteHotelsMarkersArray()
+        infowindow.close()
+        deleteBeizeCurves()
+        deleteAirportMarkers()
     })
     // itinerary tab-------------------------------------
     
     
-    
-    
-    
-    
-    
-    
-    
-    
+  
     
     // functions codeblock -------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
