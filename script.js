@@ -189,7 +189,7 @@ $.when(getAirports,airline_routes, hotels).done(function(result, result2, result
           
           // get the selected carrier option tag element
           let chosenCarrier = carrierSelector.options[carrierSelector.selectedIndex].value;
-          // alert(chosenCarrier)
+          alert(chosenCarrier)
           
           // display selected routes on the map
           showRoutesOfSelectedCarrier(chosenCarrier)
@@ -203,7 +203,19 @@ $.when(getAirports,airline_routes, hotels).done(function(result, result2, result
       // map control panel ----------------------------------------------------
       
   
-  
+    
+      // initial beizeCurve of airline of index 0 shown ------------------------------
+       // display selected routes on the map
+      showRoutesOfSelectedCarrier('CX')
+      
+      // initial beizeCurve of airline of index 0 shown ------------------------------
+      
+      
+      
+      
+      
+      
+      
       
       // fail to incorporate Popup object [edited on 23-11-2018]
       // let popup = new Popup(
