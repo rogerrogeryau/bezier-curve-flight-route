@@ -189,7 +189,7 @@ $.when(getAirports,airline_routes, hotels).done(function(result, result2, result
           
           // get the selected carrier option tag element
           let chosenCarrier = carrierSelector.options[carrierSelector.selectedIndex].value;
-          alert(chosenCarrier)
+          // alert(chosenCarrier)
           
           // display selected routes on the map
           showRoutesOfSelectedCarrier(chosenCarrier)
@@ -204,11 +204,20 @@ $.when(getAirports,airline_routes, hotels).done(function(result, result2, result
       
   
     
-      // initial beizeCurve of airline of index 0 shown ------------------------------
-       // display selected routes on the map
-      showRoutesOfSelectedCarrier('CX')
-      
-      // initial beizeCurve of airline of index 0 shown ------------------------------
+      // initial beizeCurve of first airline created and shown when air tab is clicked -----------------
+        
+        if (airlineRoutesArray.length === 0) {
+          // get the first airline in airlineRoutes array
+          // console.log(Object.keys(airlineRoutes)[0])
+          let first_airline_code = Object.keys(airlineRoutes)[0];
+          
+          // display selected routes on the map
+          showRoutesOfSelectedCarrier(first_airline_code)
+        }
+        
+        
+
+      // initial beizeCurve of airline of index 0 shown ------------------------------------------------
       
       
       
