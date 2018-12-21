@@ -290,7 +290,7 @@
   /*height:20rem;*/
   /*top:%;*/
   overflow: auto;
-  height: 45vh;
+  height: 53vh;
   /*height: 50vh;*/
   /*width:;*/
   left:-9%;
@@ -303,18 +303,86 @@
   
 }
 
-@media (max-height: 675px) {
+
+@media (max-height: 840px) {
   .sidebar-tab-content{
-    height: 35vh;
+    height: 45vh;
   }
   
 }
+
+@media (max-height: 700px) {
+  .sidebar-tab-content{
+    height: 40vh;
+  }
+  
+}
+
+
+/*@media (max-height: 675px) {*/
+/*  .sidebar-tab-content{*/
+/*    height: 35vh;*/
+/*  }*/
+  
+/*}*/
 @media (max-height: 493px) {
   .sidebar-tab-content{
     height: 25vh;
   }
   
 }
+
+
+
+/*sidebar-itin-tab-content*/
+.sidebar-itin-tab-content{
+  /*overflow:scroll;*/
+  /*height:20rem;*/
+  /*top:%;*/
+  overflow: auto;
+  height: 59vh;
+  /*height: 50vh;*/
+  /*width:;*/
+  left:-9%;
+  width:115%;
+  overflow-x: hidden;
+  /*display: block;*/
+  position: relative;
+  /*position: absolute;*/
+  /*max-height:100%;*/
+  
+}
+
+
+@media (max-height: 840px) {
+  .sidebar-itin-tab-content{
+    height: 55vh;
+  }
+  
+}
+
+@media (max-height: 700px) {
+  .sidebar-itin-tab-content{
+    height: 50vh;
+  }
+  
+}
+
+@media (max-height: 493px) {
+  .sidebar-itin-tab-content{
+    height: 45vh;
+  }
+  
+}
+
+
+
+
+
+
+
+
+
 
 .flight-ticket-list-item:hover{
   /*box-shadow: rgba(0, 0, 0, 0.298039) 0 1px 4px -1px;*/
