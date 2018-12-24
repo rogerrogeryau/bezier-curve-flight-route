@@ -103,33 +103,33 @@ $.when(getAirports,airline_routes, hotels).done(function(result, result2, result
     // For each place, get the icon, name and location.
     var bounds = new google.maps.LatLngBounds();
       places.forEach(function(place) {
-      if (!place.geometry) {
-        console.log("Returned place contains no geometry");
-        return;
-      }
-      // var icon = {
-      //   // url: place.icon,
-      //   size: new google.maps.Size(71, 71),
-      //   origin: new google.maps.Point(0, 0),
-      //   anchor: new google.maps.Point(17, 34),
-      //   scaledSize: new google.maps.Size(25, 25)
-      // };
-      
-      // // Create a marker for each place.
-      // Searchmarkers.push(new google.maps.Marker({
-      //   map: map,
-      //   icon: icon,
-      //   title: place.name,
-      //   position: place.geometry.location
-      // }));
+        if (!place.geometry) {
+          console.log("Returned place contains no geometry");
+          return;
+        }
+        // var icon = {
+        //   // url: place.icon,
+        //   size: new google.maps.Size(71, 71),
+        //   origin: new google.maps.Point(0, 0),
+        //   anchor: new google.maps.Point(17, 34),
+        //   scaledSize: new google.maps.Size(25, 25)
+        // };
+        
+        // // Create a marker for each place.
+        // Searchmarkers.push(new google.maps.Marker({
+        //   map: map,
+        //   icon: icon,
+        //   title: place.name,
+        //   position: place.geometry.location
+        // }));
     
-      if (place.geometry.viewport) {
-        // Only geocodes have viewport.
-        bounds.union(place.geometry.viewport);
-      } else {
-        bounds.extend(place.geometry.location);
-      }
-    });
+        if (place.geometry.viewport) {
+          // Only geocodes have viewport.
+          bounds.union(place.geometry.viewport);
+        } else {
+          bounds.extend(place.geometry.location);
+        }
+      });
       map.fitBounds(bounds);
       map.setZoom(13);
     });
@@ -143,33 +143,27 @@ $.when(getAirports,airline_routes, hotels).done(function(result, result2, result
     // an array storing all created airline route
     let airlineRoutesArray = [];
     
-    // array storing all markers
+    // array storing all airport markers
     let airlineAirportMarkers = []
     
+    // hotel marker array 
     let hotelsMarkersArray = []
     
-    // selector in air - tab
+    // selector in "air" tab
     let carrierSelector = $('#carrier_selector')
     
     
-    // tab - air
+    // tab - air - click event
     $( "li>a[href='#air']" ).click(function() {
-     
       
-      
-      // let carrierSelector = document.getElementById('carrier_selector')
-      
-      
-      // append all option elements (flight routes) in the selector if they are not present
+      // append options of airlines to selector if not present
       if (carrierSelector.children('option').length === 0) {
         for(let airline in airlineRoutes){
-          // console.log(airline)
+
           carrierSelector.append(`<option value=${airline}>${airline}</option>`)
         }
       }
-      
-      
-      
+
       // clear map before loading the folling code block
       deleteBeizeCurves()
       deleteAirportMarkers()
@@ -177,30 +171,14 @@ $.when(getAirports,airline_routes, hotels).done(function(result, result2, result
       infowindow.close()
       
       
-      
-      
-      
-      // map control panel ----------------------------------------------------
-        
-        
 
-      // // let carrierSelector = document.getElementById('carrier_selector')
-      // let carrierSelector = $('#carrier_selector')
-      
-      // // all option elements in the selector 
-      // for(let airline in airlineRoutes){
-      //   // console.log(airline)
-      //   carrierSelector.append(`<option value=${airline}>${airline}</option>`)
-      // }
-      
-      
-      // initial beizeCurve of first airline created and shown when "air"" tab is clicked -----------------
-      
+      // map control panel -------------------------------------------------------------------------------------
+
+      // default beizeCurve of routings for first airline -----------------
       if (airlineRoutesArray.length === 0) {
         // get the first airline in airlineRoutes array
         // console.log(Object.keys(airlineRoutes)[0])
         let first_airline_code = Object.keys(airlineRoutes)[0];
-        
         
         // clear previously displayed route
         deleteBeizeCurves()
@@ -208,16 +186,17 @@ $.when(getAirports,airline_routes, hotels).done(function(result, result2, result
         deleteAirportMarkers()
         
         // display selected routes on the map
-        // showRoutesOfSelectedCarrier(first_airline_code)
         showRoutesOfSelectedCarrier(first_airline_code)
-        
-        
+
+        // mimic change event to have the map refreshed
+        carrierSelector.trigger("change")
       }
-      // initial beizeCurve of first airline created and shown when "air"" tab is clicked -----------------
+      // default beizeCurve of routings for first airline -----------------
      
       
-      // jquery - add event listener
-      carrierSelector.on("change", function() {
+      // jquery - add event listener - refresh map when airline is changed
+      carrierSelector.on("change", function(e) {
+          e.stopPropagation()
           // clear previously displayed route
           deleteBeizeCurves()
           
@@ -237,73 +216,9 @@ $.when(getAirports,airline_routes, hotels).done(function(result, result2, result
       });
       
       
-      // map control panel ----------------------------------------------------
+      // map control panel -------------------------------------------------------------------------------------
       
-  
-    
 
-      
-      
-      
-      
-      
-      
-      
-      
-      // fail to incorporate Popup object [edited on 23-11-2018]
-      // let popup = new Popup(
-      //     new google.maps.LatLng(-33.866, 151.196),
-      //     document.getElementById('content'));
-      // popup.setMap(map);
-      
-      
-      
-      // Define the symbol, using one of the predefined paths ('CIRCLE')
-      // supplied by the Google Maps JavaScript API.
-      // var arrowSymbol = {
-      //   // path: google.maps.SymbolPath.CIRCLE,
-      //   // path : google.maps.SymbolPath.FORWARD_OPEN_ARROW,
-      //   path : google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
-      //   // path: icons.parking.icon,
-      //   scale: 3,
-      //   // strokeColor: '#fbbc05',
-      //   // strokeColor: '#0099FF',
-      //   // strokeColor:'#192A3D',
-      //   strokeColor:'#f1a130',
-      //   // strokeColor:'#ff6969'
-      //   // strokeColor:'#a68974'
-  
-      //   strokeOpacity: 1,
-      //   strokeWeight: 3,
-      //   // anchor: new google.maps.Point(300, 300)
-      // };
-      
-      // var lineSymbol2 = {
-      //   path: google.maps.SymbolPath.CIRCLE,
-      //   scale: 8,
-      //   strokeColor: '#00ac45'
-      // };
-      
-      
-      // var dotIcon = {
-      //     path: 'M -1,1 0,0 1,1',
-      //     // path:'http://material.io/tools/icons/?icon=local_airport&style=outline',
-      //     scale: 10,
-      //     strokeWeight: 2,
-      //     strokeColor: '#232e40'
-      // };
-      
-      
-      // marker icon
-      // var markerIcon = {
-      //     url: 'http://image.flaticon.com/icons/svg/252/252025.svg',
-      //     scaledSize: new google.maps.Size(30, 30),
-      //     origin: new google.maps.Point(0, 0),
-      //     anchor: new google.maps.Point(5,30),
-      //     labelOrigin:  new google.maps.Point(0,0),
-      // };
-      
-      
       
       // plane symbal
       var planeSymbol = {
@@ -320,35 +235,7 @@ $.when(getAirports,airline_routes, hotels).done(function(result, result2, result
         anchor: new google.maps.Point(300, 300)
       };
       
-      // var PlaneIcon = new google.maps.MarkerImage(
-      //   "http://www.charterjetscompany.com/planeicon.png",
-      // );
-      
-      // var planeIcon = 'https://material.io/tools/icons/?icon=local_airport&style=outline';
-      
-      
-      
-      // drawBeizeCurves = [];
-      // mouseOverEventDictionary = {}
-      
-      
-      // function to show airline routes
-      
-      
-      
-      // loop through all airline routes 
-      
-      
-      // for (let route in airlineRoutes) {
-        // console.log(airlineRoutes[route])
-      
-      
-      // // an array storing all created airline route
-      // let airlineRoutesArray = [];
-      
-      // // array storing all markers
-      // let airlineAirportMarkers = []
-      
+
       
       function showRoutesOfSelectedCarrier(carrier){
         
@@ -459,194 +346,28 @@ $.when(getAirports,airline_routes, hotels).done(function(result, result2, result
           
           // animation applied on symbol along the curve
           animateSymbol(drawBeizeCurves);
-          
-          
-          // // make the line bold when mouseover
-          // google.maps.event.addListener(drawBeizeCurves[airlineRoutes[route][i]], 'click', function() {
-          // //   new google.maps.Marker({map:map,position:event.latLng});
-          // //   path.push(event.latLng);
-          // //   myLine.setPath(path);
-          //     // console.log(drawBeizeCurves[airlineRoutes[route][i]])
-              
-          //     drawBeizeCurves[airlineRoutes[route][i]].strokeWeight = 5.5
-          //     drawBeizeCurves[airlineRoutes[route][i]].strokeColor = '#37393e'
-          //     // console.log(event)
-          // });
-          // google.maps.event.addListener(drawBeizeCurves[airlineRoutes[route][i]], 'mouseout', function(event) {
-          // //   new google.maps.Marker({map:map,position:event.latLng});
-          // //   path.push(event.latLng);
-          // //   myLine.setPath(path);
-          //     console.log(drawBeizeCurves[airlineRoutes[route][i]])
-              
-          //     drawBeizeCurves[airlineRoutes[route][i]].strokeWeight = 3.5
-          //     drawBeizeCurves[airlineRoutes[route][i]].strokeColor = '#b9c1d1'
-          //     // console.log(event)
-          // });
-          
+         
         
           // -------------------APPLY FUNCTIONS & EVENT LISTENER FOR THE LINE----------------------------------
     
-          // create clickable list items of flight ticket in the home page of nav bar
-          
-          // console.log(listGroup.children().empty())
-         
-         
-         
+
         // create flight ticket items in the list group in home tab of nav bar---------------------------------
          
         createFightTicketListItemInTheNavBarHomeTab(airlineRoutes[carrier][i], carrier, i)
         // create flight ticket items in the list group in home tab of nav bar---------------------------------
         
         }
-   
-        
       }
-  
-        
-        
-        
-        
-        
-        
+
     })
     
     // jquery event triggers
-    // click the air tab on the nav bar
+    // click the air tab on the nav bar when page is loaded
     $( "li>a[href='#air']" ).trigger( "click" );
     carrierSelector.trigger("change")
-      
-  
-      // }
+
       
       
-    
-      
-      
-      
-      
-      
-      
-      // beize curve ---------------------------------------------------------------------------------------------
-      
-      
-      
-      
-      
-      
-      
-      
-      // // single coordinate
-      // let HKG = airports.HKG;
-      // let TSA = airports.TSA;
-      // let LCY = airports.LCY;
-      // let BKK = airports.BKK;
-      // let ITM = airports.ITM;    
-      
-      // // form route of pair points
-      // let HKG_TSA = generatePathCoordinate(HKG,TSA)
-      // let HKG_LCY = generatePathCoordinate(HKG,LCY)
-      // let HKG_BKK = generatePathCoordinate(HKG,BKK)
-      // let HKG_ITM = generatePathCoordinate(HKG,ITM)
-       
-      
-      // // shape the straight route into BeizeCurve
-      // let HKG_TSA_BeizeCurve = new createBeizeCurve(HKG_TSA[0],HKG_TSA[1])
-      // let HKG_LCY_BeizeCurve = new createBeizeCurve(HKG_LCY[0],HKG_LCY[1])
-      // let HKG_BKK_BeizeCurve = new createBeizeCurve(HKG_BKK[0],HKG_BKK[1])
-      // let HKG_ITM_BeizeCurve = new createBeizeCurve(HKG_ITM[0],HKG_ITM[1])
-      
-      // console.log('midpoint :' + HKG_TSA_BeizeC  urve.midpoint)
-      
-      
-      // console.log(HKG_TW.beizePath)
-      // var bezierPath = getLatLngPath( path[0], path[1] );
-      // console.log(bezierPath)
-      // beize curve ---------------------------- ------------------------------------------------------------------
-      
-      
-      // Create the polyline and add the symbol to it via the 'icons' property.
-      // var path =  [{lat: 22.324624, lng: 114.172305}, {lat: 23.927836, lng:121.086477}]
-      // var HKG_TSA_line = new google.maps.Polyline({
-      //   path: HKG_TSA_BeizeCurve.beizePath,
-      //   // path: path,
-      //   // path:bezierPath,
-      //   // strokeColor:'#a68974',
-      //   // strokeColor:'#FF4B4B',
-      //   // strokeColor:'#d0dbd7',
-      //   strokeColor:'#b9c1d1',
-      //   // strokeColor: '#0099FF',
-      //   // 	strokeColor:'#f6dda7',
-      //   	 //strokeColor:'#82a18f',
-        	 
-      //   strokeOpacity: 1,
-      //   // strokeOpacity:0,
-      //   strokeWeight: 3.5,
-      //   geodesic: true,
-      //   icons: [{
-      //     // icon:icons.parking.icon,
-      //     // icon: arrowSymbol,
-      //     icon:dotIcon,
-      //     // icon:dotIcon,
-      //     // icon:planeIcon,
-      //     // icon:arrowSymbol,
-      //     // icon:planeSymbol,
-      //     // icon:PlaneIcon,
-      //     offset: '0%',
-      //     repeat: '150px'
-      //   }],
-      //   map: map
-      // });
-      
-      
-   
-      
-      
-      
-      // google.maps.event.addListener(HKG_TSA_line, 'mouseover', function(event) {
-      // //   new google.maps.Marker({map:map,position:event.latLng});
-      // //   path.push(event.latLng);
-      // //   myLine.setPath(path);
-      //     console.log(HKG_TSA_line)
-          
-      //     HKG_TSA_line.strokeWeight = 5.5
-      //     HKG_TSA_line.strokeColor = '#37393e'
-      //     // console.log(event)
-      // });
-      // google.maps.event.addListener(HKG_TSA_line, 'mouseout', function(event) {
-      // //   new google.maps.Marker({map:map,position:event.latLng});
-      // //   path.push(event.latLng);
-      // //   myLine.setPath(path);
-      //     console.log(HKG_TSA_line)
-          
-      //     HKG_TSA_line.strokeWeight = 3.5
-      //     HKG_TSA_line.strokeColor = '#b9c1d1'
-      //     // console.log(event)
-      // });
-  
-  
-      // customised markers----------------------------------------------------
-      // var CustomMarker1 = new CustomMarker(
-      // 	{lat:22.3089008331,lng:113.915000916},
-      // 	map,
-      // 	{
-      // 		// marker_id: '123',
-      // 		// colour: 'Red'
-      // 	}
-      // );  
-      
-      
-      
-      // customised markers----------------------------------------------------
-      
-      
-      // $( "#carrier_selector option:nth-child(2)").click()
-      // $( "#carrier_selector" ).change(function() {
-      //     // $("#CI").click();
-          
-      // });
-      // console.log($( "#carrier_selector" ).find("option:").index())
-    
-    
     
     
     
@@ -654,7 +375,7 @@ $.when(getAirports,airline_routes, hotels).done(function(result, result2, result
     
     
     $( "li>a[href='#hotel']" ).click(function() {
-    
+
         if (hotelsMarkersArray.length===0) {
           
           
@@ -670,7 +391,7 @@ $.when(getAirports,airline_routes, hotels).done(function(result, result2, result
           // }
           
           
-          console.log(map)
+          // console.log(map)
           
           deleteBeizeCurves()
           deleteAirportMarkers()

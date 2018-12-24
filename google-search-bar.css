@@ -1,10 +1,10 @@
 .google-searchBox{
     /*position: relative;*/
     overflow:auto;
-    left:33.33%;
+    left:67%;
     bottom:0%;
     right:113px;
-    top: 30%;
+    top: 20%;
     z-index:12;
     /*width:70%;*/
     visibility: invisible;
@@ -21,11 +21,11 @@
     height: 35px;
     margin-left: 0%;
     margin-right: 30%;
-    margin-top: -120px;
+    margin-top: -160px;
     outline: none;
     padding: 0 11px 0 13px;
     text-overflow: ellipsis;
-    width: 40%;
+    width: 30%;
     z-index: 10;
     /*max-width: 30%!important;*/
 }
@@ -46,17 +46,34 @@
     } 
 }
 
-@media (max-height: 800px){
+@media (max-height: 850px){
     .google-searchBox{
-        top:40%;
+        top:33%;
       /*width: 70%;*/
       /*left:17%;*/
     } 
 }
 
-@media (max-height: 600px){
+
+@media (max-height: 800px){
     .google-searchBox{
-        top:50%;
+        top:34%;
+      /*width: 70%;*/
+      /*left:17%;*/
+    } 
+}
+
+@media (max-height: 750px){
+    .google-searchBox{
+        top:38%;
+      /*width: 70%;*/
+      /*left:17%;*/
+    } 
+}
+
+@media (max-height: 700px){
+    .google-searchBox{
+        top:42%;
       /*width: 70%;*/
       /*left:17%;*/
     } 
