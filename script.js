@@ -1,24 +1,25 @@
 let getAirports = $.get("./hutcho_airport_v2.json");
-let airline_routes = $.get("./airline_routes.json");
-let hotels = $.get('./1000_hotel_JSON.json');
-
-// function activateNavBar(){
+let getAirlineRoutes = $.get("./airline_routes.json");
+let getHotels = $.get('./1000_hotel_JSON.json');
+let getItineraries = $.get('./itineraries.json');
 //   
 //   var sidebar = $('#sidebar').sidebar();
 // }
 
 
 
-$.when(getAirports,airline_routes, hotels).done(function(result, result2, result3){
+$.when(getAirports,getAirlineRoutes, getHotels, getItineraries).done(function(result, result2, result3, result4){
 
   // get airport's coordinate data
-  let airports = result[0]
+  let airports = result[0];
   
   // get airline routes
-  let airlineRoutes = result2[0]
+  let airlineRoutes = result2[0];
   
   // get hotels
-  let hotels = result3[0]
+  let hotels = result3[0];
+  
+  let itineraries = result4[0];
   // console.log(hotels)
   
   // google map initial config
@@ -563,6 +564,11 @@ $.when(getAirports,airline_routes, hotels).done(function(result, result2, result
         infowindow.close()
         deleteBeizeCurves()
         deleteAirportMarkers()
+        
+        
+        
+        
+        console.log(itineraries)
     })
     // itinerary tab-------------------------------------
     
