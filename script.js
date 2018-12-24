@@ -10,12 +10,7 @@ let hotels = $.get('./1000_hotel_JSON.json');
 
 
 $.when(getAirports,airline_routes, hotels).done(function(result, result2, result3){
-  // console.log(result[0])
-  // console.log(result2[0])
-  
-  
-  
-  
+
   // get airport's coordinate data
   let airports = result[0]
   
@@ -145,42 +140,84 @@ $.when(getAirports,airline_routes, hotels).done(function(result, result2, result
     
 
 
-
-
-
-
-
-
-
-
     // an array storing all created airline route
     let airlineRoutesArray = [];
     
     // array storing all markers
     let airlineAirportMarkers = []
     
+    let hotelsMarkersArray = []
     
+    // selector in air - tab
+    let carrierSelector = $('#carrier_selector')
     
     
     // tab - air
     $( "li>a[href='#air']" ).click(function() {
+     
       
-    
+      
+      // let carrierSelector = document.getElementById('carrier_selector')
+      
+      
+      // append all option elements (flight routes) in the selector if they are not present
+      if (carrierSelector.children('option').length === 0) {
+        for(let airline in airlineRoutes){
+          // console.log(airline)
+          carrierSelector.append(`<option value=${airline}>${airline}</option>`)
+        }
+      }
+      
+      
+      
       // clear map before loading the folling code block
-      // deleteBeizeCurves()
-      // deleteAirportMarkers()
+      deleteBeizeCurves()
+      deleteAirportMarkers()
       deleteHotelsMarkersArray()
       infowindow.close()
-    
+      
+      
+      
+      
+      
       // map control panel ----------------------------------------------------
         
         
-      // attach event listener to carrier selector
-      let carrierSelector = document.getElementById('carrier_selector')
-  
+
+      // // let carrierSelector = document.getElementById('carrier_selector')
+      // let carrierSelector = $('#carrier_selector')
       
-      // airline route displayed when another carrier selected
-      carrierSelector.addEventListener("change", function() {
+      // // all option elements in the selector 
+      // for(let airline in airlineRoutes){
+      //   // console.log(airline)
+      //   carrierSelector.append(`<option value=${airline}>${airline}</option>`)
+      // }
+      
+      
+      // initial beizeCurve of first airline created and shown when "air"" tab is clicked -----------------
+      
+      if (airlineRoutesArray.length === 0) {
+        // get the first airline in airlineRoutes array
+        // console.log(Object.keys(airlineRoutes)[0])
+        let first_airline_code = Object.keys(airlineRoutes)[0];
+        
+        
+        // clear previously displayed route
+        deleteBeizeCurves()
+        // clear previously displayed markers
+        deleteAirportMarkers()
+        
+        // display selected routes on the map
+        // showRoutesOfSelectedCarrier(first_airline_code)
+        showRoutesOfSelectedCarrier(first_airline_code)
+        
+        
+      }
+      // initial beizeCurve of first airline created and shown when "air"" tab is clicked -----------------
+     
+      
+      // jquery - add event listener
+      carrierSelector.on("change", function() {
           // clear previously displayed route
           deleteBeizeCurves()
           
@@ -188,8 +225,8 @@ $.when(getAirports,airline_routes, hotels).done(function(result, result2, result
           deleteAirportMarkers()
           
           // get the selected carrier option tag element
-          let chosenCarrier = carrierSelector.options[carrierSelector.selectedIndex].value;
-          // alert(chosenCarrier)
+          // let chosenCarrier = carrierSelector.options[carrierSelector.selectedIndex].value;
+          let chosenCarrier = carrierSelector.find(":selected").text()
           
           // display selected routes on the map
           showRoutesOfSelectedCarrier(chosenCarrier)
@@ -204,20 +241,7 @@ $.when(getAirports,airline_routes, hotels).done(function(result, result2, result
       
   
     
-      // initial beizeCurve of first airline created and shown when air tab is clicked -----------------
-        
-        if (airlineRoutesArray.length === 0) {
-          // get the first airline in airlineRoutes array
-          // console.log(Object.keys(airlineRoutes)[0])
-          let first_airline_code = Object.keys(airlineRoutes)[0];
-          
-          // display selected routes on the map
-          showRoutesOfSelectedCarrier(first_airline_code)
-        }
-        
-        
 
-      // initial beizeCurve of airline of index 0 shown ------------------------------------------------
       
       
       
@@ -427,14 +451,14 @@ $.when(getAirports,airline_routes, hotels).done(function(result, result2, result
           // -------------------APPLY FUNCTIONS & EVENT LISTENER FOR THE Beize LINE----------------------------------
           
        
-          // animation applied on symbol along the curve
-          animateSymbol(drawBeizeCurves);
+          
           
           // endow the curve with event trigger
           mouseOverEventBeizeCurves(drawBeizeCurves);
           mouseOutEventBeizeCurves(drawBeizeCurves);
           
-          
+          // animation applied on symbol along the curve
+          animateSymbol(drawBeizeCurves);
           
           
           // // make the line bold when mouseover
@@ -485,8 +509,11 @@ $.when(getAirports,airline_routes, hotels).done(function(result, result2, result
         
         
     })
-  
-      
+    
+    // jquery event triggers
+    // click the air tab on the nav bar
+    $( "li>a[href='#air']" ).trigger( "click" );
+    carrierSelector.trigger("change")
       
   
       // }
@@ -624,7 +651,7 @@ $.when(getAirports,airline_routes, hotels).done(function(result, result2, result
     
     
     // hotel tab ----------------------------------------
-    let hotelsMarkersArray = []
+    
     
     $( "li>a[href='#hotel']" ).click(function() {
     
@@ -849,6 +876,7 @@ $.when(getAirports,airline_routes, hotels).done(function(result, result2, result
             line.set('icons', icons);
         }, 40);
         // console.log(line)
+        // console.log('animated function here')
         
     }
     
