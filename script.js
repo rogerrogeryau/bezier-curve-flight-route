@@ -108,22 +108,7 @@ $.when(getAirports,getAirlineRoutes, getHotels, getItineraries).done(function(re
           console.log("Returned place contains no geometry");
           return;
         }
-        // var icon = {
-        //   // url: place.icon,
-        //   size: new google.maps.Size(71, 71),
-        //   origin: new google.maps.Point(0, 0),
-        //   anchor: new google.maps.Point(17, 34),
-        //   scaledSize: new google.maps.Size(25, 25)
-        // };
-        
-        // // Create a marker for each place.
-        // Searchmarkers.push(new google.maps.Marker({
-        //   map: map,
-        //   icon: icon,
-        //   title: place.name,
-        //   position: place.geometry.location
-        // }));
-    
+
         if (place.geometry.viewport) {
           // Only geocodes have viewport.
           bounds.union(place.geometry.viewport);
@@ -240,7 +225,7 @@ $.when(getAirports,getAirlineRoutes, getHotels, getItineraries).done(function(re
       
       function showRoutesOfSelectedCarrier(carrier){
         
-        // get the flight ticket list group in the nav bar [home tab]
+        // get the flight ticket list group in the nav bar [air tab]
         let listGroup = $(".flight-ticket-list-group")
         // clear all children list item beforehand
         listGroup.children().remove()
