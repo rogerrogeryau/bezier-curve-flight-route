@@ -1,7 +1,7 @@
 let getAirports = $.get("./hutcho_airport_v2.json");
 let getAirlineRoutes = $.get("./airline_routes.json");
 let getHotels = $.get('./1000_hotel_JSON.json');
-let getItineraries = $.get('./itineraries.json');
+let getItineraries = $.get('./itineraries_content.json');
 //   
 //   var sidebar = $('#sidebar').sidebar();
 // }
