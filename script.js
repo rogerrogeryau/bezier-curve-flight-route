@@ -553,7 +553,66 @@ $.when(getAirports,getAirlineRoutes, getHotels, getItineraries).done(function(re
         
         
         
-        console.log(itineraries)
+        // console.log(itineraries)
+        
+        
+        // itin item creation
+        let accordion = $('#accordionGroup');
+        let itin_card = $('<div>',{
+          'id':'itin001',
+          'class':'card',
+          
+        });
+        let itin_card_header = $('<div>',{
+          'class':'card-header',
+          'id':'itin001_header',
+          'data-toggle':'collapse',
+          'data-target':'#itin001_body',
+          'aria-expanded':'true',
+          'aria-controls':'itin001_body'
+        });
+        
+        let itin_card_header_title = $('<h5>',{
+          'class':'mb-0',
+          'text':'行程1'
+        });
+        
+        let itin_card_outer_body = $('<div>',{
+          'id':'itin001_body',
+          'class':'collapse show',
+          'aria-labelledby':'itin001_header',
+          'data-parent':'#accordionGroup'
+        })
+        
+        let itin_inner_body = $('<div>',{
+          'class':'card-body',
+          'text':'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmodtempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam'
+        })
+        
+        
+        accordion.append(
+          itin_card.append(
+            [
+              itin_card_header.append(itin_card_header_title),
+              itin_card_outer_body.append(itin_inner_body)
+            ]
+          )
+          
+        
+        )
+        // itin_card.append(
+        //     itin_card_header
+        //     // itin_card_outer_body.append(itin_inner_body)
+        // )
+        
+        
+        // console.log(accordion)
+        // accordion.append(itin_card.append(itin_card_header))
+        
+        
+        
+        
+        
     })
     // itinerary tab-------------------------------------
     
