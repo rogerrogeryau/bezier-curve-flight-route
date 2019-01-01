@@ -1,5 +1,6 @@
 .google-searchBox{
     /*position: relative;*/
+    
     overflow:auto;
     left:67%;
     bottom:0%;
@@ -74,6 +75,14 @@
 @media (max-height: 700px){
     .google-searchBox{
         top:42%;
+      /*width: 70%;*/
+      /*left:17%;*/
+    } 
+}
+
+@media (max-height: 650px){
+    .google-searchBox{
+        top:45.5%;
       /*width: 70%;*/
       /*left:17%;*/
     } 
