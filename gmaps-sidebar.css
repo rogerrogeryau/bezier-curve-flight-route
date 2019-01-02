@@ -124,7 +124,7 @@
 
   @media (max-width: 768px){
     .sidebar-content:not(.sidebar-header){
-      opacity: 0.85;
+      opacity: 0.95;
     }
   }
 

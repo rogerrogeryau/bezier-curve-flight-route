@@ -552,8 +552,10 @@ $.when(getAirports,getAirlineRoutes, getHotels, getItineraries).done(function(re
         deleteAirportMarkers()
         
         
-        
-        
+        // trigger carousel slider
+        $('.carousel').carousel({
+          interval: 2000
+        })
         
         
         
