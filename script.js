@@ -553,9 +553,9 @@ $.when(getAirports,getAirlineRoutes, getHotels, getItineraries).done(function(re
         
         
         // trigger carousel slider
-        $('.carousel').carousel({
-          interval: 2000
-        })
+        // $('.carousel').carousel({
+        //   interval: 2000
+        // })
         
         
         

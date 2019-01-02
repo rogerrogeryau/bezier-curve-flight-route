@@ -1,6 +1,15 @@
 @import url(https://fonts.googleapis.com/css?family=Lora|Roboto:400,500);
 
-
+.carousel-caption {
+      max-width: 600px;
+      padding: 0 0px;
+      margin:0 auto;
+      left:5%;
+      right: 5%;
+      top:5%;
+      /*margin-top: 5%;*/
+      text-align:left;
+}
 
 .itin-card {
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -13,6 +22,10 @@
   -ms-transition: all 0.25s ease-in-out;
   -o-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
+  /*height:500px;*/
+  margin-bottom: 5px;
+  
+  
 }
 .itin-card:hover {
   -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
@@ -23,6 +36,10 @@
 
 }
 
+
+.itin-item-content-body{
+  margin-bottom: 15px;
+}
 
 
 .text-uppercase {
