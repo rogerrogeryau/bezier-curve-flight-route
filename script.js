@@ -559,7 +559,7 @@ $.when(getAirports,getAirlineRoutes, getHotels, getItineraries).done(function(re
         
         
         
-        // console.log(itineraries)
+        console.log(itineraries)
         
         
         // itin item creation

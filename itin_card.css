@@ -33,6 +33,7 @@
   transition: all 0.25s ease-in-out;
   /*padding: 5px;*/
   /*height:400px;*/
+  overflow: hidden; border-radius: 12px;
   
 }
 
@@ -45,7 +46,21 @@
 
 }
 
+.itin-item-paragraph-btn{
+  text-align: right; 
+  margin-right:3%;
+}
 
+
+
+.itin-collapsable-content{
+  border-bottom-color:transparent;
+}
+
+
+.card-heading{
+  line-height: 1.25;
+}
 
 
 .itin-item-content-body{
