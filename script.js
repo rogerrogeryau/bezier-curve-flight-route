@@ -558,9 +558,160 @@ $.when(getAirports,getAirlineRoutes, getHotels, getItineraries).done(function(re
         // })
         
         
+        // itin item card jQuery Construction---------------------------------------------------
+        console.log(itineraries['itin_001'])
+        let itin_item_code = 'itin_001;'
         
-        console.log(itineraries)
+        let itin_content_tab = $('.container-fluid .sidebar-itin-tab-content')
         
+        
+        
+        
+        let itin_item_wrapper = $('<div>',{'class':'itin-item-wrapper','id':`itin_item_wrapper_${itin_item_code}`})
+                                
+        let itin_card = $('<div>',{'class':'my-1 mx-auto p-relative bg-white itin-card'})               
+        
+        let carousel_indicators = $('<div>',{'class':'carousel slide',
+                                    'id':'carouselExampleIndicators',
+                                    'data-ride':'carousel',
+                                    'data-interval':"5000"
+                                   })
+        let carousel_indicators_ordered_list = $('<ol>',{'class':'carousel-indicators'})
+        
+        let carousel_indicators_ordered_list_item1 = $('<li>',{'data-target':'#carouselExampleIndicators',
+                                                       'data-slide-to':"0",
+                                                       'class':'active'
+                                                      })
+                                                      
+                                                      
+        let itim_to_be_parsed = 
+        `
+          <div class="itin-item-wrapper">
+            <div class="my-1 mx-auto p-relative bg-white itin-card">
+              <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="14000">
+                <ol class="carousel-indicators">
+                  <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                  <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                  <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img class="d-block w-100" src="https://images.pexels.com/photos/442559/pexels-photo-442559.jpeg" alt="First slide">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5>Header</h5>
+                      <p>caption</p>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img class="d-block w-100" src="https://images.pexels.com/photos/442559/pexels-photo-442559.jpeg" alt="Second slide">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5>Header</h5>
+                      <p>caption</p>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img class="d-block w-100" src="https://images.pexels.com/photos/442559/pexels-photo-442559.jpeg" alt="Third slide">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5>Header</h5>
+                      <p>caption</p>
+                    </div>
+                  </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </div>
+              <div class="px-2 py-2 itin-item-content-body" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="">
+                <p class="mb-0 small font-weight-medium text-uppercase mb-1 text-muted lts-2px">
+                  日本
+                </p>
+                <h1 class="ff-serif font-weight-normal text-black card-heading mt-0 mb-1">
+                Planning your final summer trip
+                </h1>
+                <p class="mb-1 itin-item-desc">
+                  ing to a cd the corner. But it's not too latit's not too late to squeeze in another weekend trip weekend trip &hellip;
+                </p>
+                <p class="itin-item-paragraph-btn">
+                  <a class="btn btn-primary"  data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">了解更多 ...</a>
+                </p>
+                <div class="row">
+                  <div class="collapse multi-collapse" id="multiCollapseExample1" >
+                    <div class="card card-body itin-collapsable-content">
+                      <div class="container">
+                        <div class="row">
+                          <div id="list-example" class="list-group col-3">
+                            <a class="list-group-item list-group-item-action" href="#list-item-1">Day 1</a>
+                            <a class="list-group-item list-group-item-action" href="#list-item-2">Day 2</a>
+                            <a class="list-group-item list-group-item-action" href="#list-item-3">Day 3</a>
+                            <a class="list-group-item list-group-item-action" href="#list-item-4">Day 4</a>
+                          </div>
+                          <div data-spy="scroll" data-target="#list-example" data-offset="0" class="scrollspy-example col-9" style="height:300px; overflow:scroll;">
+                            <h4 id="list-item-1">Day 1</h4>
+                            <p>
+                              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                              proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            </p>
+                            <h4 id="list-item-2">Day 2</h4>
+                            <p>
+                              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                              proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            </p>
+                            <h4 id="list-item-3">Day 3</h4>
+                            <p>
+                              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                              proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            </p>
+                            <h4 id="list-item-4">Day 4</h4>
+                            <p>
+                              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                              proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>        
+
+        `
+        let itim_wrapper = $($.parseHTML(itim_to_be_parsed));
+        itin_content_tab.append(itim_wrapper);
+        
+        // itin item card jQuery Construction---------------------------------------------------
+        
+        
+        
+        
+        
+        
+        
+        
+                                
+        // itin_content_tab.append(itin_item_wrapper)
         
         // itin item creation
         // let accordion = $('#accordionGroup');

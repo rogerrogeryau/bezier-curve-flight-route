@@ -1,6 +1,7 @@
 {
 	"itin_001":{
 		"itin_name":"台灣墾丁三日遊",
+		"itin_desc":"台灣墾丁三日遊好好玩",
 		"city_code":"TW",
 		"num_of_day":3,
 		"itin_by_day":{
@@ -140,6 +141,7 @@
 	},
 	"itin_002":{
 		"itin_name":"輕鬆日本四日遊",
+		"itin_desc":"輕鬆日本四日遊好好玩",
 		"city_code":"JP",
 		"num_of_day":4,
 		"itin_by_day":{
@@ -330,6 +332,7 @@
 	},
 	"itin_003":{
 		"itin_name":"泰國曼谷4日遊",
+		"itin_desc":"輕鬆日本四日遊好好玩",
 		"city_code":"BKK",
 		"num_of_day":4,
 		"itin_by_day":{
