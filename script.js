@@ -567,21 +567,21 @@ $.when(getAirports,getAirlineRoutes, getHotels, getItineraries).done(function(re
         
         
         
-        let itin_item_wrapper = $('<div>',{'class':'itin-item-wrapper','id':`itin_item_wrapper_${itin_item_code}`})
+        // let itin_item_wrapper = $('<div>',{'class':'itin-item-wrapper','id':`itin_item_wrapper_${itin_item_code}`})
                                 
-        let itin_card = $('<div>',{'class':'my-1 mx-auto p-relative bg-white itin-card'})               
+        // let itin_card = $('<div>',{'class':'my-1 mx-auto p-relative bg-white itin-card'})               
         
-        let carousel_indicators = $('<div>',{'class':'carousel slide',
-                                    'id':'carouselExampleIndicators',
-                                    'data-ride':'carousel',
-                                    'data-interval':"5000"
-                                   })
-        let carousel_indicators_ordered_list = $('<ol>',{'class':'carousel-indicators'})
+        // let carousel_indicators = $('<div>',{'class':'carousel slide',
+        //                             'id':'carouselExampleIndicators',
+        //                             'data-ride':'carousel',
+        //                             'data-interval':"5000"
+        //                           })
+        // let carousel_indicators_ordered_list = $('<ol>',{'class':'carousel-indicators'})
         
-        let carousel_indicators_ordered_list_item1 = $('<li>',{'data-target':'#carouselExampleIndicators',
-                                                       'data-slide-to':"0",
-                                                       'class':'active'
-                                                      })
+        // let carousel_indicators_ordered_list_item1 = $('<li>',{'data-target':'#carouselExampleIndicators',
+        //                                               'data-slide-to':"0",
+        //                                               'class':'active'
+        //                                               })
                                                       
                                                       
         let itim_to_be_parsed = 
@@ -697,8 +697,10 @@ $.when(getAirports,getAirlineRoutes, getHotels, getItineraries).done(function(re
             </div>
           </div>        
 
-        `
-        let itim_wrapper = $($.parseHTML(itim_to_be_parsed));
+        `;
+        
+        let itim_wrapper = $('<div/>').html(itim_to_be_parsed);
+        // let itim_wrapper = $.parseHTML(itim_to_be_parsed);
         itin_content_tab.append(itim_wrapper);
         
         // itin item card jQuery Construction---------------------------------------------------
