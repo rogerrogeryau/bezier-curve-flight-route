@@ -568,11 +568,46 @@ $.when(getAirports,getAirlineRoutes, getHotels, getItineraries).done(function(re
               <div class="itin-item-wrapper" id="itin-item-wrapper-${itin_item_code}">
                 <div class="my-1 mx-auto p-relative bg-white itin-card">
                   
+                  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                      <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                      </ol>
+                      <div class="carousel-inner">
+                        <div class="carousel-item active">
+                          <img class="d-block w-100" src="https://images.pexels.com/photos/442559/pexels-photo-442559.jpeg" alt="First slide">
+                        </div>
+                        <div class="carousel-item">
+                          <img class="d-block w-100" src="https://images.pexels.com/photos/442559/pexels-photo-442559.jpeg" alt="Second slide">
+                        </div>
+                        <div class="carousel-item">
+                          <img class="d-block w-100" src="https://images.pexels.com/photos/442559/pexels-photo-442559.jpeg" alt="Third slide">
+                        </div>
+                      </div>
+                      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                      </a>
+                      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                      </a>
+                    </div>                 
+                  
+                  
+                  
+                  
+                  
+                  
+                  
                   <div class="px-2 py-2 itin-item-content-body" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="">
                     <p class="mb-0 small font-weight-medium text-uppercase mb-1 text-muted lts-2px">
                       ${itineraries[`${itin_item_code}`].city_code}
                       
                     </p>
+                    
+
                     <h1 class="ff-serif font-weight-normal text-black card-heading mt-0 mb-1">
                       ${itineraries[`${itin_item_code}`].itin_name}
                     </h1>
@@ -580,7 +615,7 @@ $.when(getAirports,getAirlineRoutes, getHotels, getItineraries).done(function(re
                       ${itineraries[`${itin_item_code}`].itin_by_day.D1.brief_desc} &hellip;
                     </p>
                     <p class="itin-item-paragraph-btn">
-                      <a class="btn btn-primary"  data-toggle="collapse" href="#multiCollapse-${itin_item_code}" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">了解更多 ...</a>
+                      <a class="btn btn-primary"  data-toggle="collapse" href="#multiCollapse-${itin_item_code}" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">了解更多</a>
                     </p>
                     <div class="row">
                       <div class="collapse multi-collapse" id="multiCollapse-${itin_item_code}">
@@ -588,6 +623,7 @@ $.when(getAirports,getAirlineRoutes, getHotels, getItineraries).done(function(re
                           <div class="container">
                             <div class="row">
                               <div id="list-${itin_item_code}" class="list-group col-3">
+
                                 ${Object.keys(itineraries[`${itin_item_code}`].itin_by_day).map(day => `
                                   <a class="list-group-item list-group-item-action" href="#${itin_item_code}-list-item-${day}">Day ${day.substring(1,2)}</a>
                                 `).join('')}
@@ -597,7 +633,7 @@ $.when(getAirports,getAirlineRoutes, getHotels, getItineraries).done(function(re
                                   <h4 id="${itin_item_code}-list-item-${day}">Day ${day.substring(1,2)}</h4>
                                   
                                     ${itineraries[`${itin_item_code}`].itin_by_day[day].checkpoints.map(checkpoint=>`
-                                      <div class="card text-white bg-primary mb-3">
+                                      <div class="card text-white bg-danger mb-3">
                                         <div class="card-header">${checkpoint.name}</div>
                                         <div class="card-body">
                                           ${checkpoint.place_desc}
