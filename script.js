@@ -559,50 +559,54 @@ $.when(getAirports,getAirlineRoutes, getHotels, getItineraries).done(function(re
         
         
         // itin item card jQuery Construction---------------------------------------------------
-        // console.log(itineraries['itin_001'])
-        
         
         let itin_content_tab = $('.container-fluid .sidebar-itin-tab-content')
-        for (let itin in itineraries){
-          let itin_item_code = itin
-          
-          let itim_to_be_parsed = `
-            <div class="itin-item-wrapper" id="itin-item-wrapper-${itin_item_code}">
-              <div class="my-1 mx-auto p-relative bg-white itin-card">
-                
-                <div class="px-2 py-2 itin-item-content-body" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="">
-                  <p class="mb-0 small font-weight-medium text-uppercase mb-1 text-muted lts-2px">
-                    ${itineraries[`${itin_item_code}`].city_code}
-                    
-                  </p>
-                  <h1 class="ff-serif font-weight-normal text-black card-heading mt-0 mb-1">
-                    ${itineraries[`${itin_item_code}`].itin_name}
-                  </h1>
-                  <p class="mb-1 itin-item-desc">
-                    ${itineraries[`${itin_item_code}`].itin_by_day.D1.brief_desc} &hellip;
-                  </p>
-                  <p class="itin-item-paragraph-btn">
-                    <a class="btn btn-primary"  data-toggle="collapse" href="#multiCollapse-${itin_item_code}" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">了解更多 ...</a>
-                  </p>
-                  <div class="row">
-                    <div class="collapse multi-collapse" id="multiCollapse-${itin_item_code}">
-                      <div class="card card-body itin-collapsable-content">
-                        <div class="container">
-                          <div class="row">
-                            <div id="list-${itin_item_code}" class="list-group col-3">
-                              ${Object.keys(itineraries[`${itin_item_code}`].itin_by_day).map(day => `
-                                <a class="list-group-item list-group-item-action" href="#${itin_item_code}-list-item-${day}">Day ${day.substring(1,2)}</a>
-                              `).join('')}
-                            </div>
-                            <div data-spy="scroll" data-target="#list-${itin_item_code}" data-offset="0" class="scrollspy-example col-9" style="height:300px; overflow:scroll;">
-                              ${Object.keys(itineraries[`${itin_item_code}`].itin_by_day).map(day =>`
-                                <h4 id="${itin_item_code}-list-item-${day}">Day ${day.substring(1,2)}</h4>
-                                <p>${itineraries[`${itin_item_code}`].itin_by_day[day].checkpoints.map(checkpoint=>`
-                                  <br>${checkpoint.name}</br>
-                                  <br>${checkpoint.type}</br>
-                                  <br>${checkpoint.place_desc}</br>
-                                `).join('')}</p>
-                              `).join('')}
+        if (itin_content_tab.children().length === 0) {
+          for (let itin in itineraries){
+            let itin_item_code = itin
+            let itim_to_be_parsed = `
+              <div class="itin-item-wrapper" id="itin-item-wrapper-${itin_item_code}">
+                <div class="my-1 mx-auto p-relative bg-white itin-card">
+                  
+                  <div class="px-2 py-2 itin-item-content-body" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="">
+                    <p class="mb-0 small font-weight-medium text-uppercase mb-1 text-muted lts-2px">
+                      ${itineraries[`${itin_item_code}`].city_code}
+                      
+                    </p>
+                    <h1 class="ff-serif font-weight-normal text-black card-heading mt-0 mb-1">
+                      ${itineraries[`${itin_item_code}`].itin_name}
+                    </h1>
+                    <p class="mb-1 itin-item-desc">
+                      ${itineraries[`${itin_item_code}`].itin_by_day.D1.brief_desc} &hellip;
+                    </p>
+                    <p class="itin-item-paragraph-btn">
+                      <a class="btn btn-primary"  data-toggle="collapse" href="#multiCollapse-${itin_item_code}" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">了解更多 ...</a>
+                    </p>
+                    <div class="row">
+                      <div class="collapse multi-collapse" id="multiCollapse-${itin_item_code}">
+                        <div class="card card-body itin-collapsable-content">
+                          <div class="container">
+                            <div class="row">
+                              <div id="list-${itin_item_code}" class="list-group col-3">
+                                ${Object.keys(itineraries[`${itin_item_code}`].itin_by_day).map(day => `
+                                  <a class="list-group-item list-group-item-action" href="#${itin_item_code}-list-item-${day}">Day ${day.substring(1,2)}</a>
+                                `).join('')}
+                              </div>
+                              <div data-spy="scroll" data-target="#list-${itin_item_code}" data-offset="0" class="scrollspy-example col-9" style="height:300px; overflow:scroll;">
+                                ${Object.keys(itineraries[`${itin_item_code}`].itin_by_day).map(day =>`
+                                  <h4 id="${itin_item_code}-list-item-${day}">Day ${day.substring(1,2)}</h4>
+                                  
+                                    ${itineraries[`${itin_item_code}`].itin_by_day[day].checkpoints.map(checkpoint=>`
+                                      <div class="card text-white bg-primary mb-3">
+                                        <div class="card-header">${checkpoint.name}</div>
+                                        <div class="card-body">
+                                          ${checkpoint.place_desc}
+                                        </div>
+                                      </div>
+                                    `).join('')}
+
+                                `).join('')}
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -611,18 +615,14 @@ $.when(getAirports,getAirlineRoutes, getHotels, getItineraries).done(function(re
                   </div>
                 </div>
               </div>
-            </div>
-          `
-        
-          let itim_wrapper = $('<div/>').html(itim_to_be_parsed);
-          itin_content_tab.append(itim_wrapper);
-        
+            `
+          
+            let itim_wrapper = $('<div/>').html(itim_to_be_parsed);
+            itin_content_tab.append(itim_wrapper);
+          
+          }
+
         }
-        
-        
-        
-        
-        
         
         
         
