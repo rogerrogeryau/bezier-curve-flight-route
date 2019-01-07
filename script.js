@@ -562,6 +562,7 @@ $.when(getAirports,getAirlineRoutes, getHotels, getItineraries).done(function(re
         
         let itin_content_tab = $('.container-fluid .sidebar-itin-tab-content')
         if (itin_content_tab.children().length === 0) {
+          console.log(itineraries)
           for (let itin in itineraries){
             let itin_item_code = itin
             let itim_to_be_parsed = `
@@ -569,10 +570,15 @@ $.when(getAirports,getAirlineRoutes, getHotels, getItineraries).done(function(re
                 <div class="my-1 mx-auto p-relative bg-white itin-card">
                   
                   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                  
+                      
                       <ol class="carousel-indicators">
                         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                         <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                        
+                        
+                        
                       </ol>
                       <div class="carousel-inner">
                         <div class="carousel-item active">
