@@ -559,61 +559,83 @@ $.when(getAirports,getAirlineRoutes, getHotels, getItineraries).done(function(re
         
         
         // itin item card jQuery Construction---------------------------------------------------
-        
+
         let itin_content_tab = $('.container-fluid .sidebar-itin-tab-content')
         if (itin_content_tab.children().length === 0) {
-          console.log(itineraries)
+          
           for (let itin in itineraries){
-            let itin_item_code = itin
+            let itin_item_code = itin;
+            
+            // itineraries[itin_item_code]['itin_by_day']
+            
+            // console.log(itineraries[itin_item_code]['itin_by_day'])
+            let img_links = [];
+            
+            for(let dayNum in itineraries[itin_item_code]['itin_by_day']){
+              // console.log(dayNum)
+              // console.log(itineraries[itin_item_code]['itin_by_day'][dayNum]['checkpoints'])
+              
+              // for (let checkpoint of itineraries[itin_item_code]['itin_by_day'][dayNum]['checkpoints']){
+              //   img_links.push(checkpoint.img_urls[0])
+              // }
+              
+              // image urls
+              itineraries[itin_item_code]['itin_by_day'][dayNum]['checkpoints'].forEach(checkpoint=>{
+                // console.log(checkpoint.img_urls[0])
+                img_links.push([checkpoint.img_urls[1], checkpoint.name])
+                
+              })
+
+            }
+            console.log(img_links)
+            
+            
             let itim_to_be_parsed = `
               <div class="itin-item-wrapper" id="itin-item-wrapper-${itin_item_code}">
                 <div class="my-1 mx-auto p-relative bg-white itin-card">
                   
-                  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                  <div id="carouselIndicators-${itin_item_code}" class="carousel slide" data-ride="carousel" data-interval="3000">
                   
-                      
                       <ol class="carousel-indicators">
-                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                        
-                        
-                        
+
+                        ${Object.keys(img_links).map(img_link_index=>`
+                          <li data-target="#carouselIndicators-${itin_item_code}" data-slide-to="${img_link_index}"></li>
+                        `).join('')}
+              
                       </ol>
+                      
                       <div class="carousel-inner">
-                        <div class="carousel-item active">
-                          <img class="d-block w-100" src="https://images.pexels.com/photos/442559/pexels-photo-442559.jpeg" alt="First slide">
-                        </div>
-                        <div class="carousel-item">
-                          <img class="d-block w-100" src="https://images.pexels.com/photos/442559/pexels-photo-442559.jpeg" alt="Second slide">
-                        </div>
-                        <div class="carousel-item">
-                          <img class="d-block w-100" src="https://images.pexels.com/photos/442559/pexels-photo-442559.jpeg" alt="Third slide">
-                        </div>
+                      
+                        ${img_links.map(img_link=>`
+                          <div class="carousel-item">
+                            <img class="d-block w-100" src="${img_link[0]}" alt="${img_link[0]}">
+                            <div class="carousel-caption d-none d-md-block" style="font-weight: 900; text-shadow: 0px 4px 3px rgba(0,0,0,0.4), 0px 8px 13px rgba(0,0,0,0.1), 0px 18px 23px rgba(0,0,0,0.1);">
+                              <h5>${img_link[1]}</h5>
+                            </div>
+                          </div>
+                          
+                          
+                          
+                        `).join('')}
+
                       </div>
-                      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                      <a class="carousel-control-prev" href="#carouselIndicators-${itin_item_code}" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="sr-only">Previous</span>
                       </a>
-                      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                      <a class="carousel-control-next" href="#carouselIndicators-${itin_item_code}" role="button" data-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="sr-only">Next</span>
                       </a>
                     </div>                 
                   
-                  
-                  
-                  
-                  
-                  
-                  
+
                   <div class="px-2 py-2 itin-item-content-body" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="">
                     <p class="mb-0 small font-weight-medium text-uppercase mb-1 text-muted lts-2px">
                       ${itineraries[`${itin_item_code}`].city_code}
                       
                     </p>
                     
-
                     <h1 class="ff-serif font-weight-normal text-black card-heading mt-0 mb-1">
                       ${itineraries[`${itin_item_code}`].itin_name}
                     </h1>
@@ -646,7 +668,6 @@ $.when(getAirports,getAirlineRoutes, getHotels, getItineraries).done(function(re
                                         </div>
                                       </div>
                                     `).join('')}
-
                                 `).join('')}
                               </div>
                             </div>
@@ -658,10 +679,15 @@ $.when(getAirports,getAirlineRoutes, getHotels, getItineraries).done(function(re
                 </div>
               </div>
             `
-          
+            
             let itim_wrapper = $('<div/>').html(itim_to_be_parsed);
             itin_content_tab.append(itim_wrapper);
-          
+            
+            // add 'active' class to the first item of an list item of DOM with class=carouselIndicators
+            $('.carousel-indicators li:first-child').addClass("active")
+            
+            // add 'active' class to the first item of DOM with class of carousel-item
+            $('.carousel-item:first-child').addClass("active")
           }
 
         }
