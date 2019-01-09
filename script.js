@@ -42,8 +42,8 @@ $.when(getAirports,getAirlineRoutes, getHotels, getItineraries).done(function(re
       styles:[{"featureType": "administrative", "elementType": "labels.text.fill", "stylers": [{"color": "#444444"} ] }, {"featureType": "landscape", "elementType": "all", "stylers": [{"color": "#f2f2f2"} ] }, {"featureType": "poi", "elementType": "all", "stylers": [{"visibility": "off"} ] }, {"featureType": "road", "elementType": "all", "stylers": [{"saturation": -100 }, {"lightness": 45 } ] }, {"featureType": "road.highway", "elementType": "all", "stylers": [{"visibility": "simplified"} ] }, {"featureType": "road.arterial", "elementType": "labels.icon", "stylers": [{"visibility": "off"} ] }, {"featureType": "transit", "elementType": "all", "stylers": [{"visibility": "off"} ] }, {"featureType": "water", "elementType": "all", "stylers": [{"color": "#46bcec"}, {"visibility": "on"} ] } ]
       // styles:[{"featureType": "administrative", "stylers": [{"visibility": "on"} ] }, {"featureType": "poi", "stylers": [{"visibility": "simplified"} ] }, {"featureType": "road", "elementType": "labels", "stylers": [{"visibility": "simplified"} ] }, {"featureType": "water", "stylers": [{"visibility": "simplified"} ] }, {"featureType": "transit", "stylers": [{"visibility": "simplified"} ] }, {"featureType": "landscape", "stylers": [{"visibility": "simplified"} ] }, {"featureType": "road.highway", "stylers": [{"visibility": "off"} ] }, {"featureType": "road.local", "stylers": [{"visibility": "on"} ] }, {"featureType": "road.highway", "elementType": "geometry", "stylers": [{"visibility": "on"} ] }, {"featureType": "water", "stylers": [{"color": "#84afa3"}, {"lightness": 52 } ] }, {"stylers": [{"saturation": -17 }, {"gamma": 0.36 } ] }, {"featureType": "transit.line", "elementType": "geometry", "stylers": [{"color": "#3f518c"} ] } ]
         // styles:[{"featureType": "landscape", "elementType": "all", "stylers": [{"hue": "#FFA800"}, {"gamma": 1 } ] }, {"featureType": "landscape", "elementType": "geometry.fill", "stylers": [{"color": "#f8fae9"} ] }, {"featureType": "poi", "elementType": "all", "stylers": [{"hue": "#679714"}, {"saturation": 33.4 }, {"lightness": -25.4 }, {"gamma": 1 } ] }, {"featureType": "road.highway", "elementType": "all", "stylers": [{"hue": "#53FF00"}, {"saturation": -73 }, {"lightness": 40 }, {"gamma": 1 } ] }, {"featureType": "road.arterial", "elementType": "all", "stylers": [{"hue": "#FBFF00"}, {"gamma": 1 } ] }, {"featureType": "road.local", "elementType": "all", "stylers": [{"hue": "#00FFFD"}, {"lightness": 30 }, {"gamma": 1 } ] }, {"featureType": "water", "elementType": "all", "stylers": [{"hue": "#00BFFF"}, {"saturation": 6 }, {"lightness": 8 }, {"gamma": 1 } ] } ]
-        // styles:[{"featureType": "landscape", "elementType": "all", "stylers": [{"hue": "#FFA800"}, {"gamma": 1 } ] }, {"featureType": "landscape", "elementType": "geometry.fill", "stylers": [{"color": "#f8fae9"} ] }, {"featureType": "poi", "elementType": "all", "stylers": [{"hue": "#679714"}, {"saturation": 33.4 }, {"lightness": -25.4 }, {"gamma": 1 } ] }, {"featureType": "road.highway", "elementType": "all", "stylers": [{"hue": "#53FF00"}, {"saturation": -73 }, {"lightness": 40 }, {"gamma": 1 } ] }, {"featureType": "road.arterial", "elementType": "all", "stylers": [{"hue": "#FBFF00"}, {"gamma": 1 } ] }, {"featureType": "road.local", "elementType": "all", "stylers": [{"hue": "#00FFFD"}, {"lightness": 30 }, {"gamma": 1 } ] }, {"featureType": "water", "elementType": "all", "stylers": [{"hue": "#00BFFF"}, {"saturation": 6 }, {"lightness": 8 }, {"gamma": 1 } ] } ]
-        // styles: [{"featureType": "administrative", "elementType": "labels.text.fill", "stylers": [{"color": "#444444"} ] }, {"featureType": "landscape", "elementType": "all", "stylers": [{"color": "#f2f2f2"} ] }, {"featureType": "poi", "elementType": "all", "stylers": [{"visibility": "off"} ] }, {"featureType": "road", "elementType": "all", "stylers": [{"saturation": -100 }, {"lightness": 45 } ] }, {"featureType": "road.highway", "elementType": "all", "stylers": [{"visibility": "simplified"} ] }, {"featureType": "road.arterial", "elementType": "labels.icon", "stylers": [{"visibility": "off"} ] }, {"featureType": "transit", "elementType": "all", "stylers": [{"visibility": "off"} ] }, {"featureType": "water", "elementType": "all", "stylers": [{"color": "#003b5d"}, {"visibility": "on"} ] } ]    
+      // styles:[{"featureType": "landscape", "elementType": "all", "stylers": [{"hue": "#FFA800"}, {"gamma": 1 } ] }, {"featureType": "landscape", "elementType": "geometry.fill", "stylers": [{"color": "#f8fae9"} ] }, {"featureType": "poi", "elementType": "all", "stylers": [{"hue": "#679714"}, {"saturation": 33.4 }, {"lightness": -25.4 }, {"gamma": 1 } ] }, {"featureType": "road.highway", "elementType": "all", "stylers": [{"hue": "#53FF00"}, {"saturation": -73 }, {"lightness": 40 }, {"gamma": 1 } ] }, {"featureType": "road.arterial", "elementType": "all", "stylers": [{"hue": "#FBFF00"}, {"gamma": 1 } ] }, {"featureType": "road.local", "elementType": "all", "stylers": [{"hue": "#00FFFD"}, {"lightness": 30 }, {"gamma": 1 } ] }, {"featureType": "water", "elementType": "all", "stylers": [{"hue": "#00BFFF"}, {"saturation": 6 }, {"lightness": 8 }, {"gamma": 1 } ] } ]
+      // styles: [{"featureType": "administrative", "elementType": "labels.text.fill", "stylers": [{"color": "#444444"} ] }, {"featureType": "landscape", "elementType": "all", "stylers": [{"color": "#f2f2f2"} ] }, {"featureType": "poi", "elementType": "all", "stylers": [{"visibility": "off"} ] }, {"featureType": "road", "elementType": "all", "stylers": [{"saturation": -100 }, {"lightness": 45 } ] }, {"featureType": "road.highway", "elementType": "all", "stylers": [{"visibility": "simplified"} ] }, {"featureType": "road.arterial", "elementType": "labels.icon", "stylers": [{"visibility": "off"} ] }, {"featureType": "transit", "elementType": "all", "stylers": [{"visibility": "off"} ] }, {"featureType": "water", "elementType": "all", "stylers": [{"color": "#003b5d"}, {"visibility": "on"} ] } ]    
         
   }
       
@@ -542,7 +542,7 @@ $.when(getAirports,getAirlineRoutes, getHotels, getItineraries).done(function(re
     
     
     // itinerary tab-------------------------------------
-   
+    let itin_route_markers = [];
     $( "li>a[href='#itinerary']").click(function() {
       // tab - itinerary
         
@@ -562,6 +562,9 @@ $.when(getAirports,getAirlineRoutes, getHotels, getItineraries).done(function(re
 
         let itin_content_tab = $('.container-fluid .sidebar-itin-tab-content')
         if (itin_content_tab.children().length === 0) {
+          
+          
+          
           
           for (let itin in itineraries){
             let itin_item_code = itin;
@@ -701,11 +704,12 @@ $.when(getAirports,getAirlineRoutes, getHotels, getItineraries).done(function(re
         
         let addressToFind0 = itineraries['itin_001']['itin_by_day']['D1']['checkpoints'][0]['name']
         let addressToFind1 = itineraries['itin_001']['itin_by_day']['D1']['checkpoints'][1]['name']
-        let addressToFind2 = itineraries['itin_002']['itin_by_day']['D1']['checkpoints'][1]['name']
+        let addressToFind2 = itineraries['itin_001']['itin_by_day']['D2']['checkpoints'][0]['name']
+        let addressToFind3 = itineraries['itin_001']['itin_by_day']['D2']['checkpoints'][1]['name']
         // let addressToFind = '香港'
-        
+        // console.log(addressToFind0, addressToFind1,addressToFind2)
 
-        var polylineOptionsActual = new google.maps.Polyline({
+        var polylineOptionsActual = {
           // strokeColor: '#b9c1d1',
           // strokeOpacity: 1.0,
           // strokeWeight: 6
@@ -718,34 +722,36 @@ $.when(getAirports,getAirlineRoutes, getHotels, getItineraries).done(function(re
           // fillOpacity: 1
           
           
-          strokeColor: '#AA4588',
+          strokeColor: '#ffc701',
           strokeOpacity: .8,
-          strokeWeight: 8,
+          strokeWeight: 7,
           // geodesic: true,
           // editable:true,
           // draggable:true
-          
-          
 
-          
-          
-          
-        });
+        };
         
+        
+        
+        
+        
+        // var directionsDisplay = new google.maps.DirectionsRenderer();
         var directionsDisplay = new google.maps.DirectionsRenderer({ polylineOptions: polylineOptionsActual });
         var directionsService = new google.maps.DirectionsService();
-        let geocoder = new google.maps.Geocoder();
-        let geo0 = geocodeAddress(geocoder, addressToFind0)
-        console.log(geo0)
+        // let geocoder = new google.maps.Geocoder();
+        // let geo1 = geocodeAddress(geocoder, addressToFind1)
+        // console.log(geo0)
         
         // let geo1 = geocodeAddress(geocoder, addressToFind1)
-        let geoCheckPoints = [addressToFind0, addressToFind1, addressToFind2]
+        let geoCheckPoints = [addressToFind0, addressToFind1,addressToFind2, addressToFind3]
         // console.log(geoCheckPoints)
         
         
-        // directionsDisplay.setMap(map);
-        // directionsDisplay.setOptions({ suppressMarkers: false });
-        // calculateAndDisplayRoute(directionsService,directionsDisplay, geoCheckPoints)
+        directionsDisplay.setMap(map);
+        directionsDisplay.setOptions({ suppressMarkers: true });
+        calculateAndDisplayRoute(directionsService,directionsDisplay, geoCheckPoints)
+        
+        
         
         // itin routing on google map ----------------------------------------------
         
@@ -764,9 +770,14 @@ $.when(getAirports,getAirlineRoutes, getHotels, getItineraries).done(function(re
     
     function geocodeAddress(geocoder, addressSearch) {
       // var address = addressSearch;
+      let result = {};
       geocoder.geocode({'address': addressSearch}, function(results, status) {
         if (status === 'OK') {
-          // console.log(results[0].geometry.location)
+          // console.log(results[0].geometry.location.lat())
+          result['lat'] = results[0].geometry.location.lat()
+          result['lng'] = results[0].geometry.location.lng()
+          // console.log(result)
+          return result
           // map.setCenter(results[0].geometry.location)
           // var markerAdd = new google.maps.Marker({
           //     map: map,
@@ -785,42 +796,78 @@ $.when(getAirports,getAirlineRoutes, getHotels, getItineraries).done(function(re
     
     
     function calculateAndDisplayRoute(directionsService, directionsDisplay, geoCheckPoints) {
+      let geocoder = new google.maps.Geocoder();
       // extract points except first and last one as waypoints
+      
       // geoCheckPoints.forEach(point=>{
       //   // console.log(point)
         
       // })
       // console.log(geoCheckPoints)
       let wayPoints =[];
-      let origin;
-      let destination;
+      // let itin_checkpoint_marker;
+      let itin_checkpoint_marker;
+          
+      // let origin_point = geoCheckPoints[0];
+      // let destination_point = geoCheckPoints[1];
+      // wayPoints.push({
+      //   location: geoCheckPoints[2],
+      //   stopover: true
+      // })
+      
+      let origin_point;
+      let destination_point;
       for (let i = 0; i < geoCheckPoints.length; i++) {
         if (i === 0) {
-          origin = geoCheckPoints[i];
-          console.log(origin);
+          origin_point = geoCheckPoints[i];
+          itin_checkpoint_marker = new google.maps.Marker({
+            map: map,
+            position: geocodeAddress(geocoder,geoCheckPoints[i]),
+            icon: 'http://www.google.com/intl/en_us/mapfiles/ms/micons/' + 'red' + '-dot.png',
+          });
+          itin_route_markers.push(itin_checkpoint_marker)
+          // console.log(origin);
         }else if (i === geoCheckPoints.length - 1){
-          destination = geoCheckPoints[i];
-          console.log(destination);
+          destination_point = geoCheckPoints[i];
+          // console.log(destination);
+          itin_checkpoint_marker = new google.maps.Marker({
+            map: map,
+            position: geocodeAddress(geocoder,geoCheckPoints[i]),
+            icon: 'http://www.google.com/intl/en_us/mapfiles/ms/micons/' + 'red' + '-dot.png',
+          });
+          itin_route_markers.push(itin_checkpoint_marker)
+          
         }
         else{
           wayPoints.push({
+            
+            // location:geocodeAddress(geocoder, geoCheckPoints[i]),
             location:geoCheckPoints[i],
+            // location:,
             stopover: true
           });
-          console.log(wayPoints);
+          
+          
+          itin_checkpoint_marker = new google.maps.Marker({
+            map: map,
+            position: geocodeAddress(geocoder,geoCheckPoints[i]),
+            icon: 'http://www.google.com/intl/en_us/mapfiles/ms/micons/' + 'red' + '-dot.png',
+          });
+          itin_route_markers.push(itin_checkpoint_marker)
+          // console.log(wayPoints);
         }
         
         
-        // console.log(i)
+      //   // console.log(i)
       }
       
       directionsService.route({
-        origin: geoCheckPoints[0],
-        destination: geoCheckPoints[1],
-        // origin:origin,
-        // destination:destination,
-        // waypoints:wayPoints,
-        // waypoints:[{location: "萬里桐", stopover: true}],
+        // origin: geoCheckPoints[0],
+        // destination: geoCheckPoints[1],
+        origin:origin_point,
+        destination:destination_point,
+        waypoints:wayPoints,
+        // waypoints:[{location: "將軍澳", stopover: true}],
         // optimizeWaypoints: true,
         travelMode: 'DRIVING'
       }, function(response, status) {
@@ -830,6 +877,8 @@ $.when(getAirports,getAirlineRoutes, getHotels, getItineraries).done(function(re
           window.alert('Directions request failed due to ' + status);
         }
       });
+      
+      console.log(itin_route_markers)
     }
     
     // function used to link up two places -- simply a line
