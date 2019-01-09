@@ -587,7 +587,7 @@ $.when(getAirports,getAirlineRoutes, getHotels, getItineraries).done(function(re
               })
 
             }
-            console.log(img_links)
+            // console.log(img_links)
             
             
             let itim_to_be_parsed = `
@@ -695,6 +695,8 @@ $.when(getAirports,getAirlineRoutes, getHotels, getItineraries).done(function(re
         
         
         // itin routing on google map ----------------------------------------------
+        console.log(itineraries['itin_001']['itin_by_day']['D1']['checkpoints'][0]['name'])
+        console.log(itineraries['itin_001']['itin_by_day']['D1']['checkpoints'][1]['name'])
         
         
         // itin routing on google map ----------------------------------------------
