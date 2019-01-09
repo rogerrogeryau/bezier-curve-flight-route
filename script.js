@@ -695,9 +695,57 @@ $.when(getAirports,getAirlineRoutes, getHotels, getItineraries).done(function(re
         
         
         // itin routing on google map ----------------------------------------------
-        console.log(itineraries['itin_001']['itin_by_day']['D1']['checkpoints'][0]['name'])
-        console.log(itineraries['itin_001']['itin_by_day']['D1']['checkpoints'][1]['name'])
         
+        // console.log(itineraries['itin_001']['itin_by_day']['D1']['checkpoints'][0]['name'])
+        // console.log(itineraries['itin_001']['itin_by_day']['D1']['checkpoints'][1]['name'])
+        
+        let addressToFind0 = itineraries['itin_001']['itin_by_day']['D1']['checkpoints'][0]['name']
+        let addressToFind1 = itineraries['itin_001']['itin_by_day']['D1']['checkpoints'][1]['name']
+        let addressToFind2 = itineraries['itin_002']['itin_by_day']['D1']['checkpoints'][1]['name']
+        // let addressToFind = '香港'
+        
+
+        var polylineOptionsActual = new google.maps.Polyline({
+          // strokeColor: '#b9c1d1',
+          // strokeOpacity: 1.0,
+          // strokeWeight: 6
+          
+          // scale: 4,
+          // strokeColor: "#000",
+          // strokeOpacity: 0.7,
+          // strokeWeight: 4,
+          // fillColor: "#ff9715",
+          // fillOpacity: 1
+          
+          
+          strokeColor: '#AA4588',
+          strokeOpacity: .8,
+          strokeWeight: 8,
+          // geodesic: true,
+          // editable:true,
+          // draggable:true
+          
+          
+
+          
+          
+          
+        });
+        
+        var directionsDisplay = new google.maps.DirectionsRenderer({ polylineOptions: polylineOptionsActual });
+        var directionsService = new google.maps.DirectionsService();
+        let geocoder = new google.maps.Geocoder();
+        let geo0 = geocodeAddress(geocoder, addressToFind0)
+        console.log(geo0)
+        
+        // let geo1 = geocodeAddress(geocoder, addressToFind1)
+        let geoCheckPoints = [addressToFind0, addressToFind1, addressToFind2]
+        // console.log(geoCheckPoints)
+        
+        
+        // directionsDisplay.setMap(map);
+        // directionsDisplay.setOptions({ suppressMarkers: false });
+        // calculateAndDisplayRoute(directionsService,directionsDisplay, geoCheckPoints)
         
         // itin routing on google map ----------------------------------------------
         
@@ -713,6 +761,76 @@ $.when(getAirports,getAirlineRoutes, getHotels, getItineraries).done(function(re
   
     
     // functions codeblock -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    function geocodeAddress(geocoder, addressSearch) {
+      // var address = addressSearch;
+      geocoder.geocode({'address': addressSearch}, function(results, status) {
+        if (status === 'OK') {
+          // console.log(results[0].geometry.location)
+          // map.setCenter(results[0].geometry.location)
+          // var markerAdd = new google.maps.Marker({
+          //     map: map,
+          //     position: results[0].geometry.location
+          //   });
+          // resultsMap.setCenter(results[0].geometry.location);
+          // var marker = new google.maps.Marker({
+            // map: resultsMap,
+            // position: results[0].geometry.location
+          // });
+        } else {
+          alert(`Geocode for [${addressSearch}] was not successful for the following reason: ${status}.`);
+        }
+      });
+    }
+    
+    
+    function calculateAndDisplayRoute(directionsService, directionsDisplay, geoCheckPoints) {
+      // extract points except first and last one as waypoints
+      // geoCheckPoints.forEach(point=>{
+      //   // console.log(point)
+        
+      // })
+      // console.log(geoCheckPoints)
+      let wayPoints =[];
+      let origin;
+      let destination;
+      for (let i = 0; i < geoCheckPoints.length; i++) {
+        if (i === 0) {
+          origin = geoCheckPoints[i];
+          console.log(origin);
+        }else if (i === geoCheckPoints.length - 1){
+          destination = geoCheckPoints[i];
+          console.log(destination);
+        }
+        else{
+          wayPoints.push({
+            location:geoCheckPoints[i],
+            stopover: true
+          });
+          console.log(wayPoints);
+        }
+        
+        
+        // console.log(i)
+      }
+      
+      directionsService.route({
+        origin: geoCheckPoints[0],
+        destination: geoCheckPoints[1],
+        // origin:origin,
+        // destination:destination,
+        // waypoints:wayPoints,
+        // waypoints:[{location: "萬里桐", stopover: true}],
+        // optimizeWaypoints: true,
+        travelMode: 'DRIVING'
+      }, function(response, status) {
+        if (status === 'OK') {
+          directionsDisplay.setDirections(response);
+        } else {
+          window.alert('Directions request failed due to ' + status);
+        }
+      });
+    }
     
     // function used to link up two places -- simply a line
     function generatePathCoordinate(fromPlace, toPlace){
